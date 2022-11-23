@@ -2,26 +2,62 @@
     <div class="scene scene--card">
       <div
         :class="this.colorClass"
-        @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         v-bind:class="{ flipme: cardOne == 'flipped' }">
         <div class="card__face card__face--front">
-            <div class="title"><u>{{title}}</u></div>
+            <!-- <div class="title"><u>{{title}}</u></div> -->
             <div class="front-details">{{front}}</div>
         </div>
-        <div class="card__face card__face--back">{{back}}</div>
+        <div class="card__face card__face--back">
+          <div class="back-details">{{back}}</div>
+        </div>
       </div>
+      <span class="card-controller">
+        <img 
+          src="rotate-icon.png" 
+          class="rotate-image-icon"
+          @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
+        />
+        <div><button>Edit</button></div>
+        <div id="{{id}}"><button @click="this.delete($event)">Delete</button></div>
+       </span>
     </div>
+
+
 </template>
 
 <script>
+import { getAuth } from '@firebase/auth';
+
 export default {
-    props: ["title", "subject", "email", "key", "front", "back"],
+    props: ["title", "subject", "email", "key", "front", "back", "id"],
     
   data() {
     return {
         colorClass: `card color-${Math.floor(Math.random() * (6 - 1) + 1)}`,
-        cardOne: "start"
+        cardOne: "start",
+        user: getAuth(),
     };
+  },
+  methods: {
+    delete(e){
+      const id = e.target.__vueParentComponent.props.id;
+      const subject = e.target.__vueParentComponent.props.subject;
+      
+      fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}/${subject}/${id}.json`, {
+        method:"DELELTE",
+        mode: 'cors',
+        cache: 'no-cache'
+      })
+      .then((res) => {
+        if(res.ok){
+          return res.json();
+        }
+      }).catch((error) => {
+        this.error = error;
+        alert(error);
+      })
+      
+    },
   }
 };
 </script>
@@ -42,7 +78,6 @@ export default {
     height: 100%;
     transition: transform 1s;
     transform-style: preserve-3d;
-    cursor: pointer;
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
@@ -55,11 +90,53 @@ export default {
     font-weight: bold;
     font-size: 20px;
     backface-visibility: hidden;
+    overflow-y: scroll;
+    padding: 15px;
   }
   
+  .front-details {
+    margin-top: 25%
+  }
+
+  /* .title {
+    margin-top: 10px;
+  } */
   
   .card__face--back {
     transform: rotateY(180deg);
+  }
+
+  .back-details {
+    margin-top: 25%;
+  }
+
+  .edit-card {
+    float: right;
+    border: none;
+    background-color: transparent;
+    font-size: 20px;
+    backface-visibility: hidden;
+  }
+
+  .edit-card:hover{
+    cursor: pointer;
+  }
+
+  .edit-card__options{
+    display: none;
+  }
+
+  .rotate-image-icon {
+    width: 35px;
+  }
+
+  .card-controller {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    left: 25%;
+    top: 3%;
+    width: 200px;
   }
   
   .flipme {

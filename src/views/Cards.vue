@@ -15,13 +15,14 @@
    <the-card 
     v-for="result in results"
       :key="result.key"
+      :id="result.key"
       :title="result.title"
       :subject="result.subject"
       :email="result.email"
       :front="result.front"
       :back="result.back"
     ></the-card>
-  </div> 
+  </div>
 </template>
 
 <script>
@@ -44,8 +45,8 @@ export default {
     }
   },
   methods: {
-    printVal(e){
-      console.log(e.target.value)
+    printKey(key){
+      console.log(key)
     },
     capFirst(a) {
       return a.charAt(0).toUpperCase() + a.slice(1);
@@ -65,7 +66,6 @@ export default {
         };
         
         this.subjects = subjects;
-        console.log(this.subjects)
       }).catch((error) => {
         this.error = error;
         alert(error);
@@ -75,7 +75,6 @@ export default {
 
       //Retrieves the information for each card from the current user
     loadCards(){
-      console.log("subject: ", this.subject)
       this.isLoading = true;
       this.error = null;
 
@@ -121,6 +120,7 @@ export default {
     column-gap: 50px;
   }
 
+
   @media (max-width: 850px) {
     .card-holder {
     display: grid;
@@ -128,6 +128,8 @@ export default {
     column-gap: 50px;
   }
   }
+
+
 </style>
 
   

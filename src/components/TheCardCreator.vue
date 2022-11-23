@@ -2,25 +2,12 @@
     <form class="card-form">
         <h3>New Flash Card</h3>
         <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p>
-        <p><input type="text" maxlength="40" v-model="title" placeholder="Title" required/></p>
+        <!-- <p><input type="text" maxlength="40" v-model="title" placeholder="Title" required/></p> -->
         <p><input type="text" maxlength="500" v-model="front" placeholder="Front" required/></p>
         <p><input type="text" maxlength="500" v-model="back" placeholder="Back" required/></p>
         <button @click.prevent="createCard()">Create</button>
     </form>
-    <div class="previous-subjects">
-        <h3>Previous Subjects:</h3>
-        <select @click="loadSubjects">
-            <p>
-                <label for="subject">Subject:</label>
-                <select id="subject" 
-                v-model="this.subject" @click="loadSubjects" v-on:change="loadCards">
-                    <option
-                        v-for="(item, key) in subjects" :value="item"
-                    >{{item}}</option>
-                </select>
-            </p>
-        </select>
-    </div>
+    
 </template>
 
 <script>
@@ -32,14 +19,15 @@
         data() {
             return{
                 subject: ref(""),
-                title: ref(""),
+                // title: ref(""),
                 front: ref(""),
                 back: ref(""),
                 user: getAuth(),
                 email: ref(""),
                 invalidInput: false,
                 error: null,
-                subjects: []
+                subjects: [],
+                id: ""
             }
         },
         methods: {
@@ -48,7 +36,6 @@
 
                 if(
                 this.subject === "" ||
-                this.title === "" ||
                 this.front === "" ||
                 this.back === "" ||
                 this.email === "" 
@@ -67,14 +54,16 @@
                     },
                     body: JSON.stringify({
                         subject: this.subject,
-                        title: this.title,
+                        // title: this.title,
                         front: this.front,
                         back: this.back,
-                        email: this.email
+                        email: this.email,
+                        id: this
+
                     })
                 }).then((res) => {
                     if(res.ok) {
-
+                        console.log(id)
                     } else {
                         throw new Error("Could not submit new card to the data base.")
                     }
@@ -82,8 +71,8 @@
                     this.error = error.message
                 });
 
-                this.subject = "";
-                this.title = "";
+                // this.subject = "";
+                // this.title = "";
                 this.front = "";
                 this.back = "";
             },
@@ -101,7 +90,6 @@
             };
         
             this.subjects = subjects;
-            console.log(this.subjects)
         }).catch((error) => {
             this.error = error;
             alert(error);
