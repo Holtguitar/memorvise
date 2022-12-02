@@ -27,7 +27,6 @@
                 invalidInput: false,
                 error: null,
                 subjects: [],
-                id: ""
             }
         },
         methods: {
@@ -54,11 +53,9 @@
                     },
                     body: JSON.stringify({
                         subject: this.subject,
-                        // title: this.title,
                         front: this.front,
                         back: this.back,
                         email: this.email,
-                        id: this
 
                     })
                 }).then((res) => {

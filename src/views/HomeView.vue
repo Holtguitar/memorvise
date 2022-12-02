@@ -1,21 +1,17 @@
 <template>
-  <h1>Home</h1>
-  <div class="learning-summary">
-    <h2>Learning Summary</h2>
+  <div class="account-info">
+    <h2 class="account-title">Account Info:</h2>
+    <p>Email: <p>{{this.email}}</p></p>
+    <p>Display Name: <p>{{this.displayName}}</p></p>
     <p>Total cards:</p>
     <p>Total Subjects: {{this.subjects.length}}</p>
   </div>
-  <div class="account-info">
-    <h2>Account Info:</h2>
-    <p>Email: <div>{{this.email}}</div></p>
-    <p>Account created:</p>
-    <!-- <button @click.prevent="getAccountInfo">Show account info</button> -->
-    <!-- <button @click.prevent="deleteAccount">Delete Account</button> -->
-  </div>
+  <router-link to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
 </template>
 
 <script>
   import {getAuth} from "firebase/auth";
+  import {RouterLink} from "vue-router"
 
   export default {
     data(){
@@ -23,16 +19,19 @@
         user: getAuth(),
         email: "",
         subjects: [],
+        displayName: "None"
       }
     },
     methods: {
       getAccountInfo() {
         this.email = this.user.currentUser.email;
+        this.displayName = this.user.currentUser.displayName;
         this.loadSubjects()
       },
       deleteAccount(){
-        this.user.deleteAccount;
-        console.log("Account Deleted!")
+        // alert("Are you sure?")
+        this.user.currentUser.delete();
+        
       }, 
       loadSubjects(){
       fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}.json`)
@@ -46,7 +45,6 @@
         for(const id in data){
           subjects.push({
             subjectOption: id,
-            // subjectTitle: this.capFirst(id)
           })
         };
         
@@ -60,8 +58,36 @@
     },
     mounted(){
       if(this.user){
-        setTimeout(this.loadSubjects, 300)
+        setTimeout(this.getAccountInfo(), 300)
       }
     }
   }
 </script>
+
+<style scoped>
+  .account-info {
+    /* background-color: red; */
+    width: 500px;
+    height: fit-content;
+    margin-top: 25px;
+    padding: 5px;
+    left: 28%;
+    font-family: 'Shadows Into Light';
+    font-size: 20px;
+    top: -7%;
+  }
+
+  .account-info p {
+    font-size: 30px;
+  }
+
+  .account-title {
+    left: 30%;
+    text-decoration: underline;
+    font-family: 'Playball', cursive;
+    /* font-size: 20px; */
+    margin-bottom: 25px;
+  }
+
+
+</style>

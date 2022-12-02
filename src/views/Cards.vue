@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <h3>Select a Subject</h3>
-    <p>
-      <label for="subject">Subject:</label>
+  <div class="subject-selector">
+    <h3 class="select-title">Select a Subject</h3>
+    <p class="subject-selector-form">
       <select id="subject" 
           v-model="this.subject" @click="loadSubjects" v-on:change="loadCards">
         <option
@@ -11,8 +10,10 @@
       </select>
     </p>
   </div>
+  <button @click="flip">Flip</button>
   <div class="card-holder">
-   <the-card 
+   <the-card
+    v-if="flip" 
     v-for="result in results"
       :key="result.key"
       :id="result.key"
@@ -42,9 +43,13 @@ export default {
       error: null,
       user: getAuth(),
       subject: "",
+      front: true
     }
   },
   methods: {
+    flip(){
+      front = !front
+    },
     printKey(key){
       console.log(key)
     },
@@ -114,13 +119,48 @@ export default {
 
 
 <style scoped>
+
+  .select-title {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(47, 55, 52);
+    font-weight: 700;
+    font-size: 20px;
+  }
+
   .card-holder {
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 50px;
   }
 
+  .subject-selector {
+    left: 40%;
+    top: -7%;
+    width: fit-content;
+    /* background-color: red; */
+    padding: 8px;
+    justify-content: center;
+    text-align: center;
+    background-color: red;
+    font-size: 50px;
+  }
 
+  .subject-selector-form {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(47, 55, 52);
+    font-weight: 700;
+    font-size: 40px;
+  }
+
+  .subject {    
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: rgb(47, 55, 52);
+    font-weight: 700;
+    font-size: 40px;
+    padding: 10px;
+    background-color: blue;
+    color: green;
+  }
   @media (max-width: 850px) {
     .card-holder {
     display: grid;

@@ -27,6 +27,7 @@
 
 <script>
 import { getAuth } from '@firebase/auth';
+import { remove } from '@firebase/database';
 
 export default {
     props: ["title", "subject", "email", "key", "front", "back", "id"],
@@ -41,22 +42,7 @@ export default {
   methods: {
     delete(e){
       const id = e.target.__vueParentComponent.props.id;
-      const subject = e.target.__vueParentComponent.props.subject;
-      
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}/${subject}/${id}.json`, {
-        method:"DELELTE",
-        mode: 'cors',
-        cache: 'no-cache'
-      })
-      .then((res) => {
-        if(res.ok){
-          return res.json();
-        }
-      }).catch((error) => {
-        this.error = error;
-        alert(error);
-      })
-      
+      remove(id)
     },
   }
 };
