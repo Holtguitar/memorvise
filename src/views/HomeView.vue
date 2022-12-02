@@ -1,16 +1,19 @@
 <template>
   <div class="account-info">
     <h2 class="account-title">Account Info:</h2>
-    <p>Email: <p>{{this.email}}</p></p>
-    <p>Display Name: <p>{{this.displayName}}</p></p>
-    <p>Total cards:</p>
-    <p>Total Subjects: {{this.subjects.length}}</p>
+    <p>Email: <span>{{this.email}}</span></p>
+    <p>Display Name: <span>{{this.displayName}}</span></p>
+    <!-- <p>Total cards:</p> -->
+    <p>Total Subjects: <span>{{this.subjects.length}}</span></p>
+    <br/>
+    <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
   </div>
-  <router-link to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
+  
 </template>
 
 <script>
   import {getAuth} from "firebase/auth";
+  import { getDatabase, set, ref } from "@firebase/database";
   import {RouterLink} from "vue-router"
 
   export default {
@@ -29,8 +32,24 @@
         this.loadSubjects()
       },
       deleteAccount(){
-        // alert("Are you sure?")
-        this.user.currentUser.delete();
+        let confirmDelete = confirm("Are you sure you want to delete your account?")
+        
+        if(confirmDelete){
+          const db = getDatabase();
+          const auth = getAuth();
+          const user = auth.currentUser.uid
+
+          set(ref(db, user), {
+            id: null,
+          }).then(() => {
+            this.user.currentUser.delete();
+            window.location.href="/sign-in"
+          }).catch((error) => {
+            alert(error);
+          });
+          
+          
+        }
         
       }, 
       loadSubjects(){
@@ -66,19 +85,25 @@
 
 <style scoped>
   .account-info {
-    /* background-color: red; */
+    position: fixed;
     width: 500px;
     height: fit-content;
     margin-top: 25px;
     padding: 5px;
-    left: 28%;
+    left: 32%;
     font-family: 'Shadows Into Light';
     font-size: 20px;
-    top: -7%;
+    font-weight: bolder;
+    top: 25%;
+    color: rgb(16, 122, 87);
   }
 
   .account-info p {
     font-size: 30px;
+  }
+
+  .account-info span {
+    color: rgb(83, 84, 83);
   }
 
   .account-title {
@@ -89,5 +114,10 @@
     margin-bottom: 25px;
   }
 
+  .delete-account {
+    left: 32%;
+    color: rgb(82, 1, 1);
+    font-weight: 800;
+  }
 
 </style>

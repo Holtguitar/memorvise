@@ -1,11 +1,12 @@
 <template>
     <form class="card-form">
-        <h3>New Flash Card</h3>
+        <h3 class="create-title">New Flash Card</h3>
         <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p>
         <!-- <p><input type="text" maxlength="40" v-model="title" placeholder="Title" required/></p> -->
         <p><input type="text" maxlength="500" v-model="front" placeholder="Front" required/></p>
         <p><input type="text" maxlength="500" v-model="back" placeholder="Back" required/></p>
-        <button @click.prevent="createCard()">Create</button>
+        <input class="mem-filter" type="checkbox"/><span>Mem Filter?</span>
+        <button class="create-button" @click.prevent="createCard()">Create</button>
     </form>
     
 </template>
@@ -108,5 +109,36 @@
     .card-form {
         display: flex;
         flex-direction: column;
+        /* height: 350px; */
+        height: fit-content;
+        border-radius: 5%;
+        background-color:rgb(11, 214, 146);
+        top: 15%;
+        left: -1%;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+        0 10px 10px rgba(0,0,0,0.22);
+        padding: 35px;
+
+    }
+
+    .create-title {
+        top: -5%;
+        font-family: 'Shadows Into Light', cursive;
+        font-size: 30px;
+    }
+
+    .mem-filter {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .create-button {
+        margin-top: 15px;
+        border-radius: 5%;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+        0 10px 10px rgba(0,0,0,0.22);
+        width: 10rem;
+        height: 30px;
+        border-color: transparent;
     }
 </style>

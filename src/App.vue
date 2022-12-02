@@ -2,7 +2,7 @@
 </script>
 
 <template>
-  <nav>
+  <nav class="nav-bar">
     <router-link id="logo" to="/" v-if="isLoggedIn">Memorvise</router-link>
     <div id="logo-else" to="/" v-else="isLoggedIn">Memorvise</div>
     <router-link class="nav-item" id="home" to="/"  v-if="isLoggedIn">Account Info</router-link>
@@ -19,9 +19,10 @@
   import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
   import router from "./router"
 
-  const isLoggedIn = ref(false);
+  let isLoggedIn = ref(false);
+  let auth = getAuth();
+  let user = auth.currentUser;
 
-  let auth;
   onMounted(() => {
     auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -42,17 +43,17 @@
 
 <style>
 
-nav {
-  position: -webkit-sticky;
+.nav-bar {
+  position: fixed;
   display: flex;
-  margin-top: -1%;
   justify-content: center;
   text-align: center;
   margin-bottom: 50px !important;
   width: 100vw;
   height: 90px;
-  left: -9.2%;
-  top: -5%;
+  left: -.5%;
+  top: -.5%;
+  margin-bottom: 50px;
   background-color: whitesmoke;
 }
 
@@ -133,7 +134,7 @@ nav {
 }
 
 #sign-out {
-
+  background-color: transparent;
 }
 #sign-out:hover {
  

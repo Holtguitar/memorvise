@@ -11,7 +11,7 @@
 			<input type="email" placeholder="Email" v-model="email"/>
 			<input type="password" placeholder="Password" v-model="password"/>
 			<a href="#">Forgot your password?</a>
-			<button @click.prevent="signIn">Sign In</button>
+			<button class="button" @click.prevent="signIn">Sign In</button>
 		</form>
 	</div>
 	<div class="overlay-container">
@@ -24,7 +24,7 @@
         <input type="text" placeholder="Display Name" v-model="displayName"/>
         <input type="password" placeholder="Password" v-model="newPassword"/>
         <input type="password" placeholder="Confirm Password" v-model="confirmPassword"/>
-				<button class="ghost" id="signUp" @click="register">Sign Up</button>
+				<button class="button" id="sign-up-button" @click="register">Sign Up</button>
 			</div>
 		</div>
 	</div>
@@ -108,7 +108,13 @@
 	margin: 0;
 }
 
-.container button {
+.container {
+  position: fixed;
+  top: 25%;
+  margin-left: 5%;
+}
+
+.container .button {
 	border-radius: 20px;
 	border: 1px solid #0b1ec8;
 	background-color: #2f21eb;
@@ -122,15 +128,15 @@
   margin-top: 15px;
 }
 
-button:active {
+.button:active {
 	transform: scale(0.95);
 }
 
-button:focus {
+.button:focus {
 	outline: none;
 }
 
-button.ghost {
+#sign-up-button {
 	background-color: transparent;
 	border-color: #FFFFFF;
 }
@@ -300,7 +306,7 @@ input {
   transform: scale(0.95);
 }
 
-button {
+.button:hover {
   cursor: pointer;
   box-shadow: 0 14px 28px rgba(20, 20, 20, 0.25)
 }

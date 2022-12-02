@@ -27,7 +27,7 @@
 
 <script>
 import { getAuth } from '@firebase/auth';
-import { remove } from '@firebase/database';
+import { getDatabase, ref, child, push, update, set } from '@firebase/database';
 
 export default {
     props: ["title", "subject", "email", "key", "front", "back", "id"],
@@ -41,8 +41,29 @@ export default {
   },
   methods: {
     delete(e){
-      const id = e.target.__vueParentComponent.props.id;
-      remove(id)
+      let deleteConfirm = confirm("Are you sure you want to delete this card?")
+      if(deleteConfirm){
+        const db = getDatabase();
+        const id = e.target.__vueParentComponent.props.id;
+        const subject = e.target.__vueParentComponent.props.subject;
+        const auth = getAuth();
+        const user = auth.currentUser.uid
+
+        set(ref(db, user + "/" + subject + "/" + id), {
+          key: null,
+          id: null,
+          title: null,
+          subject: null,
+          email: null,
+          front: null,
+          back: null
+        }).then(() => {
+          window.location.reload();
+        }).catch((error) => {
+          alert(error);
+        });
+      }
+
     },
   }
 };

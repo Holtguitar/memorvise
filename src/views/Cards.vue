@@ -10,7 +10,6 @@
       </select>
     </p>
   </div>
-  <button @click="flip">Flip</button>
   <div class="card-holder">
    <the-card
     v-if="flip" 
@@ -67,6 +66,7 @@ export default {
         const subjects = [];
 
         for(const id in data){
+          console.log(data)
           subjects.push(id)
         };
         
@@ -131,17 +131,21 @@ export default {
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 50px;
+    top: 35%;
+    overflow-y: scroll;
+    background-color: red;
   }
 
   .subject-selector {
+    position: fixed;
     left: 40%;
-    top: -7%;
+    top: 18%;
     width: fit-content;
     /* background-color: red; */
     padding: 8px;
     justify-content: center;
     text-align: center;
-    background-color: red;
+    /* background-color: red; */
     font-size: 50px;
   }
 
