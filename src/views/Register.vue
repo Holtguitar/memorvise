@@ -18,12 +18,11 @@
 		<div class="overlay">
 			<div class="overlay-panel overlay-right">
 				<h1 class="form-title">New Account</h1>
-        <br/>
-        <br/>
-        <input type="email" placeholder="Email" v-model="newEmail"/>
-        <input type="text" placeholder="Display Name" v-model="displayName"/>
-        <input type="password" placeholder="Password" v-model="newPassword"/>
-        <input type="password" placeholder="Confirm Password" v-model="confirmPassword"/>
+				<br/>
+				<br/>
+				<input type="email" placeholder="Email" v-model="newEmail"/>
+				<input type="password" placeholder="Password" v-model="newPassword"/>
+				<input type="password" placeholder="Confirm Password" v-model="confirmPassword"/>
 				<button class="button" id="sign-up-button" @click="register">Sign Up</button>
 			</div>
 		</div>
@@ -33,7 +32,8 @@
   
 <script setup>
   import {ref} from "vue";
-  import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, updateProfile} from "firebase/auth";
+  import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+  import { getDatabase, ref as refs, set } from "@firebase/database";
   import { useRouter } from "vue-router";
 
   let email = ref("");
@@ -41,9 +41,7 @@
   let newEmail = ref("")
   let newPassword = ref("")
   let confirmPassword = ref("");
-  let displayName = ref("");
-  const auth = getAuth();
-  const user = auth.currentUser
+
   
 
   const router = useRouter();
@@ -73,18 +71,15 @@
 
   const register = () => {
     if(newPassword.value == confirmPassword.value){
-      createUserWithEmailAndPassword(getAuth(), newEmail.value, newPassword.value,)
-      .then(() => {
-        // updateProfile(user, {
-        //   displayName: displayName
-        // })
-      }).then((data) => {
-        router.push("/")
-      }).catch((error) => {
-        alert(error.message);
-      })
+		createUserWithEmailAndPassword(getAuth(), newEmail.value, newPassword.value,)
+		.then(() => {
+			router.push("/")
+		}).catch((error) => {
+			alert(error);
+		})
+		
     } else {
-      alert(newPassword.value, " ", confirmPassword.value)
+      alert("Passwords do not match!")
     }
 
   };
@@ -94,7 +89,7 @@
     signInWithPopup(getAuth(), provider).then((result) => {
       router.push("/")
     }).catch((error) => {
-
+		alert(error);
     })
   };
 </script>
@@ -161,7 +156,7 @@ input {
 }
 
 .container {
-  left: 12%;
+  left: 15%;
 	background-color: #fff;
 	border-radius: 10px;
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 

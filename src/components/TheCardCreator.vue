@@ -2,7 +2,6 @@
     <form class="card-form">
         <h3 class="create-title">New Flash Card</h3>
         <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p>
-        <!-- <p><input type="text" maxlength="40" v-model="title" placeholder="Title" required/></p> -->
         <p><input type="text" maxlength="500" v-model="front" placeholder="Front" required/></p>
         <p><input type="text" maxlength="500" v-model="back" placeholder="Back" required/></p>
         <input class="mem-filter" type="checkbox"/><span>Mem Filter?</span>
@@ -14,7 +13,6 @@
 <script>
     import {ref} from "vue";
     import {getAuth} from "firebase/auth"
-    import {getDatabase, ref as sRef, set, child, get, update, remove,} from "firebase/database";
 
     export default {
         data() {
@@ -47,7 +45,7 @@
                 this.invalidInput = false;
                 this.error = null;
 
-                fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}/${this.subject}.json`, {
+                fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.subject}.json`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json"
@@ -69,31 +67,29 @@
                     this.error = error.message
                 });
 
-                // this.subject = "";
-                // this.title = "";
                 this.front = "";
                 this.back = "";
             },
-            loadSubjects(){
-            fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}.json`)
-        .then((res) => {
-            if(res.ok){
-            return res.json();
-            }
-        }).then((data) => {
-            const subjects = [];
 
-            for(const id in data){
-            subjects.push(id)
-            };
+            loadSubjects(){
+                fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}.json`)
+                .then((res) => {
+                    if(res.ok){
+                    return res.json();
+                    }
+                }).then((data) => {
+                    const subjects = [];
+
+                    for(const id in data){
+                    subjects.push(id)
+                    };
         
-            this.subjects = subjects;
-        }).catch((error) => {
-            this.error = error;
-            alert(error);
-        })
-      
-    },
+                    this.subjects = subjects;
+                }).catch((error) => {
+                    this.error = error;
+                    alert(error);
+                })
+            },
     },
     mounted(){
         if(this.user){
@@ -109,7 +105,6 @@
     .card-form {
         display: flex;
         flex-direction: column;
-        /* height: 350px; */
         height: fit-content;
         border-radius: 5%;
         background-color:rgb(11, 214, 146);
@@ -118,7 +113,6 @@
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
         0 10px 10px rgba(0,0,0,0.22);
         padding: 35px;
-
     }
 
     .create-title {

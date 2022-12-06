@@ -40,9 +40,9 @@ export default {
       tempSubs: ['Math', 'Science'],
       isLoading: false,
       error: null,
-      user: getAuth(),
       subject: "",
-      front: true
+      front: true,
+      user: getAuth()
     }
   },
   methods: {
@@ -55,9 +55,14 @@ export default {
     capFirst(a) {
       return a.charAt(0).toUpperCase() + a.slice(1);
     },
-      //Retrieves the subjects in use from the current user
+    loadUser(){
+      const auth = getAuth();
+      this.user = auth.currentUser.uid;
+    },
+    //Retrieves the subjects in use from the current user
     loadSubjects(){
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}.json`)
+      
+      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user}.json`)
       .then((res) => {
         if(res.ok){
           return res.json();
@@ -66,7 +71,6 @@ export default {
         const subjects = [];
 
         for(const id in data){
-          console.log(data)
           subjects.push(id)
         };
         
@@ -78,12 +82,13 @@ export default {
       
     },
 
-      //Retrieves the information for each card from the current user
+    //Retrieves the information for each card from the current user
     loadCards(){
+      this.loadUser();
       this.isLoading = true;
       this.error = null;
 
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}/${this.subject}.json`)
+      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user}/${this.subject}.json`)
       .then((res) => {
         if(res.ok){
           return res.json();
@@ -109,8 +114,10 @@ export default {
     },
   },
   mounted(){
+    this.loadUser();
+
     if(this.user){
-      setTimeout(this.loadSubjects, 300)
+      setTimeout(this.loadSubjects, 100)
     }
   }
 }
@@ -133,20 +140,31 @@ export default {
     column-gap: 50px;
     top: 35%;
     overflow-y: scroll;
-    background-color: red;
+    /* background-color: red; */
   }
 
   .subject-selector {
     position: fixed;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    width: 350px;
+    border-radius: 5%;
+    background-color:rgb(11, 214, 146);
+    left: 36%;
+    top: 15%;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    padding: 35px;
+    /* position: fixed;
     left: 40%;
     top: 18%;
     width: fit-content;
-    /* background-color: red; */
     padding: 8px;
     justify-content: center;
     text-align: center;
-    /* background-color: red; */
-    font-size: 50px;
+    font-size: 50px; */
   }
 
   .subject-selector-form {

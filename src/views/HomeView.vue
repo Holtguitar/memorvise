@@ -1,8 +1,7 @@
 <template>
-  <div class="account-info">
+  <div v-if="user" class="account-info">
     <h2 class="account-title">Account Info:</h2>
     <p>Email: <span>{{this.email}}</span></p>
-    <p>Display Name: <span>{{this.displayName}}</span></p>
     <!-- <p>Total cards:</p> -->
     <p>Total Subjects: <span>{{this.subjects.length}}</span></p>
     <br/>
@@ -22,13 +21,11 @@
         user: getAuth(),
         email: "",
         subjects: [],
-        displayName: "None"
       }
     },
     methods: {
       getAccountInfo() {
         this.email = this.user.currentUser.email;
-        this.displayName = this.user.currentUser.displayName;
         this.loadSubjects()
       },
       deleteAccount(){
@@ -47,8 +44,6 @@
           }).catch((error) => {
             alert(error);
           });
-          
-          
         }
         
       }, 
@@ -60,13 +55,11 @@
         }
       }).then((data) => {
         const subjects = [];
-
         for(const id in data){
           subjects.push({
             subjectOption: id,
           })
         };
-        
         this.subjects = subjects;
       }).catch((error) => {
         this.error = error;
@@ -77,7 +70,8 @@
     },
     mounted(){
       if(this.user){
-        setTimeout(this.getAccountInfo(), 300)
+        // setTimeout(this.getAccountInfo(), 100)
+        this.getAccountInfo()
       }
     }
   }
