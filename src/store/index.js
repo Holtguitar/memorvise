@@ -8,6 +8,11 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+// import {
+//   getDatabase,
+//   set,
+//   ref
+// } from "firebase/databse"
 
 
 export default createStore({
@@ -18,6 +23,7 @@ export default createStore({
         numCards: 0,
         numFriends: 0,
         friendsList: [],
+        subjects: []
     },
     mutations: {
         SET_USER(state, user){
@@ -26,18 +32,15 @@ export default createStore({
         CLEAR_USER(state) {
             state.user = null;
         },
-        SET_SUBJECT(state, subject){
-            state.user = subject;
+        GET_USER(state){
+          return state.user;
         },
-        CLEAR_SUBJECT(state) {
-            state.subject = null;
-        },
-        SET_NUMSUBJECTS(state, numSubjects){
-            state.numSubjects = user;
-        },
-        CLEAR_NUMSUBJECTS(state) {
-            state.numSubjects = null;
-        },
+        SET_SUBJECTS(state, subjectArr){
+          console.log(subjectArr)
+          for(let value of Object.values(subjectArr)){
+            console.log(value)
+          }
+        }
     },
     actions: {
         async loginWithEmail({ commit }, details) {
@@ -132,6 +135,32 @@ export default createStore({
             }
           });
         },
+        deleteAccount({commit}){
+
+        },
+        loadSubjects({commit}){
+          let loadedSubjects = [];
+          const user = getAuth();
+
+          fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${user.currentUser.uid}.json`)
+          .then((res) => {
+            if(res.ok){
+              return res.json();
+            }
+          }).then((data) => {
+            let subjects = [];
+            for(const id in data){
+              subjects.push({
+                subjectOption: id,
+              })
+              loadedSubjects = subjects;
+            };
+            commit("SET_SUBJECTS", loadedSubjects);
+          }).catch((error) => {
+            this.error = error;
+            alert(error);
+          });
+        }
     },
     getters: {}
 });

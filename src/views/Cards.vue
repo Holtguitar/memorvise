@@ -3,10 +3,8 @@
     <h3 class="select-title">Select a Subject</h3>
     <p class="subject-selector-form">
       <select id="subject" 
-          v-model="this.subject" @click="loadSubjects" v-on:change="loadCards">
-        <option
-          v-for="(item, key) in subjects" :value="item"
-        >{{item}}</option>
+          v-model="this.subject" v-on:change="loadCards">
+        <option v-for="(item, key) in subjects" :value="item">{{item}}</option>
       </select>
     </p>
   </div>
@@ -27,7 +25,7 @@
 
 <script>
 import TheCard from "../components/TheCard.vue";
-import { getAuth } from "@firebase/auth";
+import {useStore} from "vuex";
 
 export default {
   components: {
@@ -35,6 +33,7 @@ export default {
   }, 
   data() {
     return {
+      store: useStore(),
       results: [],
       subjects: [],
       tempSubs: ['Math', 'Science'],
@@ -42,44 +41,16 @@ export default {
       error: null,
       subject: "",
       front: true,
-      user: getAuth()
     }
   },
   methods: {
     flip(){
       front = !front
     },
-    printKey(key){
-      console.log(key)
-    },
-    capFirst(a) {
-      return a.charAt(0).toUpperCase() + a.slice(1);
-    },
-    loadUser(){
-      const auth = getAuth();
-      this.user = auth.currentUser.uid;
-    },
-    //Retrieves the subjects in use from the current user
     loadSubjects(){
-      
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user}.json`)
-      .then((res) => {
-        if(res.ok){
-          return res.json();
-        }
-      }).then((data) => {
-        const subjects = [];
-
-        for(const id in data){
-          subjects.push(id)
-        };
-        
-        this.subjects = subjects;
-      }).catch((error) => {
-        this.error = error;
-        alert(error);
-      })
-      
+      this.store.dispatch("loadSubjects")
+      this.subjects = this.store.state.subjects;
+      console.log(this.store.state.subjects);
     },
 
     //Retrieves the information for each card from the current user
@@ -114,11 +85,9 @@ export default {
     },
   },
   mounted(){
-    this.loadUser();
-
-    if(this.user){
-      setTimeout(this.loadSubjects, 100)
-    }
+    if(this.store.state.user){
+        this.loadSubjects();
+      }
   }
 }
 </script>

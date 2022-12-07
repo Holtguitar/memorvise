@@ -14,15 +14,15 @@
   import {getAuth} from "firebase/auth";
   import { getDatabase, set, ref } from "@firebase/database";
   import {RouterLink} from "vue-router"
-  import { useStore } from "vuex";
+  import { Store, useStore } from "vuex";
 
   export default {
     data(){
       return{
         user: getAuth(),
         email: "",
+        store: useStore(),
         subjects: [],
-        store: useStore()
       }
     },
     methods: {
@@ -50,25 +50,9 @@
         
       }, 
       loadSubjects(){
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}.json`)
-      .then((res) => {
-        if(res.ok){
-          return res.json();
-        }
-      }).then((data) => {
-        const subjects = [];
-        for(const id in data){
-          subjects.push({
-            subjectOption: id,
-          })
-        };
-        this.subjects = subjects;
-      }).catch((error) => {
-        this.error = error;
-        alert(error);
-      })
-      
-    },
+        this.store.dispatch("loadSubjects")
+        this.subjects = this.store.state.subjects;
+      },
     },
     mounted(){
       if(this.store.state.user){
