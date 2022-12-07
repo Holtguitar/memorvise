@@ -40,11 +40,10 @@ export default createStore({
         },
     },
     actions: {
-        async test(){console.log("Test")},
-        async loginWithEmail({ commit }, inputEmail, inputPassword) {
-          // const {email, password} = {inputEmail, inputPassword};
-          const email = inputEmail;
-          const password = inputPassword;
+        async loginWithEmail({ commit }, details) {
+          const {email, password} = details.value;
+          console.log(email, " ", password)
+
           const auth = getAuth();
 
             try {
@@ -67,10 +66,9 @@ export default createStore({
             commit("SET_USER", auth.currentUser);
             router.push("/");
         },
-        async loginWithGoogle({ commit }, details) {
+        async loginWithGoogle({ commit }) {
             const provider = new GoogleAuthProvider();
-
-            const { email, password } = details;
+            const auth = getAuth();
             try {
                 const provider = new GoogleAuthProvider();
                 await signInWithPopup(auth, provider);
@@ -93,8 +91,8 @@ export default createStore({
             router.push("/");
 
           },
-          async register({ commit }, inputEmail, inputPassword) {
-            const { email, password } = {};
+          async register({ commit }, details) {
+            const { email, password } = details.value;
             const auth = getAuth();
       
             try {
