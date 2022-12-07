@@ -48,7 +48,7 @@
         
       }, 
       loadSubjects(){
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/${this.user.currentUser.uid}.json`)
+      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}.json`)
       .then((res) => {
         if(res.ok){
           return res.json();

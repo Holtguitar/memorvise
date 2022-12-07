@@ -4,14 +4,14 @@
 		<form action="#">
 			<h1 class="form-title">Sign in</h1>
 			<div class="social-container"
-        @click.prevent="signInWithgoogle"
-      >
-				<img src="google.png" class="google__sign-in"/>
+        		@click.prevent=""
+      		>
+			<img src="google.png" class="google__sign-in"/>
 			</div>
 			<input type="email" placeholder="Email" v-model="email"/>
 			<input type="password" placeholder="Password" v-model="password"/>
 			<a href="#">Forgot your password?</a>
-			<button class="button" @click.prevent="signIn">Sign In</button>
+			<button class="button" @click.prevent="login">Sign In</button>
 		</form>
 	</div>
 	<div class="overlay-container">
@@ -20,9 +20,9 @@
 				<h1 class="form-title">New Account</h1>
 				<br/>
 				<br/>
-				<input type="email" placeholder="Email" v-model="newEmail"/>
-				<input type="password" placeholder="Password" v-model="newPassword"/>
-				<input type="password" placeholder="Confirm Password" v-model="confirmPassword"/>
+				<input type="email" placeholder="Email" v-model="email"/>
+				<input type="password" placeholder="Password" v-model="password"/>
+				<!-- <input type="password" placeholder="Confirm Password" v-model="confirmPassword"/> -->
 				<button class="button" id="sign-up-button" @click="register">Sign Up</button>
 			</div>
 		</div>
@@ -32,66 +32,94 @@
   
 <script setup>
   import {ref} from "vue";
-  import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
-  import { getDatabase, ref as refs, set } from "@firebase/database";
-  import { useRouter } from "vue-router";
+  import { useStore } from "vuex";
+//   import {getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
+//   import { getDatabase, ref as refs, set } from "@firebase/database";
+//   import { useRouter } from "vue-router";
 
-  let email = ref("");
-  let password = ref("");
-  let newEmail = ref("")
-  let newPassword = ref("")
-  let confirmPassword = ref("");
+//   let email = ref("");
+//   let password = ref("");
+//   let newEmail = ref("")
+//   let newPassword = ref("")
+//   let confirmPassword = ref("");
+
+//   export default {
+// 	setup(){
+		let login_form = ref({});
+		let password = ref();
+		let email = ref()
+		const register_form = ref({});
+		const store = useStore();
+
+		const login = () => {
+			// console.log(email.value," ", password.value)
+			// login_form = {email.value, password.value};
+			store.dispatch("loginWithEmail", email.value, password.value)
+    	};
+
+		const register = () => {}
+
+		const loginWithGoogle = () => {}
+
+    	// return {
+      	// 	login_form,
+      	// 	login,
+		// 	register,
+		// 	loginWithGoogle,
+    	// };
+	// },
+//   }
 
   
 
-  const router = useRouter();
-  const errMsg = ref();
+//   const router = useRouter();
+//   const errMsg = ref();
 
-  const signIn = () => {
-    signInWithEmailAndPassword(getAuth(), email.value, password.value).then((data) => {
-      router.push("/")
-    }).catch((error) => {
-      alert(error.message);
-      switch(error.code) {
-        case "auth/invalid-email":
-          errMsg.value = "Invalid Email";
-          break;
-        case "auth/user-not-found":
-          errMsg.value = "No account exists with that email.";
-          break;
-        case "auth/wrong-password":
-          errMsg.value = "Incorrect password";
-          break;
-        default:
-          errMsg.value = "Email or password was incorrect";
-          break;
-      }
-    })
-  };
+//   const signIn = () => {
+//     signInWithEmailAndPassword(getAuth(), email.value, password.value).then((data) => {
+//       router.push("/")
+//     }).catch((error) => {
+//       alert(error.message);
+//       switch(error.code) {
+//         case "auth/invalid-email":
+//           errMsg.value = "Invalid Email";
+//           break;
+//         case "auth/user-not-found":
+//           errMsg.value = "No account exists with that email.";
+//           break;
+//         case "auth/wrong-password":
+//           errMsg.value = "Incorrect password";
+//           break;
+//         default:
+//           errMsg.value = "Email or password was incorrect";
+//           break;
+//       }
+//     })
+//   };
 
-  const register = () => {
-    if(newPassword.value == confirmPassword.value){
-		createUserWithEmailAndPassword(getAuth(), newEmail.value, newPassword.value,)
-		.then(() => {
-			router.push("/")
-		}).catch((error) => {
-			alert(error);
-		})
+//   const register = () => {
+//     if(newPassword.value == confirmPassword.value){
+// 		createUserWithEmailAndPassword(getAuth(), newEmail.value, newPassword.value,)
+// 		.then(() => {
+// 			router.push("/")
+// 		}).catch((error) => {
+// 			alert(error);
+// 		})
 		
-    } else {
-      alert("Passwords do not match!")
-    }
+//     } else {
+//       alert("Passwords do not match!")
+//     }
 
-  };
+//   };
 
-  const signInWithgoogle = () => {
-    const provider = new GoogleAuthProvider();
-    signInWithPopup(getAuth(), provider).then((result) => {
-      router.push("/")
-    }).catch((error) => {
-		alert(error);
-    })
-  };
+//   const signInWithgoogle = () => {
+//     const provider = new GoogleAuthProvider();
+//     signInWithPopup(getAuth(), provider).then((result) => {
+//       router.push("/")
+//     }).catch((error) => {
+// 		alert(error);
+//     })
+//   };
 </script>
 
 <style>
