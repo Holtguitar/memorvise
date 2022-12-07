@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user" class="account-info">
+  <div v-if="store.state.user" class="account-info">
     <h2 class="account-title">Account Info:</h2>
     <p>Email: <span>{{this.email}}</span></p>
     <!-- <p>Total cards:</p> -->
@@ -14,6 +14,7 @@
   import {getAuth} from "firebase/auth";
   import { getDatabase, set, ref } from "@firebase/database";
   import {RouterLink} from "vue-router"
+  import { useStore } from "vuex";
 
   export default {
     data(){
@@ -21,12 +22,13 @@
         user: getAuth(),
         email: "",
         subjects: [],
+        store: useStore()
       }
     },
     methods: {
       getAccountInfo() {
-        this.email = this.user.currentUser.email;
-        this.loadSubjects()
+        this.email = this.store.state.user.email;
+        this.loadSubjects();
       },
       deleteAccount(){
         let confirmDelete = confirm("Are you sure you want to delete your account?")
@@ -69,8 +71,7 @@
     },
     },
     mounted(){
-      if(this.user){
-        // setTimeout(this.getAccountInfo(), 100)
+      if(this.store.state.user){
         this.getAccountInfo()
       }
     }

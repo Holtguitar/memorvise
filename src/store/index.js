@@ -59,10 +59,8 @@ export default createStore({
                 default:
                   alert("Something went wrong");
               }
-      
               return;
             }
-      
             commit("SET_USER", auth.currentUser);
             router.push("/");
         },
@@ -83,18 +81,14 @@ export default createStore({
                     default:
                     alert("Something went wrong");
                 }
-                
                 return;
             }
-      
             commit("SET_USER", auth.currentUser);
             router.push("/");
-
           },
           async register({ commit }, details) {
             const { email, password } = details.value;
             const auth = getAuth();
-      
             try {
               await createUserWithEmailAndPassword(auth, email, password);
             } catch (error) {
@@ -116,20 +110,15 @@ export default createStore({
               }
               return;
             }
-      
             commit("SET_USER", auth.currentUser);
-      
             router.push("/");
           },
           
         async logout({ commit }) {
           await signOut(auth);
-    
           commit("CLEAR_USER");
-    
           router.push("/sign-in");
         },
-    
         fetchUser({ commit }) {
           auth.onAuthStateChanged(async (user) => {
             if (user === null) {
@@ -143,5 +132,6 @@ export default createStore({
             }
           });
         },
-    }
+    },
+    getters: {}
 });
