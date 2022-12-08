@@ -28,7 +28,6 @@
     methods: {
       getAccountInfo() {
         this.email = this.store.state.user.email;
-        this.loadSubjects();
       },
       deleteAccount(){
         let confirmDelete = confirm("Are you sure you want to delete your account?")
@@ -56,7 +55,8 @@
     },
     mounted(){
       if(this.store.state.user){
-        this.getAccountInfo()
+        this.getAccountInfo();
+        this.loadSubjects();
       }
     }
   }

@@ -1,13 +1,13 @@
 <template>
   <nav>
     <nav class="nav-bar">
-      <router-link id="logo" to="/" v-if="$store.state.user">Memorvise</router-link>
+      <router-link id="logo" to="/" v-if="this.store.state.user">Memorvise</router-link>
       <div id="logo-else" to="/" v-else>Memorvise</div>
-      <router-link class="nav-item" id="home" to="/" v-if="$store.state.user">Account Info</router-link>
-      <router-link class="nav-item" id="cards" to="/cards" v-if="$store.state.user">Cards</router-link>
-      <router-link class="nav-item" id="card-creator" to="/card-creator" v-if="$store.state.user">Create</router-link>
-      <router-link  id="sign-in" to="/sign-in" v-if="!$store.state.user">Sign In</router-link>
-      <button @click="handleSignOut"  id="sign-out" v-if="$store.state.user">Sign Out</button>
+      <router-link class="nav-item" id="home" to="/" v-if="this.store.state.user">Account Info</router-link>
+      <router-link class="nav-item" id="cards" to="/cards" v-if="this.store.state.user">Cards</router-link>
+      <router-link class="nav-item" id="card-creator" to="/card-creator" v-if="this.store.state.user">Create</router-link>
+      <router-link  id="sign-in" to="/sign-in" v-if="!this.store.state.user">Sign In</router-link>
+      <button @click="handleSignOut"  id="sign-out" v-if="this.store.state.user">Sign Out</button>
     </nav>
   </nav>
 </template>

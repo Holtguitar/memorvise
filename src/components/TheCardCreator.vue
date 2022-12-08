@@ -13,6 +13,7 @@
 <script>
     import {ref} from "vue";
     import {getAuth} from "firebase/auth"
+    import { useStore } from "vuex"
 
     export default {
         data() {
@@ -26,6 +27,8 @@
                 invalidInput: false,
                 error: null,
                 subjects: [],
+                store: useStore
+        
             }
         },
         methods: {

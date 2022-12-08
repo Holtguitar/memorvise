@@ -28,6 +28,7 @@
 <script>
 import { getAuth } from '@firebase/auth';
 import { getDatabase, ref, child, push, update, set } from '@firebase/database';
+import {  useStore } from "vuex"
 
 export default {
     props: ["title", "subject", "email", "key", "front", "back", "id"],
@@ -37,6 +38,7 @@ export default {
         colorClass: `card color-${Math.floor(Math.random() * (6 - 1) + 1)}`,
         cardOne: "start",
         user: getAuth(),
+        store: useStore()
     };
   },
   methods: {
@@ -46,8 +48,11 @@ export default {
         const db = getDatabase();
         const id = e.target.__vueParentComponent.props.id;
         const subject = e.target.__vueParentComponent.props.subject;
-        const auth = getAuth();
-        const user = auth.currentUser.uid
+        const user = this.store.state.user.uid;
+
+        // this.store.dispatch("deleteCard", db, id, subject, user);
+
+
 
         set(ref(db, user + "/" + subject + "/" + id), {
           key: null,
@@ -58,7 +63,7 @@ export default {
           front: null,
           back: null
         }).then(() => {
-          window.location.reload();
+          
         }).catch((error) => {
           alert(error);
         });

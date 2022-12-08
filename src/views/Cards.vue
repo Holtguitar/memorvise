@@ -11,7 +11,7 @@
   <div class="card-holder">
    <the-card
     v-if="flip" 
-    v-for="result in results"
+    v-for="result in cards"
       :key="result.key"
       :id="result.key"
       :title="result.title"
@@ -34,13 +34,21 @@ export default {
   data() {
     return {
       store: useStore(),
-      results: [],
-      subjects: [],
-      tempSubs: ['Math', 'Science'],
-      isLoading: false,
-      error: null,
-      subject: "",
+      cards: this.getCards,
+      subjects: this.getSubjects,
+      subject: this.getSubject,
       front: true,
+    }
+  },
+  computed: {
+    getSubject(){
+      return this.$store.getters.getSubject;
+    },
+    getCards(){
+      return this.$store.getters.getSubject;
+    },
+    getSubjects(){
+      return this.$store.getters.getSubjects;
     }
   },
   methods: {
@@ -48,18 +56,16 @@ export default {
       front = !front
     },
     loadSubjects(){
-      this.store.dispatch("loadSubjects")
-      this.subjects = this.store.state.subjects;
-      console.log(this.store.state.subjects);
+      this.store.dispatch("loadSubjects");
+      console.log(this.subjects);
+      // this.subjects = this.store.state.subjects;
     },
-
-    //Retrieves the information for each card from the current user
     loadCards(){
-      this.loadUser();
       this.isLoading = true;
       this.error = null;
+      const user = this.store.state.user.uid;
 
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user}/${this.subject}.json`)
+      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`)
       .then((res) => {
         if(res.ok){
           return res.json();
@@ -75,9 +81,9 @@ export default {
             email: data[id].email,
             front: data[id].front,
             back: data[id].back
-        })
-          this.results = results;
+          })
         }
+        this.cards = results;
       }).catch((error) => {
         this.error = error;
         alert(error);
@@ -86,8 +92,8 @@ export default {
   },
   mounted(){
     if(this.store.state.user){
-        this.loadSubjects();
-      }
+      this.loadSubjects();
+    }
   }
 }
 </script>
@@ -126,14 +132,6 @@ export default {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
     0 10px 10px rgba(0,0,0,0.22);
     padding: 35px;
-    /* position: fixed;
-    left: 40%;
-    top: 18%;
-    width: fit-content;
-    padding: 8px;
-    justify-content: center;
-    text-align: center;
-    font-size: 50px; */
   }
 
   .subject-selector-form {

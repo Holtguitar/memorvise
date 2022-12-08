@@ -8,11 +8,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-// import {
-//   getDatabase,
-//   set,
-//   ref
-// } from "firebase/databse"
+import { getDatabase, ref, child, push, update, set } from '@firebase/database';
 
 
 export default createStore({
@@ -23,7 +19,8 @@ export default createStore({
         numCards: 0,
         numFriends: 0,
         friendsList: [],
-        subjects: []
+        subjects: [],
+        cards: []
     },
     mutations: {
         SET_USER(state, user){
@@ -36,19 +33,23 @@ export default createStore({
           return state.user;
         },
         SET_SUBJECTS(state, subjectArr){
-          console.log(subjectArr)
+          state.subjects = [];
           for(let value of Object.values(subjectArr)){
-            console.log(value)
+            state.subjects.push(value.subjectOption);
           }
-        }
+        },
+        SET_SUBJECT(state, selectedSubject){
+          state.subject = selectedSubject;
+        },
+        CLEAR_SUBJECT(state){
+          state.subject = null;
+        },
     },
     actions: {
+////////////////////ACCOUNT AND USER MANAGEMENT///////////////////////////////////
         async loginWithEmail({ commit }, details) {
           const {email, password} = details.value;
-          console.log(email, " ", password)
-
           const auth = getAuth();
-
             try {
               await signInWithEmailAndPassword(auth, email, password);
             } catch (error) {
@@ -118,6 +119,7 @@ export default createStore({
           },
           
         async logout({ commit }) {
+          const auth = getAuth();
           await signOut(auth);
           commit("CLEAR_USER");
           router.push("/sign-in");
@@ -138,11 +140,12 @@ export default createStore({
         deleteAccount({commit}){
 
         },
-        loadSubjects({commit}){
+////////////////////////SUBJECT AND CARD MANAGEMENT///////////////////////////////////        
+        async loadSubjects({commit}){
           let loadedSubjects = [];
           const user = getAuth();
 
-          fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${user.currentUser.uid}.json`)
+          await fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${user.currentUser.uid}.json`)
           .then((res) => {
             if(res.ok){
               return res.json();
@@ -160,7 +163,17 @@ export default createStore({
             this.error = error;
             alert(error);
           });
-        }
+        },
+        setSubject({commit, state}, selectedSubject){
+          commit("SET_SUBJECT", selectedSubject)
+        },
     },
-    getters: {}
+    getters: {
+      getSubject: state => {
+        return state.subject;
+      },
+      getSubjects(state) {
+        return state.subjects
+      }
+    }
 });
