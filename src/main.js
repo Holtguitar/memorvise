@@ -1,12 +1,11 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
 import store from "./store";
-import './assets/main.css'
-
-// firebase compnents
+import useStore from "./store"
+import './assets/main.css';
 import { initializeApp } from "firebase/app";
-
+import {getAuth, setPersistence, browserSessionPersistence, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth"
 const firebaseConfig = {
     apiKey: "AIzaSyBYG43e-GJZGiZcQ7f9ckz31lKx2uIGUmw",
     authDomain: "memorvise.firebaseapp.com",
@@ -17,11 +16,14 @@ const firebaseConfig = {
     appId: "1:1036407656797:web:25e9a78566e4873b5018b4",
     measurementId: "G-HE85QZ5SHZ"
 };
-
-initializeApp(firebaseConfig);
-// const app = createApp(App)
-// app.use(router)
-// app.use(store)
-// app.mount('#app')
-
 createApp(App).use(store).use(router).mount("#app");
+initializeApp(firebaseConfig);
+
+const auth = getAuth();
+setPersistence(auth, browserSessionPersistence)
+    .then(() => {
+        store.commit("SET_USER", auth.currentUser)
+    })
+    .catch((error) => {
+        alert(error.message)
+    })

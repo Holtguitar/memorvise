@@ -4,6 +4,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  setPersistence,
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
@@ -20,7 +21,8 @@ export default createStore({
         numFriends: 0,
         friendsList: [],
         subjects: [],
-        cards: []
+        cards: [],
+        reloadCards: false
     },
     mutations: {
         SET_USER(state, user){
@@ -46,7 +48,6 @@ export default createStore({
         },
         SET_CARDS(state, cards){
           state.cards = cards;
-          console.log(cards)
         },
         CLEAR_CARDS(state){
           state.cards = [];
@@ -144,8 +145,16 @@ export default createStore({
             }
           });
         },
-        deleteAccount({commit}){
-
+        async deleteUser({dispatch, state}, details){
+          await set(ref(details.db, details.user, details.path), {
+            id: null,
+          }).then(() => {   
+            state.user.delete();
+            dispatch("logout");
+            window.location.href="/sign-in"
+          }).catch((error) => {
+            alert(error);
+          });
         },
 ////////////////////////SUBJECT AND CARD MANAGEMENT///////////////////////////////////        
         async loadSubjects({commit}){
@@ -194,7 +203,6 @@ export default createStore({
                 back: data[id].back
               })
             };
-            console.log(results)
             commit("SET_CARDS", results);
           }).catch((error) => {
             this.error = error;
@@ -202,6 +210,7 @@ export default createStore({
           })
         },
         deleteCard({commit, dispatch, state}, details) {
+          state.reloadCards = true;
           set(ref(details.db, details.path), {
             key: null,
             id: null,
@@ -213,11 +222,11 @@ export default createStore({
           }).catch((error) => {
             alert(error);
           });
-          dispatch("loadSubjects")
-          console.log(details.userID, ", ", details.subject)
+          dispatch("loadSubjects");
           const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${details.userID}/${details.subject}.json`
           const cardDetails = {path};
           dispatch("loadCards", cardDetails); 
+          state.reloadCards = false;
         }
     },
     getters: {

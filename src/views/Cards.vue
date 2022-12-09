@@ -44,6 +44,11 @@ export default {
       front: true,
     }
   },
+  watch: {
+    'this.$store.state.reloadCards' : () => {
+      console.log("Deleting a card!")
+    }
+  },
   computed: {
     getSubject(){
       return this.$store.getters.getSubject;
@@ -101,7 +106,6 @@ export default {
   },
   mounted(){
     if(this.store.state.user){
-      console.log(this.store.state.cards)
       this.loadSubjects();
       this.loadCards();
     }

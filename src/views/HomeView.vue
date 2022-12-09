@@ -3,7 +3,7 @@
     <h2 class="account-title">Account Info:</h2>
     <p>Email: <span>{{this.email}}</span></p>
     <!-- <p>Total cards:</p> -->
-    <p>Total Subjects: <span>{{this.subjects.length}}</span></p>
+    <p>Total Subjects: <span>{{subjects}}</span></p>
     <br/>
     <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
   </div>
@@ -22,7 +22,7 @@
         user: getAuth(),
         email: "",
         store: useStore(),
-        subjects: [],
+        subjects: 0,
         store: useStore()
       }
     },
@@ -35,30 +35,25 @@
         
         if(confirmDelete){
           const db = getDatabase();
-          const auth = getAuth();
-          const user = auth.currentUser.uid
-
-          set(ref(db, user), {
-            id: null,
-          }).then(() => {
-            this.user.currentUser.delete();
-            window.location.href="/sign-in"
-          }).catch((error) => {
-            alert(error);
-          });
+          const userID = this.store.state.user.uid;
+          const path = `cards/${userID}`
+          const details = {db, path, userID}
+          this.store.dispatch("deleteUser", details);
+          
         }
         
       }, 
       loadSubjects(){
         this.store.dispatch("loadSubjects")
-        this.subjects = this.store.state.subjects;
+        if(this.store.state.subjects){
+          this.subjects = this.store.state.subjects.length;
+        }
       },
     },
     mounted(){
       if(this.store.state.user){
         this.getAccountInfo();
         this.loadSubjects();
-        
       }
     }
   }
