@@ -23,6 +23,7 @@
         email: "",
         store: useStore(),
         subjects: [],
+        store: useStore()
       }
     },
     methods: {
@@ -57,6 +58,7 @@
       if(this.store.state.user){
         this.getAccountInfo();
         this.loadSubjects();
+        
       }
     }
   }

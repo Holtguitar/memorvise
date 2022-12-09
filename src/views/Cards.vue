@@ -1,6 +1,6 @@
 <template>
-  <div class="subject-selector">
-    <h3 class="select-title">Select a Subject</h3>
+  <div v-if="(subjects.length > 0)" class="subject-selector">
+    <h3 class="select-title">Select a topic</h3>
     <p class="subject-selector-form">
       <select id="subject" 
           v-model="this.subject" v-on:change="loadCards">
@@ -8,10 +8,14 @@
       </select>
     </p>
   </div>
+  <div v-else class="subject-selector">
+    <h3>No topics to view</h3>
+    <hr style="border: solid 1px grey;">
+  </div>
   <div class="card-holder">
    <the-card
     v-if="flip" 
-    v-for="result in cards"
+    v-for="result in this.$store.state.cards"
       :key="result.key"
       :id="result.key"
       :title="result.title"
@@ -34,9 +38,9 @@ export default {
   data() {
     return {
       store: useStore(),
-      cards: this.getCards,
-      subjects: this.getSubjects,
-      subject: this.getSubject,
+      cards: this.$store.state.cards,
+      subjects: this.$store.state.subjects,
+      subject: this.$store.state.subject,
       front: true,
     }
   },
@@ -57,42 +61,49 @@ export default {
     },
     loadSubjects(){
       this.store.dispatch("loadSubjects");
-      console.log(this.subjects);
-      // this.subjects = this.store.state.subjects;
     },
     loadCards(){
-      this.isLoading = true;
-      this.error = null;
+      this.store.commit("CLEAR_CARDS")
       const user = this.store.state.user.uid;
+      const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`
+      const details = {path};
+      this.store.dispatch("loadCards", details);
+    }
+    // loadCards(){
+    //   this.isLoading = true;
+    //   this.error = null;
+    //   const user = this.store.state.user.uid;
 
-      fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`)
-      .then((res) => {
-        if(res.ok){
-          return res.json();
-        }
-      }).then((data) => {
-        this.isLoading = false;
-        const results = []
-        for(const id in data){
-          results.push({
-            key: id,
-            title: data[id].title,
-            subject: data[id].subject,
-            email: data[id].email,
-            front: data[id].front,
-            back: data[id].back
-          })
-        }
-        this.cards = results;
-      }).catch((error) => {
-        this.error = error;
-        alert(error);
-      })
-    },
+    //   fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`)
+    //   .then((res) => {
+    //     if(res.ok){
+    //       return res.json();
+    //     }
+    //   }).then((data) => {
+    //     this.isLoading = false;
+    //     const results = []
+    //     for(const id in data){
+    //       results.push({
+    //         key: id,
+    //         title: data[id].title,
+    //         subject: data[id].subject,
+    //         email: data[id].email,
+    //         front: data[id].front,
+    //         back: data[id].back
+    //       })
+    //     }
+    //     this.cards = results;
+    //   }).catch((error) => {
+    //     this.error = error;
+    //     alert(error);
+    //   })
+    // },
   },
   mounted(){
     if(this.store.state.user){
+      console.log(this.store.state.cards)
       this.loadSubjects();
+      this.loadCards();
     }
   }
 }

@@ -4,7 +4,6 @@
         :class="this.colorClass"
         v-bind:class="{ flipme: cardOne == 'flipped' }">
         <div class="card__face card__face--front">
-            <!-- <div class="title"><u>{{title}}</u></div> -->
             <div class="front-details">{{front}}</div>
         </div>
         <div class="card__face card__face--back">
@@ -43,33 +42,20 @@ export default {
   },
   methods: {
     delete(e){
-      let deleteConfirm = confirm("Are you sure you want to delete this card?")
+      let deleteConfirm = confirm("Are you sure you want to delete this card?");
       if(deleteConfirm){
         const db = getDatabase();
         const id = e.target.__vueParentComponent.props.id;
         const subject = e.target.__vueParentComponent.props.subject;
-        const user = this.store.state.user.uid;
-
-        // this.store.dispatch("deleteCard", db, id, subject, user);
-
-
-
-        set(ref(db, user + "/" + subject + "/" + id), {
-          key: null,
-          id: null,
-          title: null,
-          subject: null,
-          email: null,
-          front: null,
-          back: null
-        }).then(() => {
-          
-        }).catch((error) => {
-          alert(error);
-        });
+        const userID = this.store.state.user.uid;
+        const path = `cards/${userID}/${subject}/${id}`
+        const details = {db, path, userID, subject}
+        this.store.dispatch("deleteCard", details);
       }
-
     },
+    edit(e){
+      //TODO
+    }
   }
 };
 </script>

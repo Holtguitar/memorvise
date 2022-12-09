@@ -44,6 +44,13 @@ export default createStore({
         CLEAR_SUBJECT(state){
           state.subject = null;
         },
+        SET_CARDS(state, cards){
+          state.cards = cards;
+          console.log(cards)
+        },
+        CLEAR_CARDS(state){
+          state.cards = [];
+        }
     },
     actions: {
 ////////////////////ACCOUNT AND USER MANAGEMENT///////////////////////////////////
@@ -165,8 +172,53 @@ export default createStore({
           });
         },
         setSubject({commit, state}, selectedSubject){
-          commit("SET_SUBJECT", selectedSubject)
+          commit("SET_SUBJECT", selectedSubject);
         },
+        async loadCards({commit, state}, details){
+          const path = details.path;
+
+          await fetch(path)
+          .then((res) => {
+            if(res.ok){
+              return res.json();
+            }
+          }).then((data) => {
+            const results = []
+            for(const id in data){
+              results.push({
+                key: id,
+                title: data[id].title,
+                subject: data[id].subject,
+                email: data[id].email,
+                front: data[id].front,
+                back: data[id].back
+              })
+            };
+            console.log(results)
+            commit("SET_CARDS", results);
+          }).catch((error) => {
+            this.error = error;
+            alert(error);
+          })
+        },
+        deleteCard({commit, dispatch, state}, details) {
+          set(ref(details.db, details.path), {
+            key: null,
+            id: null,
+            title: null,
+            subject: null,
+            email: null,
+            front: null,
+            back: null
+          }).catch((error) => {
+            alert(error);
+          });
+          dispatch("loadSubjects")
+          console.log(details.userID, ", ", details.subject)
+          const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${details.userID}/${details.subject}.json`
+          const cardDetails = {path};
+          dispatch("loadCards", cardDetails); 
+        }
     },
     getters: {
       getSubject: state => {

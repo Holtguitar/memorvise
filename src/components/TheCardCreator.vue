@@ -19,7 +19,6 @@
         data() {
             return{
                 subject: ref(""),
-                // title: ref(""),
                 front: ref(""),
                 back: ref(""),
                 user: getAuth(),
@@ -27,72 +26,72 @@
                 invalidInput: false,
                 error: null,
                 subjects: [],
-                store: useStore
+                store: useStore()
         
             }
         },
         methods: {
-            createCard() {
-                this.email = this.user.currentUser.email;
+        createCard() {
+            this.email = this.user.currentUser.email;
+            if(
+            this.subject === "" ||
+            this.front === "" ||
+            this.back === "" ||
+            this.email === "" 
+            ){ 
+                this.invalidInput = true;
+                alert("Invalid input!")
+            }
 
-                if(
-                this.subject === "" ||
-                this.front === "" ||
-                this.back === "" ||
-                this.email === "" 
-                ){ 
-                    this.invalidInput = true;
-                    alert("Invalid input!")
-                }
+            this.invalidInput = false;
+            this.error = null;
 
-                this.invalidInput = false;
-                this.error = null;
+            fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.subject}.json`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    subject: this.subject,
+                    front: this.front,
+                    back: this.back,
+                    email: this.email,
 
-                fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.subject}.json`, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        subject: this.subject,
-                        front: this.front,
-                        back: this.back,
-                        email: this.email,
-
-                    })
-                }).then((res) => {
-                    if(res.ok) {
-                        console.log(id)
-                    } else {
-                        throw new Error("Could not submit new card to the data base.")
-                    }
-                }).catch((error) => {
-                    this.error = error.message
-                });
-
-                this.front = "";
-                this.back = "";
-            },
-
-            loadSubjects(){
-                fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}.json`)
-                .then((res) => {
-                    if(res.ok){
-                    return res.json();
-                    }
-                }).then((data) => {
-                    const subjects = [];
-
-                    for(const id in data){
-                    subjects.push(id)
-                    };
-        
-                    this.subjects = subjects;
-                }).catch((error) => {
-                    this.error = error;
-                    alert(error);
                 })
-            },
+            }).then((res) => {
+                if(res.ok) {
+                    this.store.dispatch("loadSubjects")
+                } else {
+                    throw new Error("Could not submit new card to the data base.")
+                }
+            }).catch((error) => {
+                this.error = error.message
+            });
+
+            this.front = "";
+            this.back = "";
+        },
+
+        loadSubjects(){
+            fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}.json`)
+            .then((res) => {
+                if(res.ok){
+                return res.json();
+                }
+            }).then((data) => {
+                const subjects = [];
+
+                for(const id in data){
+                subjects.push(id)
+                };
+    
+                this.subjects = subjects;
+            }).catch((error) => {
+                this.error = error;
+                alert(error);
+            })
+
+        },
     },
     mounted(){
         if(this.user){
