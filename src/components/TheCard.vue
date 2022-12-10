@@ -16,7 +16,7 @@
           class="rotate-image-icon"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
-        <div><button @click="this.editCard($event)">Edit</button></div>
+        <div id="{{id}}"><button @click="this.editCard($event)">Edit</button></div>
         <div id="{{id}}"><button @click="this.deleteCard($event)">Delete</button></div>
        </span>
     </div>
@@ -28,8 +28,8 @@
             <input 
               class="front-details" 
               type="text" 
-              placeholder="{{editFront}}"
-              v-model="this.editFront"
+              placeholder="{{frontEdit}}"
+              v-model="this.frontEdit"
               required
             >
         </div>
@@ -37,8 +37,8 @@
           <input 
               class="back-details" 
               type="text" 
-              placeholder="{{editBack}}"
-              v-model="this.editBack"
+              placeholder="{{backEdit}}"
+              v-model="this.backEdit"
               required
             >
         </div>
@@ -63,7 +63,7 @@ import { getDatabase, ref, child, push, update, set } from '@firebase/database';
 import {  useStore } from "vuex"
 
 export default {
-    props: ["title", "subject", "email", "key", "front", "back", "id"],
+    props: ["subject", "email", "key", "front", "back", "id"],
     
   data() {
     return {
@@ -77,7 +77,8 @@ export default {
         subjectEdit: null,
         emailEdit: null,
         frontEdit: null,
-        backEdit: null
+        backEdit: null,
+      
     };
   },
   methods: {
@@ -95,26 +96,27 @@ export default {
       }
     },
     editCard(e){
+      this.keyEdit = e.target.__vueParentComponent.props.id;
+      this.idEdit = e.target.__vueParentComponent.props.id;
+      this.subjectEdit = this.store.state.subject;
+      this.emailEdit = e.target.__vueParentComponent.props.email;
+      this.frontEdit = e.target.__vueParentComponent.props.front;
+      this.backEdit = e.target.__vueParentComponent.props.back;
       this.editMode = true;
-      this.key = e.target.__vueParentComponent.props.key;
-      this.id = e.target.__vueParentComponent.props.id;
-      this.subject = e.target.__vueParentComponent.props.subject;
-      this.email = e.target.__vueParentComponent.props.email;
-      this.front = e.target.__vueParentComponent.props.front;
-      this.back = e.target.__vueParentComponent.props.back
     },
     saveCard(e){
       this.editMode = false;
       const key = this.keyEdit;
       const id = this.idEdit;
       const subject = this.subjectEdit;
-      const email = this.emailEdit;
+      const email = this.store.state.user.email;
       const front = this.frontEdit;
       const back = this.backEdit;
       const userID = this.store.state.user.uid;
       const db = getDatabase();
-      const path = `cards/${userID}/${subject}/${id}`;
-      const details = {db, path, userID, key, id, subject, email, front, back};
+      const path = `cards/${userID}/${subject}/${id}`
+      const details = {path, userID, subject, id, key, email, front, back, db};
+      console.log(details)
       this.store.dispatch("editCard", details);
 
     },

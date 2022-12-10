@@ -68,8 +68,9 @@ export default {
     loadCards(){
       this.store.commit("CLEAR_CARDS")
       const user = this.store.state.user.uid;
+      const subject = this.subject;
       const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`
-      const details = {path};
+      const details = {path, subject};
       this.store.dispatch("loadCards", details);
     }
   },

@@ -43,6 +43,9 @@ export default createStore({
         SET_SUBJECT(state, selectedSubject){
           state.subject = selectedSubject;
         },
+        GET_SUBJECT(state){
+          return state.subject;
+        },
         CLEAR_SUBJECT(state){
           state.subject = null;
         },
@@ -182,8 +185,10 @@ export default createStore({
         },
         setSubject({commit, state}, selectedSubject){
           commit("SET_SUBJECT", selectedSubject);
+          
         },
-        async loadCards({commit, state}, details){
+        async loadCards({commit, dispatch, state}, details){
+          commit("SET_SUBJECT", details.subject)
           const path = details.path;
 
           await fetch(path)
@@ -226,6 +231,7 @@ export default createStore({
           const cardDetails = {path};
           dispatch("loadCards", cardDetails); 
           state.reloadCards = false;
+          window.location.reload();
         },
         editCard({commit, dispatch, state}, details) {
           state.reloadCards = true;
@@ -236,14 +242,9 @@ export default createStore({
             email: details.email,
             front: details.front,
             back: details.back
-          }).catch((error) => {
-            alert(error)
-          });
-          dispatch("loadSubjects");
-          const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${details.userID}/${details.subject}.json`
-          const cardDetails = {path};
-          dispatch("loadCards", cardDetails); 
+          })
           state.reloadCards = false;
+          window.location.reload();
         }
     },
     getters: {
