@@ -2,8 +2,8 @@
     <form class="card-form">
         <h3 class="create-title">New Flash Card</h3>
         <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p>
-        <p><input type="text" maxlength="500" v-model="front" placeholder="Front" required/></p>
-        <p><input type="text" maxlength="500" v-model="back" placeholder="Back" required/></p>
+        <p><input type="text" v-model="front" placeholder="Front" required/></p>
+        <p><input type="text" v-model="back" placeholder="Back" required/></p>
         <input class="mem-filter" type="checkbox"/><span>Mem Filter?</span>
         <button class="create-button" @click.prevent="createCard()">Create</button>
     </form>

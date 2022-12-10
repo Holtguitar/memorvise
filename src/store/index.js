@@ -177,7 +177,7 @@ export default createStore({
             commit("SET_SUBJECTS", loadedSubjects);
           }).catch((error) => {
             this.error = error;
-            alert(error);
+            // alert(error);
           });
         },
         setSubject({commit, state}, selectedSubject){
@@ -214,13 +214,30 @@ export default createStore({
           set(ref(details.db, details.path), {
             key: null,
             id: null,
-            title: null,
             subject: null,
             email: null,
             front: null,
             back: null
           }).catch((error) => {
             alert(error);
+          });
+          dispatch("loadSubjects");
+          const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${details.userID}/${details.subject}.json`
+          const cardDetails = {path};
+          dispatch("loadCards", cardDetails); 
+          state.reloadCards = false;
+        },
+        editCard({commit, dispatch, state}, details) {
+          state.reloadCards = true;
+          set(ref(details.db, details.path), {
+            key: details.key,
+            id: details.id,
+            subject: details.subject,
+            email: details.email,
+            front: details.front,
+            back: details.back
+          }).catch((error) => {
+            alert(error)
           });
           dispatch("loadSubjects");
           const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${details.userID}/${details.subject}.json`

@@ -1,5 +1,5 @@
 <template>
-    <div class="scene scene--card">
+    <div v-if="!editMode" class="scene scene--card">
       <div
         :class="this.colorClass"
         v-bind:class="{ flipme: cardOne == 'flipped' }">
@@ -16,8 +16,41 @@
           class="rotate-image-icon"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
-        <div><button>Edit</button></div>
-        <div id="{{id}}"><button @click="this.delete($event)">Delete</button></div>
+        <div><button @click="this.editCard($event)">Edit</button></div>
+        <div id="{{id}}"><button @click="this.deleteCard($event)">Delete</button></div>
+       </span>
+    </div>
+    <div v-else class="scene scene--card">
+      <div
+        :class="this.colorClass"
+        v-bind:class="{ flipme: cardOne == 'flipped' }">
+        <div class="card__face card__face--front">
+            <input 
+              class="front-details" 
+              type="text" 
+              placeholder="{{editFront}}"
+              v-model="this.editFront"
+              required
+            >
+        </div>
+        <div class="card__face card__face--back">
+          <input 
+              class="back-details" 
+              type="text" 
+              placeholder="{{editBack}}"
+              v-model="this.editBack"
+              required
+            >
+        </div>
+      </div>
+      <span class="card-controller">
+        <img 
+          src="rotate-icon.png" 
+          class="rotate-image-icon"
+          @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
+        />
+        <div><button @click="this.cancelEdit()">Cancel</button></div>
+        <div><button @click="this.saveCard()">Save</button></div>
        </span>
     </div>
 
@@ -37,11 +70,18 @@ export default {
         colorClass: `card color-${Math.floor(Math.random() * (6 - 1) + 1)}`,
         cardOne: "start",
         user: getAuth(),
-        store: useStore()
+        store: useStore(),
+        editMode: false,
+        keyEdit: null,
+        idEdit: null,
+        subjectEdit: null,
+        emailEdit: null,
+        frontEdit: null,
+        backEdit: null
     };
   },
   methods: {
-    delete(e){
+    deleteCard(e){
       let deleteConfirm = confirm("Are you sure you want to delete this card?");
       if(deleteConfirm){
         const db = getDatabase();
@@ -51,10 +91,42 @@ export default {
         const path = `cards/${userID}/${subject}/${id}`
         const details = {db, path, userID, subject}
         this.store.dispatch("deleteCard", details);
+
       }
     },
-    edit(e){
-      //TODO
+    editCard(e){
+      this.editMode = true;
+      this.key = e.target.__vueParentComponent.props.key;
+      this.id = e.target.__vueParentComponent.props.id;
+      this.subject = e.target.__vueParentComponent.props.subject;
+      this.email = e.target.__vueParentComponent.props.email;
+      this.front = e.target.__vueParentComponent.props.front;
+      this.back = e.target.__vueParentComponent.props.back
+    },
+    saveCard(e){
+      this.editMode = false;
+      const key = this.keyEdit;
+      const id = this.idEdit;
+      const subject = this.subjectEdit;
+      const email = this.emailEdit;
+      const front = this.frontEdit;
+      const back = this.backEdit;
+      const userID = this.store.state.user.uid;
+      const db = getDatabase();
+      const path = `cards/${userID}/${subject}/${id}`;
+      const details = {db, path, userID, key, id, subject, email, front, back};
+      this.store.dispatch("editCard", details);
+
+    },
+    cancelEdit(){
+      this.editMode = false;
+      this.keyEdit = null;
+      this.idEdit = null;
+      this.subjectEdit = null;
+      this.emailEdit = null;
+      this.frontEdit = null;
+      this.backEdit = null;
+      
     }
   }
 };

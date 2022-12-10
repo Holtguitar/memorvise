@@ -21,8 +21,9 @@ initializeApp(firebaseConfig);
 
 const auth = getAuth();
 setPersistence(auth, browserSessionPersistence)
-    .then(() => {
-        store.commit("SET_USER", auth.currentUser)
+    .then(async () => {
+        store.commit("SET_USER", auth.currentUser);
+        await store.dispatch("loadSubjects");
     })
     .catch((error) => {
         alert(error.message)

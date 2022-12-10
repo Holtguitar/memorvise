@@ -45,13 +45,11 @@ export default {
     }
   },
   watch: {
-    'this.$store.state.reloadCards' : () => {
-      console.log("Deleting a card!")
-    }
+    // getSubject: () => {console.log(this.subject)}
   },
   computed: {
     getSubject(){
-      return this.$store.getters.getSubject;
+      return this.$store.state.subject;
     },
     getCards(){
       return this.$store.getters.getSubject;
@@ -74,35 +72,6 @@ export default {
       const details = {path};
       this.store.dispatch("loadCards", details);
     }
-    // loadCards(){
-    //   this.isLoading = true;
-    //   this.error = null;
-    //   const user = this.store.state.user.uid;
-
-    //   fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`)
-    //   .then((res) => {
-    //     if(res.ok){
-    //       return res.json();
-    //     }
-    //   }).then((data) => {
-    //     this.isLoading = false;
-    //     const results = []
-    //     for(const id in data){
-    //       results.push({
-    //         key: id,
-    //         title: data[id].title,
-    //         subject: data[id].subject,
-    //         email: data[id].email,
-    //         front: data[id].front,
-    //         back: data[id].back
-    //       })
-    //     }
-    //     this.cards = results;
-    //   }).catch((error) => {
-    //     this.error = error;
-    //     alert(error);
-    //   })
-    // },
   },
   mounted(){
     if(this.store.state.user){
@@ -116,7 +85,6 @@ export default {
 
 
 <style scoped>
-
   .select-title {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: rgb(47, 55, 52);

@@ -3,7 +3,7 @@
     <h2 class="account-title">Account Info:</h2>
     <p>Email: <span>{{this.email}}</span></p>
     <!-- <p>Total cards:</p> -->
-    <p>Total Subjects: <span>{{subjects}}</span></p>
+    <p>Total Subjects: <span>{{subjectsLength}}</span></p>
     <br/>
     <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
   </div>
@@ -22,8 +22,15 @@
         user: getAuth(),
         email: "",
         store: useStore(),
-        subjects: 0,
-        store: useStore()
+        // subjects: 
+      }
+    },
+    computed :{
+      subjectsLength: () => {
+        const store = useStore();
+        const newArr = store.state.subjects;
+        return newArr.length;
+        // return 0;
       }
     },
     methods: {
