@@ -49,12 +49,10 @@
           class="rotate-image-icon"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
-        <div><button @click="this.cancelEdit()">Cancel</button></div>
-        <div><button @click="this.saveCard()">Save</button></div>
+        <div><button @click.prevent="this.cancelEdit()">Cancel</button></div>
+        <div><button @click.prevent="this.saveCard()">Save</button></div>
        </span>
     </div>
-
-
 </template>
 
 <script>
@@ -90,7 +88,7 @@ export default {
         const subject = e.target.__vueParentComponent.props.subject;
         const userID = this.store.state.user.uid;
         const path = `cards/${userID}/${subject}/${id}`
-        const details = {db, path, userID, subject}
+        const details = {db, path, userID, subject, id}
         this.store.dispatch("deleteCard", details);
 
       }
@@ -116,7 +114,6 @@ export default {
       const db = getDatabase();
       const path = `cards/${userID}/${subject}/${id}`
       const details = {path, userID, subject, id, key, email, front, back, db};
-      console.log(details)
       this.store.dispatch("editCard", details);
 
     },
@@ -134,7 +131,8 @@ export default {
 };
 </script>
 
-<style scoped>body {
+<style scoped>
+body {
     font-family: sans-serif;
   }
   

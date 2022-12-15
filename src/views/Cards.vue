@@ -38,9 +38,9 @@ export default {
   data() {
     return {
       store: useStore(),
-      cards: this.$store.state.cards,
+      cards: this.getCards,
       subjects: this.$store.state.subjects,
-      subject: this.$store.state.subject,
+      subject: this.getSubject,
       front: true,
     }
   },
@@ -66,12 +66,10 @@ export default {
       this.store.dispatch("loadSubjects");
     },
     loadCards(){
-      this.store.commit("CLEAR_CARDS")
-      const user = this.store.state.user.uid;
-      const subject = this.subject;
-      const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`
-      const details = {path, subject};
-      this.store.dispatch("loadCards", details);
+      this.store.commit("CLEAR_CARDS");
+      this.store.dispatch("loadSubjects");
+      this.store.commit("SET_SUBJECT", this.subject);
+      this.store.dispatch("loadCards");
     }
   },
   mounted(){
@@ -82,7 +80,6 @@ export default {
   }
 }
 </script>
-
 
 
 <style scoped>

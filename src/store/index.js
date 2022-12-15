@@ -52,6 +52,9 @@ export default createStore({
         SET_CARDS(state, cards){
           state.cards = cards;
         },
+        UPDATE_CARDS(state, card){
+          state.cards.push(card);
+        },
         CLEAR_CARDS(state){
           state.cards = [];
         }
@@ -187,10 +190,39 @@ export default createStore({
           commit("SET_SUBJECT", selectedSubject);
           
         },
-        async loadCards({commit, dispatch, state}, details){
-          commit("SET_SUBJECT", details.subject)
-          const path = details.path;
+        // async loadCards({commit, dispatch, state}, details){
+        //   commit("SET_SUBJECT", details.subject)
+        //   const path = details.path;
+        //   `https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`
 
+        //   await fetch(path)
+        //   .then((res) => {
+        //     if(res.ok){
+        //       return res.json();
+        //     }
+        //   }).then((data) => {
+        //     const results = []
+        //     for(const id in data){
+        //       results.push({
+        //         key: id,
+        //         title: data[id].title,
+        //         subject: data[id].subject,
+        //         email: data[id].email,
+        //         front: data[id].front,
+        //         back: data[id].back
+        //       })
+        //     };
+        //     commit("SET_CARDS", results);
+        //   }).catch((error) => {
+        //     this.error = error;
+        //     alert(error);
+        //   })
+        // },
+        async loadCards({commit, dispatch, state}){
+          const currSubject = state.subject;
+          const currUser = state.user.uid;
+          const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${currUser}/${currSubject}.json`
+      
           await fetch(path)
           .then((res) => {
             if(res.ok){
@@ -212,11 +244,11 @@ export default createStore({
           }).catch((error) => {
             this.error = error;
             alert(error);
-          })
+          });
         },
-        deleteCard({commit, dispatch, state}, details) {
-          state.reloadCards = true;
-          set(ref(details.db, details.path), {
+        async deleteCard({commit, dispatch, state}, details) {
+
+          await set(ref(details.db, details.path), {
             key: null,
             id: null,
             subject: null,
@@ -226,25 +258,80 @@ export default createStore({
           }).catch((error) => {
             alert(error);
           });
-          dispatch("loadSubjects");
-          const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${details.userID}/${details.subject}.json`
-          const cardDetails = {path};
-          dispatch("loadCards", cardDetails); 
-          state.reloadCards = false;
-          window.location.reload();
+         
+          const newCardArr = [];
+
+          for(let value of Object.values(state.cards)){
+            if(value.key !== details.id){
+              newCardArr.push(value);
+            } 
+          };
+
+          commit("SET_CARDS", newCardArr);
         },
-        editCard({commit, dispatch, state}, details) {
-          state.reloadCards = true;
-          set(ref(details.db, details.path), {
-            key: details.key,
-            id: details.id,
-            subject: details.subject,
-            email: details.email,
-            front: details.front,
-            back: details.back
-          })
-          state.reloadCards = false;
-          window.location.reload();
+        async editCard({commit, dispatch, state}, details) {
+          const oldCard = details.id;
+          let newCard = null;
+          const currSubject = state.subject;
+          const currUser = state.user.uid;
+          const path = `https://memorvise-default-rtdb.firebaseio.com/cards/${currUser}/${currSubject}.json`
+          const newCardArr = [];
+
+          await set(ref(details.db, details.path), {
+            key: null,
+            id: null,
+            subject: null,
+            email: null,
+            front: null,
+            back: null
+          });
+
+          await fetch(path, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    subject: details.subject,
+                    front: details.front,
+                    back: details.back,
+                    email: details.email,
+                })
+            }).catch((error) => {
+                this.error = error.message
+            });
+
+            await fetch(path)
+            .then((res) => {
+              if(res.ok){
+                return res.json();
+              }
+            }).then((data) => {
+              const results = []
+              for(const id in data){
+                results.push({
+                  key: id,
+                  title: data[id].title,
+                  subject: data[id].subject,
+                  email: data[id].email,
+                  front: data[id].front,
+                  back: data[id].back
+                })
+              };
+              commit("SET_CARDS", results);
+            }).catch((error) => {
+              this.error = error;
+              alert(error);
+            });
+
+
+            // for(let value of Object.values(state.cards)){
+            //   if(value.key !== details.id){
+            //     newCardArr.push(value);
+            //   } 
+            // };
+  
+            // commit("SET_CARDS", newCardArr);
         }
     },
     getters: {
