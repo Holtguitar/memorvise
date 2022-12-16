@@ -1,24 +1,30 @@
 <template>
     <div class="card-creator">
+        <form class="subject-form">
+            <h3 class="create-title">New Topic</h3>
+            <p><input type="text" maxlength="30" v-model="subject" placeholder="Topic"/></p>
+        </form>
         <form class="card-form">
-            <h3 class="create-title">New Flash Card</h3>
-            <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p>
-            <p><input type="text" v-model="front" placeholder="Front" required/></p>
-            <p><input type="text" v-model="back" placeholder="Back" required/></p>
-            <p>
-                <p>Filter difficulty</p>
-                <input type="radio" id="easy" name="difficulty" value="easy"/>
-                <label for="easy">Easy</label>
-                <input type="radio" id="hard" name="difficulty" value="hard"/>
-                <label for="hard">Hard</label>
-                <input type="radio" id="harder" name="difficulty" value="harder"/>
-                <label for="harder">Harder</label>
-            </p>
+            <span class="card-form-span">
+                <h3 class="create-title">New Flash Card</h3>
+                <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p>
+                <p><input type="text" v-model="front" placeholder="Front" required/></p>
+                <p><input type="text" v-model="back" placeholder="Back" required/></p>
+            </span>
+            <span class="color-form-span">
+                <label for="cardColor">Card Color:</label>
+                <input class="color-picker" id="cardColor" type="color" v-model="this.cardColor" v-on:change="changeColor"/>
+                <br/>
+                <br/>
+                <label for="textColor">Text Color:</label>
+                <input class="color-picker" id="textColor" type="color" v-model="this.textColor" v-on:change="changeColor"/>
+            </span>
             <button class="create-button" @click.prevent="createCard()">Create</button>
         </form>
         <div class="scene scene--card">
             <div
-                :class="this.colorClass"
+                :style="this.colorClass"
+                class="card"
                 v-bind:class="{ flipme: cardOne == 'flipped' }">
                 <div class="card__face card__face--front">
                     <div class="front-details">{{front}}</div>
@@ -56,50 +62,56 @@
                 error: null,
                 subjects: [],
                 store: useStore(),
-                colorClass: `card color-${Math.floor(Math.random() * (6 - 1) + 1)}`,
+                cardColor: "#0b5cd5",
+                textColor: "#C7C7C7",
+                colorClass: "background-color: #0b5cd5; color: #C7C7C7",
                 cardOne: "start",
         
             }
         },
         methods: {
+        changeColor(){
+            this.colorClass = "background-color: " + this.cardColor + "; color: " + this.textColor;
+        },
         createCard() {
             this.email = this.user.currentUser.email;
             if(
-            this.subject === "" ||
-            this.front === "" ||
-            this.back === "" ||
-            this.email === "" 
+                this.subject === "" ||
+                this.front === "" ||
+                this.back === "" ||
+                this.email === "" 
             ){ 
                 this.invalidInput = true;
                 alert("Invalid input!")
+            } else {
+                this.invalidInput = false;
+                this.error = null;
+
+                fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.subject}.json`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        subject: this.subject,
+                        front: this.front,
+                        back: this.back,
+                        email: this.email,
+                        colors: this.colorClass
+                    })
+                }).then((res) => {
+                    if(res.ok) {
+                        this.store.dispatch("loadSubjects");
+                    } else {
+                        throw new Error("Could not submit new card to the data base.")
+                    }
+                }).catch((error) => {
+                    this.error = error.message
+                });
+
+                this.front = "";
+                this.back = "";
             }
-
-            this.invalidInput = false;
-            this.error = null;
-
-            fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.subject}.json`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    subject: this.subject,
-                    front: this.front,
-                    back: this.back,
-                    email: this.email,
-                })
-            }).then((res) => {
-                if(res.ok) {
-                    this.store.dispatch("loadSubjects")
-                } else {
-                    throw new Error("Could not submit new card to the data base.")
-                }
-            }).catch((error) => {
-                this.error = error.message
-            });
-
-            this.front = "";
-            this.back = "";
         },
 
         loadSubjects(){
@@ -124,9 +136,11 @@
         },
     },
     mounted(){
-        if(this.user){
-            setTimeout(this.loadSubjects, 300)
-        }
+        // if(this.user){
+        //     setTimeout(this.loadSubjects, 300);
+        //     this.changeColor();
+        // }
+        this.changeColor;
     }
 }
 
@@ -140,18 +154,34 @@
         justify-content: center;
         height: fit-content;
         top: 15%;
+        height: 70vh;
     }
     /* Card Creator Form */
-    .card-form {
+    .card-form, .subject-form, .card-formatter {
         display: flex;
         flex-direction: column;
         height: fit-content;
         border-radius: 5%;
-        background-color:rgb(11, 214, 146);
+        background-color:#0bd692;
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
         0 10px 10px rgba(0,0,0,0.22);
         padding: 35px;
         margin: 20px;
+    }
+
+    .card-form {
+        display: grid;
+        grid-template-columns: auto auto;
+        column-gap: 50px;
+    }
+
+    .color-form-span{
+        top: 30%;
+    }
+
+    .card-formatter {
+        text-align: center;
+        
     }
 
     .create-title {
@@ -175,10 +205,16 @@
         border-color: transparent;
     }
 
+    .color-picker {
+        /* border-radius: 20px; */
+        width: 35px;
+        margin-left: 15px;
+    }
+
     /* Card Preview */
   .scene {
     width: 400px;
-    min-height: 260px;
+    height: 260px;
     perspective: 600px;
     justify-content: center;
     align-items: center;
@@ -239,19 +275,13 @@
   }
 
   .card-controller {
-    display:flex;
-    flex-direction: row;
-    width: fit-content;
-    left: 42.5%;
+    left: 45%;
     top: 10%;
+    padding: 5px;
   }
   
   .flipme {
     transform: rotateY(180deg);
-  }
-
-  #easy, #hard, #harder {
-    background-color: red;
   }
 
   /* Dynamic color themes */

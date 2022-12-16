@@ -23,6 +23,7 @@
       :email="result.email"
       :front="result.front"
       :back="result.back"
+      :colors="result.colors"
     ></the-card>
   </div>
 </template>

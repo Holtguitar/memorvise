@@ -190,34 +190,6 @@ export default createStore({
           commit("SET_SUBJECT", selectedSubject);
           
         },
-        // async loadCards({commit, dispatch, state}, details){
-        //   commit("SET_SUBJECT", details.subject)
-        //   const path = details.path;
-        //   `https://memorvise-default-rtdb.firebaseio.com/cards/${user}/${this.subject}.json`
-
-        //   await fetch(path)
-        //   .then((res) => {
-        //     if(res.ok){
-        //       return res.json();
-        //     }
-        //   }).then((data) => {
-        //     const results = []
-        //     for(const id in data){
-        //       results.push({
-        //         key: id,
-        //         title: data[id].title,
-        //         subject: data[id].subject,
-        //         email: data[id].email,
-        //         front: data[id].front,
-        //         back: data[id].back
-        //       })
-        //     };
-        //     commit("SET_CARDS", results);
-        //   }).catch((error) => {
-        //     this.error = error;
-        //     alert(error);
-        //   })
-        // },
         async loadCards({commit, dispatch, state}){
           const currSubject = state.subject;
           const currUser = state.user.uid;
@@ -237,7 +209,8 @@ export default createStore({
                 subject: data[id].subject,
                 email: data[id].email,
                 front: data[id].front,
-                back: data[id].back
+                back: data[id].back,
+                colors: data[id].colors
               })
             };
             commit("SET_CARDS", results);
@@ -254,7 +227,8 @@ export default createStore({
             subject: null,
             email: null,
             front: null,
-            back: null
+            back: null,
+            colors: null
           }).catch((error) => {
             alert(error);
           });
@@ -283,7 +257,8 @@ export default createStore({
             subject: null,
             email: null,
             front: null,
-            back: null
+            back: null,
+            colors: null
           });
 
           await fetch(path, {
@@ -296,6 +271,7 @@ export default createStore({
                     front: details.front,
                     back: details.back,
                     email: details.email,
+                    colors: details.colors
                 })
             }).catch((error) => {
                 this.error = error.message
@@ -315,7 +291,8 @@ export default createStore({
                   subject: data[id].subject,
                   email: data[id].email,
                   front: data[id].front,
-                  back: data[id].back
+                  back: data[id].back,
+                  colors: data[id].colors
                 })
               };
               commit("SET_CARDS", results);
@@ -323,15 +300,6 @@ export default createStore({
               this.error = error;
               alert(error);
             });
-
-
-            // for(let value of Object.values(state.cards)){
-            //   if(value.key !== details.id){
-            //     newCardArr.push(value);
-            //   } 
-            // };
-  
-            // commit("SET_CARDS", newCardArr);
         }
     },
     getters: {
