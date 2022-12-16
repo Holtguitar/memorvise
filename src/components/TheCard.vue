@@ -6,10 +6,12 @@
         :style="this.cardStyle"
       >
         <div class="card__face card__face--front">
-            <div class="front-details">{{front}}</div>
+            <div v-if="(this.front.length < 160)" class="front-details">{{front}}</div>
+            <div v-else class="front-details-long">{{front}}</div>
         </div>
         <div class="card__face card__face--back">
-          <div class="back-details">{{back}}</div>
+          <div v-if="(this.back.length < 160)" class="back-details">{{back}}</div>
+          <div v-else class="back-details-long">{{back}}</div>
         </div>
       </div>
       <span class="card-controller">
@@ -179,13 +181,21 @@ export default {
   .front-details {
     margin-top: 25%
   }
+
+  .front-details-long {
+    margin-top: 0%;
+  }
   
   .card__face--back {
-    transform: rotateY(180deg);
+    transform: translateZ(-1px) rotateY(180deg);
   }
 
   .back-details {
     margin-top: 25%;
+  }
+
+  .back-details-long {
+    margin-top: 0%;
   }
 
   .edit-card {
