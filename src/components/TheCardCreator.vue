@@ -2,22 +2,28 @@
     <div class="card-creator">
         <form class="subject-form">
             <h3 class="create-title">New Topic</h3>
-            <p><input type="text" maxlength="30" v-model="subject" placeholder="Topic"/></p>
+            <p><input type="text" maxlength="30" v-model="newSubject" placeholder="Topic"/></p>
+            <button class="create-subject-button"  @click.prevent="createSubject()">Create</button>
         </form>
         <form class="card-form">
             <span class="card-form-span">
                 <h3 class="create-title">New Flash Card</h3>
-                <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p>
+                <!-- <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p> -->
+                <select id="subject">
+                    <option v-for="(item, key) in subjects" :value="item" >{{item}}</option>
+                </select>
                 <p><input type="text" v-model="front" placeholder="Front" required/></p>
                 <p><input type="text" v-model="back" placeholder="Back" required/></p>
             </span>
             <span class="color-form-span">
-                <label for="cardColor">Card Color:</label>
-                <input class="color-picker" id="cardColor" type="color" v-model="this.cardColor" v-on:change="changeColor"/>
-                <br/>
-                <br/>
-                <label for="textColor">Text Color:</label>
-                <input class="color-picker" id="textColor" type="color" v-model="this.textColor" v-on:change="changeColor"/>
+                <div class="color-form">
+                    <label for="cardColor">Card Color:</label>
+                    <input class="color-picker" id="cardColor" type="color" v-model="this.cardColor" v-on:change="changeColor"/>
+                    <br/>
+                    <br/>
+                    <label for="textColor">Text Color:</label>
+                    <input class="color-picker" id="textColor" type="color" v-model="this.textColor" v-on:change="changeColor"/>
+                </div>
             </span>
             <button class="create-button" @click.prevent="createCard()">Create</button>
         </form>
@@ -54,22 +60,46 @@
         data() {
             return{
                 subject: ref(""),
+                newSubject: ref(""),
                 front: ref(""),
                 back: ref(""),
                 user: getAuth(),
                 email: ref(""),
                 invalidInput: false,
                 error: null,
-                subjects: [],
+                subjects: this.$store.state.subjects,
                 store: useStore(),
-                cardColor: "#0b5cd5",
-                textColor: "#C7C7C7",
-                colorClass: "background-color: #0b5cd5; color: #C7C7C7",
+                cardColor: "#6107cf",
+                textColor: "#FAFAFA",
+                colorClass: "background-color: #6107cf; color: #FAFAFA",
                 cardOne: "start",
         
             }
         },
         methods: {
+        createSubject(){
+            console.log(this.newSubject);
+
+            fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.newSubject}.json`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    value: this.newSubject
+                })
+            }).then((res) => {
+                if(res.ok) {
+                    this.store.dispatch("loadSubjects");
+                    this.subjects.push(this.newSubject);
+                    this.newSubject = "";
+                } else {
+                    throw new Error("Could not submit new card to the data base.")
+                }
+            }).catch((error) => {
+                this.error = error.message
+            });
+        },
         changeColor(){
             this.colorClass = "background-color: " + this.cardColor + "; color: " + this.textColor;
         },
@@ -113,34 +143,13 @@
                 this.back = "";
             }
         },
-
-        loadSubjects(){
-            fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}.json`)
-            .then((res) => {
-                if(res.ok){
-                return res.json();
-                }
-            }).then((data) => {
-                const subjects = [];
-
-                for(const id in data){
-                subjects.push(id)
-                };
-    
-                this.subjects = subjects;
-            }).catch((error) => {
-                this.error = error;
-                alert(error);
-            })
-
-        },
+    loadSubjects(){
+      this.store.dispatch("loadSubjects");
+    },
     },
     mounted(){
-        // if(this.user){
-        //     setTimeout(this.loadSubjects, 300);
-        //     this.changeColor();
-        // }
         this.changeColor;
+        this.loadSubjects;
     }
 }
 
@@ -160,8 +169,8 @@
     .card-form, .subject-form, .card-formatter {
         display: flex;
         flex-direction: column;
-        height: fit-content;
-        border-radius: 5%;
+        height: 250px;
+        border-radius: 15px;
         background-color:#0bd692;
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
         0 10px 10px rgba(0,0,0,0.22);
@@ -169,19 +178,36 @@
         margin: 20px;
     }
 
+    .subject-form {
+        height: 175px;
+        text-align: center;
+    }
+
     .card-form {
         display: grid;
         grid-template-columns: auto auto;
         column-gap: 50px;
+        width: 400px
     }
 
-    .color-form-span{
+    .color-form {
+        width: 115px;
         top: 30%;
+        left: 20%;
+    }
+    .color-form-span {
+        position: absolute;
+        background-color: rgb(81, 121, 253);
+        color:rgb(2, 2, 101);
+        height: 100%;
+        width: 45%;
+        top: 0%;
+        right: 0%;
+        border-radius: 200px 15px 15px 200px;
     }
 
     .card-formatter {
         text-align: center;
-        
     }
 
     .create-title {
@@ -196,7 +222,9 @@
     }
 
     .create-button {
-        margin-top: 15px;
+        position: absolute;
+        bottom: 10%;
+        left: 8%;
         border-radius: 5%;
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
         0 10px 10px rgba(0,0,0,0.22);
@@ -205,10 +233,37 @@
         border-color: transparent;
     }
 
+    .create-subject-button {
+        position: absolute;
+        bottom: 10%;
+        left: 30%;
+        border-radius: 5%;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+        0 10px 10px rgba(0,0,0,0.22);
+        width: 5rem;
+        height: 30px;
+        border-color: transparent;
+    }
+
+    .create-button:hover, .create-subject-button:hover {
+        cursor: pointer;
+    }
+
+    .create-button:active, .create-subject-button:active {
+        transform: scale(.98);
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+        0 15px 15px rgba(0,0,0,0.22);
+    }
+
     .color-picker {
-        /* border-radius: 20px; */
+        background-color: transparent;
+        border-color: transparent;
         width: 35px;
-        margin-left: 15px;
+        /* margin-left: 15px; */
+    }
+
+    .color-picker:hover {
+        cursor: pointer;
     }
 
     /* Card Preview */
@@ -274,6 +329,10 @@
     width: 35px;
   }
 
+  .rotate-image-icon:hover {
+    cursor: pointer;
+  }
+
   .card-controller {
     left: 45%;
     top: 10%;
@@ -284,33 +343,4 @@
     transform: rotateY(180deg);
   }
 
-  /* Dynamic color themes */
-  .color-1 {
-    background-color: #a6a5ac;
-    color: rgb(252, 252, 252);
-  }
-  
-  .color-2 {  
-    background-color: rgb(90, 184, 131);
-    color: rgb(74, 74, 74);
-  }
-  .color-3 {
-    background-color: #F26659;
-    color: rgb(255, 255, 255);
-  }
-  
-  .color-4 {
-    background-color: #8CA9D3;
-    color: rgb(255, 255, 255);
-  }
-  
-  .color-5 {
-    background-color: #c28cd3;
-    color: rgb(255, 255, 255);
-  }
-  
-  .color-6 {
-    background-color: #EBC999;
-    color: rgb(214, 137, 22);
-  }
 </style>

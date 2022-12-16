@@ -183,7 +183,6 @@ export default createStore({
             commit("SET_SUBJECTS", loadedSubjects);
           }).catch((error) => {
             this.error = error;
-            // alert(error);
           });
         },
         setSubject({commit, state}, selectedSubject){
@@ -241,6 +240,7 @@ export default createStore({
             } 
           };
 
+          dispatch("loadSubjects")
           commit("SET_CARDS", newCardArr);
         },
         async editCard({commit, dispatch, state}, details) {
