@@ -9,7 +9,7 @@
             <span class="card-form-span">
                 <h3 class="create-title">New Flash Card</h3>
                 <!-- <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p> -->
-                <select id="subject">
+                <select id="subject" v-model="this.subject" v-on:change="printSub()">
                     <option v-for="(item, key) in subjects" :value="item" >{{item}}</option>
                 </select>
                 <p><input type="text" v-model="front" placeholder="Front" required/></p>
@@ -69,16 +69,15 @@
                 error: null,
                 subjects: this.$store.state.subjects,
                 store: useStore(),
-                cardColor: "#6107cf",
-                textColor: "#FAFAFA",
-                colorClass: "background-color: #6107cf; color: #FAFAFA",
+                cardColor: "#FFFFFF",
+                textColor: "#000000",
+                colorClass: "background-color: #FFFFFF; color: #000000",
                 cardOne: "start",
         
             }
         },
         methods: {
         createSubject(){
-            console.log(this.newSubject);
 
             fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.newSubject}.json`, {
                 method: "POST",
@@ -86,7 +85,10 @@
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    value: this.newSubject
+                    subject: this.newSubject,
+                    front: "",
+                    back: "",
+                    email: "",
                 })
             }).then((res) => {
                 if(res.ok) {
@@ -103,6 +105,9 @@
         changeColor(){
             this.colorClass = "background-color: " + this.cardColor + "; color: " + this.textColor;
         },
+        printSub(){
+            console.log(this.email)
+        },
         createCard() {
             this.email = this.user.currentUser.email;
             if(
@@ -112,10 +117,11 @@
                 this.email === "" 
             ){ 
                 this.invalidInput = true;
-                alert("Invalid input!")
+                alert("Invalid input!");
             } else {
                 this.invalidInput = false;
                 this.error = null;
+                console.log
 
                 fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.subject}.json`, {
                     method: "POST",
@@ -127,7 +133,9 @@
                         front: this.front,
                         back: this.back,
                         email: this.email,
-                        colors: this.colorClass
+                        textColor: this.textColor,
+                        cardColor: this.cardColor,
+                        colors: `background-color: ${this.cardColor}; color: ${this.textColor}`
                     })
                 }).then((res) => {
                     if(res.ok) {

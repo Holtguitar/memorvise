@@ -209,7 +209,9 @@ export default createStore({
                 email: data[id].email,
                 front: data[id].front,
                 back: data[id].back,
-                colors: data[id].colors
+                colors: data[id].colors,
+                textColor: data[id].textColor,
+                cardColor: data[id].cardColor
               })
             };
             commit("SET_CARDS", results);
@@ -227,7 +229,9 @@ export default createStore({
             email: null,
             front: null,
             back: null,
-            colors: null
+            colors: null,
+            textColor: null,
+            cardColor: null
           }).catch((error) => {
             alert(error);
           });
@@ -258,7 +262,9 @@ export default createStore({
             email: null,
             front: null,
             back: null,
-            colors: null
+            colors: null,
+            textColor: null,
+            cardColor: null
           });
 
           await fetch(path, {
@@ -271,7 +277,9 @@ export default createStore({
                     front: details.front,
                     back: details.back,
                     email: details.email,
-                    colors: details.colors
+                    colors: details.colors,
+                    textColor: details.textColor,
+                    cardColor: details.cardColor
                 })
             }).catch((error) => {
                 this.error = error.message

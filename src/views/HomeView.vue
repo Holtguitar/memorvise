@@ -38,6 +38,7 @@
     },
     methods: {
       getAccountInfo() {
+        this.loadSubjects();
         this.email = this.store.state.user.email;
         this.displayName = this.store.state.user.displayName;
         this.user = this.store.state.user;
@@ -65,7 +66,9 @@
       },
     },
     mounted(){
-      this.getAccountInfo();
+      if(this.store.state.user){
+        this.getAccountInfo();
+      }
     }
   }
 </script>

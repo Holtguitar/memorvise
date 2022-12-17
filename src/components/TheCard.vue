@@ -1,5 +1,8 @@
 <template>
-    <div v-if="!editMode" class="scene scene--card">
+    <div 
+      v-if="!editMode" class="scene scene--card"
+      :style="this.displayStyle"
+    >
       <div
         class="card"
         v-bind:class="{ flipme: cardOne == 'flipped' }"
@@ -27,7 +30,7 @@
     <div v-else class="scene scene--card">
       <div
         class="card"
-        :style="this.cardStyle"
+        :style="this.colorsEdit"
         v-bind:class="{ flipme: cardOne == 'flipped' }">
         <div class="card__face card__face--front">
             <input 
@@ -54,6 +57,8 @@
           class="rotate-image-icon"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
+        <div class="text-color-edit"><img src="letter-t.png" class="text-image"/><input type="color" class="text-color-picker" v-model="this.textColorEdit" v-on:change="changeTextColor()"/></div>
+        <div class="card-color-edit"><img src="cards.png" class="cards-image"/><input type="color" class="card-color-picker" v-model="this.cardColorEdit" v-on:change="changeCardColor()"/></div>
         <div><button @click.prevent="this.cancelEdit()">Cancel</button></div>
         <div><button @click.prevent="this.saveCard()">Save</button></div>
        </span>
@@ -66,7 +71,7 @@ import { getDatabase, ref, child, push, update, set } from '@firebase/database';
 import {  useStore } from "vuex"
 
 export default {
-    props: ["subject", "email", "key", "front", "back", "id", "colors"],
+    props: ["subject", "email", "key", "front", "back", "id", "colors", "display", "textColor", "cardColor"],
     
   data() {
     return {
@@ -81,16 +86,29 @@ export default {
         emailEdit: null,
         frontEdit: null,
         backEdit: null,
-        colorsEdit: null,
+        textColorEdit: this.textColor,
+        cardColorEdit: this.cardColor,
+        colorsEdit: `background-color: ${this.cardColorEdit}; color: ${this.textColorEdit}`
       
     };
   },
   computed: {
     cardStyle(){
-      return this.colors;
+      return this.colors
+    },
+    displayStyle(){
+      if(this.front === "" && this.back === ""){
+        return "display: none";
+      }
     }
   },
   methods: {
+    changeTextColor(){
+      this.colorsEdit = `background-color: ${this.cardColorEdit}; color: ${this.textColorEdit}`
+    },    
+    changeCardColor(){
+      this.colorsEdit = `background-color: ${this.cardColorEdit}; color: ${this.textColorEdit}`
+    },
     deleteCard(e){
       let deleteConfirm = confirm("Are you sure you want to delete this card?");
       if(deleteConfirm){
@@ -100,7 +118,9 @@ export default {
         const userID = this.store.state.user.uid;
         const path = `cards/${userID}/${subject}/${id}`
         const colors = e.target.__vueParentComponent.props.colors;
-        const details = {db, path, userID, subject, id, colors}
+        const textColor = e.target.__vueParentComponent.props.textColor
+        const cardColor = e.target.__vueParentComponent.props.cardColor
+        const details = {db, path, userID, subject, id, colors, textColor, cardColor}
         this.store.dispatch("deleteCard", details);
 
       }
@@ -112,7 +132,12 @@ export default {
       this.emailEdit = e.target.__vueParentComponent.props.email;
       this.frontEdit = e.target.__vueParentComponent.props.front;
       this.backEdit = e.target.__vueParentComponent.props.back;
-      this.colorsEdit = e.target.__vueParentComponent.props.colors;
+      // this.cardColorEdit = e.target.__vueParentComponent.props.cardColor;
+      // this.textColorEdit = e.target.__vueParentComponent.props.textColor;
+      // this.colorsEdit = "background-color: " + this.cardColorEdit + "; color: " + this.textColorEdit;
+      this.cardColorEdit = this.cardColor;
+      this.textColorEdit = this.textColor;
+      this.colorsEdit = this.colors;
       this.editMode = true;
     },
     saveCard(e){
@@ -123,11 +148,13 @@ export default {
       const email = this.store.state.user.email;
       const front = this.frontEdit;
       const back = this.backEdit;
-      const colors = this.colorsEdit;
+      const textColor = this.textColorEdit;
+      const cardColor = this.cardColorEdit;
+      const colors = `background-color: ${cardColor}; color: ${textColor}`
       const userID = this.store.state.user.uid;
       const db = getDatabase();
       const path = `cards/${userID}/${subject}/${id}`
-      const details = {path, userID, subject, id, key, email, front, back, db, colors};
+      const details = {path, userID, subject, id, key, email, front, back, db, colors, textColor, cardColor};
       this.store.dispatch("editCard", details);
 
     },
@@ -140,15 +167,14 @@ export default {
       this.frontEdit = null;
       this.backEdit = null;
       this.colorsEdit = null;
+      this.cardColorEdit = null;
+      this.textColorEdit = null;
     }
   }
 };
 </script>
 
 <style scoped>
-  body {
-    font-family: sans-serif;
-  }
   
   .scene {
     width: 400px;
@@ -222,10 +248,9 @@ export default {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    left: 20%;
+    left: 7%;
     top: 3%;
-    width: 250px;
-    /* background-color: red; */
+    width: 350px;
   }
 
   .card-controller button {
@@ -236,6 +261,26 @@ export default {
     height: 25px;
     border-color: transparent;
     background-color: whitesmoke;
+  }
+
+  .text-image {
+    position: fixed;
+    height: 25px
+  }
+
+  .cards-image {
+    position: fixed;
+    height: 25px
+  }
+
+  .text-color-picker {
+    position: fixed;
+    opacity: 0;
+  }
+
+  .card-color-picker {
+    position: fixed;
+    opacity: 0;
   }
 
   .card-controller button:hover {

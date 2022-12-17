@@ -12,19 +12,21 @@
     <h3>No topics to view</h3>
     <hr style="border: solid 1px grey;">
   </div>
-  <div class="card-holder">
-   <the-card
-    v-if="flip" 
-    v-for="result in this.$store.state.cards"
-      :key="result.key"
-      :id="result.key"
-      :title="result.title"
-      :subject="result.subject"
-      :email="result.email"
-      :front="result.front"
-      :back="result.back"
-      :colors="result.colors"
-    ></the-card>
+  <div class="card-scroll">
+    <div class="card-holder">
+      <the-card
+        v-if="flip" 
+        v-for="result in this.$store.state.cards"
+          :key="result.key"
+          :id="result.key"
+          :title="result.title"
+          :subject="result.subject"
+          :email="result.email"
+          :front="result.front"
+          :back="result.back"
+          :colors="result.colors"
+      ></the-card>
+    </div>
   </div>
 </template>
 
@@ -89,15 +91,25 @@ export default {
     color: rgb(47, 55, 52);
     font-weight: 700;
     font-size: 20px;
+    margin-top: -10% !important;
   }
 
   .card-holder {
+    position: absolute;
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 50px;
-    top: 35%;
+  }
+
+  .card-scroll {
+    position: fixed;
+    top: 27%;
+    left: 21%;
+    height: 60vh;
+    padding-bottom: 250px;
+    width: 150vh;
     overflow-y: scroll;
-    /* background-color: red; */
+    margin-bottom: 200px;
   }
 
   .subject-selector {
@@ -105,12 +117,12 @@ export default {
     text-align: center;
     display: flex;
     flex-direction: column;
-    height: 150px;
-    width: 350px;
+    height: 100px;
+    width: 250px;
     border-radius: 5%;
     background-color:rgb(11, 214, 146);
-    left: 36%;
-    top: 15%;
+    left: 40%;
+    top: 12%;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
     0 10px 10px rgba(0,0,0,0.22);
     padding: 35px;
@@ -121,6 +133,7 @@ export default {
     color: rgb(47, 55, 52);
     font-weight: 700;
     font-size: 40px;
+    top: -50%;
   }
 
   .subject {    
