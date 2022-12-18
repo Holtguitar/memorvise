@@ -23,8 +23,8 @@
           class="rotate-image-icon"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
-        <div id="{{id}}"><button @click="this.editCard($event)">Edit</button></div>
-        <div id="{{id}}"><button @click="this.deleteCard($event)">Delete</button></div>
+        <div id="{{id}}"><img src="edit-icon.png" class="edit-icon" @click.prevent="this.editCard($event)"/></div>
+        <div id="{{id}}"><img src="delete-icon.png" class="delete-icon" @click.prevent="this.deleteCard($event)"/></div>
        </span>
     </div>
     <div v-else class="scene scene--card">
@@ -59,8 +59,8 @@
         />
         <div class="text-color-edit"><img src="letter-t.png" class="text-image"/><input type="color" class="text-color-picker" v-model="this.textColorEdit" v-on:change="changeTextColor()"/></div>
         <div class="card-color-edit"><img src="cards.png" class="cards-image"/><input type="color" class="card-color-picker" v-model="this.cardColorEdit" v-on:change="changeCardColor()"/></div>
-        <div><button @click.prevent="this.cancelEdit()">Cancel</button></div>
-        <div><button @click.prevent="this.saveCard()">Save</button></div>
+        <div><img src="cancel-icon.png" class="cancel-icon" @click.prevent="this.cancelEdit()"/></div>
+        <div><img src="save-icon.png" class="save-icon" @click.prevent="this.saveCard()"/></div>
        </span>
     </div>
 </template>
@@ -132,9 +132,6 @@ export default {
       this.emailEdit = e.target.__vueParentComponent.props.email;
       this.frontEdit = e.target.__vueParentComponent.props.front;
       this.backEdit = e.target.__vueParentComponent.props.back;
-      // this.cardColorEdit = e.target.__vueParentComponent.props.cardColor;
-      // this.textColorEdit = e.target.__vueParentComponent.props.textColor;
-      // this.colorsEdit = "background-color: " + this.cardColorEdit + "; color: " + this.textColorEdit;
       this.cardColorEdit = this.cardColor;
       this.textColorEdit = this.textColor;
       this.colorsEdit = this.colors;
@@ -241,7 +238,34 @@ export default {
   }
 
   .rotate-image-icon {
-    width: 35px;
+    width: 25px;
+  }
+
+  .edit-icon {
+    width: 25px;
+    color: red
+  }
+
+  .delete-icon {
+    width: 25px;
+  }
+
+  .cancel-icon {
+    width: 25px;
+  }
+
+  .save-icon {
+    width: 30px;
+  }
+
+  .text-image {
+    /* position: fixed; */
+    height: 25px
+  }
+
+  .cards-image {
+    /* position: fixed; */
+    height: 25px
   }
 
   .card-controller {
@@ -261,16 +285,6 @@ export default {
     height: 25px;
     border-color: transparent;
     background-color: whitesmoke;
-  }
-
-  .text-image {
-    position: fixed;
-    height: 25px
-  }
-
-  .cards-image {
-    position: fixed;
-    height: 25px
   }
 
   .text-color-picker {
@@ -296,33 +310,5 @@ export default {
     transform: rotateY(180deg);
   }
 
-  /* Dynamic color themes */
-  .color-1 {
-    background-color: #a6a5ac;
-    color: rgb(252, 252, 252);
-  }
   
-  .color-2 {  
-    background-color: rgb(90, 184, 131);
-    color: rgb(74, 74, 74);
-  }
-  .color-3 {
-    background-color: #F26659;
-    color: rgb(255, 255, 255);
-  }
-  
-  .color-4 {
-    background-color: #8CA9D3;
-    color: rgb(255, 255, 255);
-  }
-  
-  .color-5 {
-    background-color: #c28cd3;
-    color: rgb(255, 255, 255);
-  }
-  
-  .color-6 {
-    background-color: #EBC999;
-    color: rgb(214, 137, 22);
-  }
 </style>

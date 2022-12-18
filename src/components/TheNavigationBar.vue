@@ -1,8 +1,7 @@
 <template>
   <nav>
     <nav class="nav-bar">
-      <router-link id="logo" to="/" v-if="this.store.state.user">Memorvise</router-link>
-      <div id="logo-else" to="/" v-else>Memorvise</div>
+      <router-link id="logo" to="/" v-if="this.store.state.user">Memorwise</router-link>
       <router-link class="nav-item" id="home" to="/" v-if="this.store.state.user">Account Info</router-link>
       <router-link class="nav-item" id="cards" to="/cards" v-if="this.store.state.user">Cards</router-link>
       <router-link class="nav-item" id="card-creator" to="/card-creator" v-if="this.store.state.user">Create</router-link>
@@ -69,23 +68,23 @@
     text-decoration: underline;
   }
 
-  #logo-else {
+  /* #logo-else {
     position: absolute;
     padding: 5px;
-    top: 30%;
+    top: 20%;
     left: 5%;
     font-size: 30px;
     height: 60px;
     font-family: 'Playball', cursive;
     text-decoration: underline;
     color: rgb(16, 122, 87)
-  }
+  } */
 
   #sign-out, #sign-in {
     position: absolute;
     margin-right: 30px;
     padding: 5px;
-    top: 30%;
+    top: 20%;
     left: 80%;
     font-size: 30px;
     height: 60px;

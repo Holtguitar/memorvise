@@ -10,13 +10,13 @@
 a,
 .green {
   text-decoration: none;
-  color: rgb(16, 122, 87);
+  color: #107a57;
   font-weight: 600;
   transition: 0.4s;
 }
 
 body {
-  background-color: rgb(252, 252, 252)
+  background-color: #fcfcfc
 }
 
 

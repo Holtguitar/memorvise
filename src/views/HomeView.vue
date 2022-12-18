@@ -7,8 +7,21 @@
     <br/>
     <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
   </div>
-  <div class="cards-info">
-    <p></p>
+  <div v-else class="welcome-page">
+    <h2 class="welcome-title">Memorwise</h2>
+    <div class="welcome-message">A Key Tool For Your Learning Journey</div>
+    <div class="scene scene--card">
+      <div
+          class="welcome-card"
+          v-bind:class="{ flipme: cardOne == 'flipped' }">
+          <div class="welcome-card__face welcome-card__face--front">
+              <div class="front-details"><span class="first-word">{{firstWord}}</span> something <span class="last-word">{{lastWord}}</span></div>
+          </div>
+          <div class="welcome-card__face welcome-card__face--back">
+          <div class="back-details">Learn something </div>
+          </div>
+      </div>
+    </div>
   </div>
   
 </template>
@@ -26,7 +39,10 @@
         user: "",
         displayName: "",
         email: "",
-        accountCreationDate: ""
+        accountCreationDate: "",
+        cardOne: "start",
+        firstWord: "Write",
+        lastWord: "new"
       }
     },
     computed :{
@@ -37,6 +53,17 @@
       }
     },
     methods: {
+      welcomeAnimation(){
+        setTimeout(() => {
+          this.firstWord = "Study";
+          this.lastWord = "often"
+
+          setTimeout(() => {
+            this.firstWord = "Memorize";
+            this.lastWord = "well"
+          }, 2000)
+        }, 2000);
+      },
       getAccountInfo() {
         this.loadSubjects();
         this.email = this.store.state.user.email;
@@ -68,7 +95,10 @@
     mounted(){
       if(this.store.state.user){
         this.getAccountInfo();
+      } else {
+        this.welcomeAnimation();
       }
+
     }
   }
 </script>
@@ -93,18 +123,6 @@
     margin: 20px;
   }
 
-  .account-info {
-    /* display: flex;
-    flex-direction: column;
-    height: fit-content;
-    border-radius: 5%;
-    background-color:#0bd692;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-    0 10px 10px rgba(0,0,0,0.22);
-    padding: 35px;
-    margin: 20px; */
-  }
-
   .account-info p {
     font-size: 30px;
   }
@@ -118,7 +136,6 @@
     left: 30%;
     text-decoration: underline;
     font-family: 'Playball', cursive;
-    /* font-size: 20px; */
     margin-bottom: 25px;
   }
 
@@ -128,4 +145,77 @@
     font-weight: 800;
   }
 
+  .welcome-title {
+    position: absolute;
+    padding: 5px;
+    top: 5rem;
+    font-size: 60px;
+    height: 100px;
+    font-family: 'Playball', cursive;
+    text-decoration: underline;
+    color: #107a57;
+  }
+
+  .welcome-message {
+    padding: 5px;
+    top: 12rem;
+    left: -20%;
+    font-size: 30px;
+    height: 70px;
+    font-family: 'Playball', cursive;
+    color: #107a57;
+  }
+
+  /* Welcome Card View */
+   /* Card Preview */
+   .scene {
+    width: 400px;
+    height: 260px;
+    perspective: 600px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(190, 190, 190);
+    top: 15rem;
+    left: -3rem;
+    font-family: 'Shadows Into Light', cursive;
+    
+  }
+  
+  .welcome-card {
+    width: 100%;
+    height: 100%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  }
+  
+  .welcome-card__face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+    backface-visibility: hidden;
+    overflow-y: scroll;
+    padding: 15px;
+    font-size: 30px;
+  }
+  
+  .front-details {
+    margin-top: 25%
+  }
+  
+  .welcome-card__face--back {
+    transform: rotateY(180deg);
+  }
+
+  .back-details {
+    margin-top: 25%;
+  }
+
+  .flipme {
+    transform: rotateY(180deg);
+  }
 </style>
