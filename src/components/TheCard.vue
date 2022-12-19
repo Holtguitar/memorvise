@@ -20,12 +20,12 @@
       </div>
       <span class="card-controller">
         <img 
-          src="rotate-icon.png" 
+          src="\rotate-icon.png" 
           class="rotate-image-icon"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
-        <div id="{{id}}"><img src="edit-icon.png" class="edit-icon" @click.prevent="this.editCard($event)"/></div>
-        <div id="{{id}}"><img src="delete-icon.png" class="delete-icon" @click.prevent="this.deleteCard($event)"/></div>
+        <div id="{{id}}"><img src="\edit-icon.png" class="edit-icon" @click.prevent="this.editCard($event)"/></div>
+        <div id="{{id}}"><img src="\delete-icon.png" class="delete-icon" @click.prevent="this.deleteCard($event)"/></div>
        </span>
     </div>
     <div v-else class="scene scene--card">
@@ -54,14 +54,14 @@
       </div>
       <span class="card-controller">
         <img 
-          src="rotate-icon.png" 
+          src="\rotate-icon.png" 
           class="rotate-image-icon-edit"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
-        <div class="text-color-edit"><img src="letter-t.png" class="text-image"/><input type="color" class="text-color-picker" v-model="this.textColorEdit" v-on:change="changeTextColor()"/></div>
-        <div class="card-color-edit"><img src="cards.png" class="cards-image"/><input type="color" class="card-color-picker" v-model="this.cardColorEdit" v-on:change="changeCardColor()"/></div>
-        <div><img src="cancel-icon.png" class="cancel-icon" @click.prevent="this.cancelEdit()"/></div>
-        <div><img src="save-icon.png" class="save-icon" @click.prevent="this.saveCard()"/></div>
+        <div class="text-color-edit"><img src="\letter-t.png" class="text-image"/><input type="color" class="text-color-picker" v-model="this.textColorEdit" v-on:change="changeTextColor()"/></div>
+        <div class="card-color-edit"><img src="\cards.png" class="cards-image"/><input type="color" class="card-color-picker" v-model="this.cardColorEdit" v-on:change="changeCardColor()"/></div>
+        <div><img src="\cancel-icon.png" class="cancel-icon" @click.prevent="this.cancelEdit()"/></div>
+        <div><img src="\save-icon.png" class="save-icon" @click.prevent="this.saveCard()"/></div>
       </span>
 
   </div>

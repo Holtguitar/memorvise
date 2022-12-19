@@ -8,8 +8,8 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   signOut,
-} from "firebase/auth";
-import { getDatabase, ref, remove, set, } from '@firebase/database';
+} from "../firebase";
+import { getDatabase, ref, set } from '../firebase';
 
 
 export default createStore({

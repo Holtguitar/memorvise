@@ -41,7 +41,7 @@
             </div>
             <span class="card-controller">
                 <img 
-                src="rotate-icon.png" 
+                src="\rotate-icon.png" 
                 class="rotate-image-icon"
                 @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
                 />

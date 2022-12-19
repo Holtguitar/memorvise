@@ -6,7 +6,7 @@
 			<div class="social-container"
         		@click.prevent="loginWithGoogle"
       		>
-			<img src="google.png" class="google__sign-in"/>
+			<img src="\google.png" class="google__sign-in"/>
 			</div>
 			<input type="email" placeholder="Email" v-model="login_form.email"/>
 			<input type="password" placeholder="Password" v-model="login_form.password"/>

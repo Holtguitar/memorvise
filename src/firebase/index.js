@@ -1,6 +1,16 @@
-import store from "../store"
 import { initializeApp } from "firebase/app";
-import { getAuth, setPersistence, browserSessionPersistence, onAuthStateChanged, signInWithEmailAndPassword} from "@firebase/auth";
+import store from "../store"
+import { 
+    getAuth, 
+    setPersistence, 
+    browserSessionPersistence, 
+    onAuthStateChanged, 
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+} from "@firebase/auth";
 import {
   getDatabase,
   ref,
@@ -39,16 +49,22 @@ setPersistence(auth, browserSessionPersistence)
 })
 
 export {
-  auth,
-  realdb,
-  getDatabase,
-  ref,
-  set,
-  child,
-  get,
-  update,
-  remove,
-  setPersistence,
-  initializeApp,
-  firebaseConfig,
+    getAuth, 
+    setPersistence, 
+    browserSessionPersistence, 
+    onAuthStateChanged, 
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    getDatabase,
+    ref,
+    set,
+    child,
+    get,
+    update,
+    remove,
+    auth, 
+    realdb
 };

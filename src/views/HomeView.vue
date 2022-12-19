@@ -9,10 +9,10 @@
     <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
   </div>
   <div class="subject-editor">
-    <h1>Topics <img src="edit-icon.png" class="subject-edit-icon" @click.prevent="this.toggleEditMode()"/></h1>
+    <h1>Topics <img src="\edit-icon.png" class="subject-edit-icon" @click.prevent="this.toggleEditMode()"/></h1>
     <hr/>
     <div v-for="(item, key) in subjects" class="subject-list">
-      <p>{{item}} <img src="cancel-icon.png" class="delete-subject-icon" style="width:25px;" v-if="this.editMode" @click.prevent="this.deleteSubject(item)"/></p>
+      <p>{{item}} <img src="\cancel-icon.png" class="delete-subject-icon" style="width:25px;" v-if="this.editMode" @click.prevent="this.deleteSubject(item)"/></p>
     </div>
   </div>
   </div>
@@ -36,8 +36,7 @@
 </template>
 
 <script>
-  import {getAuth} from "firebase/auth";
-  import { getDatabase, set, ref } from "@firebase/database";
+  import { getDatabase, set, ref } from "../firebase";
   import {RouterLink} from "vue-router"
   import { Store, useStore } from "vuex";
 
