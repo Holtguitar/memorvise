@@ -236,7 +236,15 @@ export default {
     height: 30px;
   }
 
-  .edit-card:hover{
+  .edit-card:hover, 
+  .cancel-icon:hover, 
+  .save-icon:hover, 
+  .delete-icon:hover, 
+  .text-image:hover, 
+  .cards-image:hover, 
+  .rotate-image-icon-edit:hover,
+  .text-color-picker:hover,
+  .card-color-picker:hover {
     cursor: pointer;
   }
 
