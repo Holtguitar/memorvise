@@ -275,7 +275,7 @@ export default {
     width: 30px;
   }
 
-  .text-color-picker, .card-color-picker, .cards-image, .text-image {
+  .scene .text-color-picker, .card-color-picker, .cards-image, .text-image {
     position: fixed;
     height: 25px;
   }

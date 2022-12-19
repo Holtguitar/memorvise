@@ -177,7 +177,7 @@
     .card-form, .subject-form, .card-formatter {
         display: flex;
         flex-direction: column;
-        height: 250px;
+        /* height: 250px; */
         border-radius: 15px;
         background-color:#0bd692;
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
@@ -187,15 +187,22 @@
     }
 
     .subject-form {
-        height: 175px;
+        height: 200px;
         text-align: center;
     }
 
     .card-form {
-        display: grid;
+        /* display: grid; */
         grid-template-columns: auto auto;
         column-gap: 50px;
-        width: 400px
+        width: 500px;
+        height: 300px;
+    }
+
+    .card-form-span {
+        position: absolute;
+        /* left: -30%;
+        top: -10%; */
     }
 
     .color-form {
@@ -203,6 +210,7 @@
         top: 30%;
         left: 20%;
     }
+
     .color-form-span {
         position: absolute;
         background-color: rgb(81, 121, 253);
