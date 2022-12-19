@@ -1,6 +1,7 @@
 <template>
     <div 
-      v-if="!editMode" class="scene scene--card"
+      v-if="!editMode" 
+      class="scene scene--card"
       :style="this.displayStyle"
     >
       <div
@@ -54,15 +55,16 @@
       <span class="card-controller">
         <img 
           src="rotate-icon.png" 
-          class="rotate-image-icon"
+          class="rotate-image-icon-edit"
           @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
         />
         <div class="text-color-edit"><img src="letter-t.png" class="text-image"/><input type="color" class="text-color-picker" v-model="this.textColorEdit" v-on:change="changeTextColor()"/></div>
         <div class="card-color-edit"><img src="cards.png" class="cards-image"/><input type="color" class="card-color-picker" v-model="this.cardColorEdit" v-on:change="changeCardColor()"/></div>
         <div><img src="cancel-icon.png" class="cancel-icon" @click.prevent="this.cancelEdit()"/></div>
         <div><img src="save-icon.png" class="save-icon" @click.prevent="this.saveCard()"/></div>
-       </span>
-    </div>
+      </span>
+
+  </div>
 </template>
 
 <script>
@@ -229,6 +231,11 @@ export default {
     backface-visibility: hidden;
   }
 
+  .rotate-image-icon-edit {
+    width: 45px;
+    height: 30px;
+  }
+
   .edit-card:hover{
     cursor: pointer;
   }
@@ -238,7 +245,8 @@ export default {
   }
 
   .rotate-image-icon {
-    width: 25px;
+    width: 45px;
+    height: 30px;
   }
 
   .edit-icon {
@@ -252,20 +260,25 @@ export default {
 
   .cancel-icon {
     width: 25px;
+    left: 60%;
   }
 
   .save-icon {
     width: 30px;
   }
 
-  .text-image {
-    /* position: fixed; */
-    height: 25px
+  .text-color-picker, .card-color-picker, .cards-image, .text-image {
+    position: fixed;
+    height: 25px;
   }
 
-  .cards-image {
-    /* position: fixed; */
-    height: 25px
+  .text-image, .text-color-picker {
+    left: 30%;
+  }
+
+  .cards-image, .card-color-picker {
+    left: 47%;
+    top: 107%;
   }
 
   .card-controller {
@@ -285,6 +298,20 @@ export default {
     height: 25px;
     border-color: transparent;
     background-color: whitesmoke;
+  }
+
+  .card-edit-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 200px;
+    border-radius: 15px;
+    background-color:#0bd692;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    right: 0vw;
+    top: 10%;
   }
 
   .text-color-picker {

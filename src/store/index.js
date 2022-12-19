@@ -9,7 +9,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { getDatabase, ref, child, push, update, set } from '@firebase/database';
+import { getDatabase, ref, remove, set, } from '@firebase/database';
 
 
 export default createStore({
@@ -187,7 +187,30 @@ export default createStore({
         },
         setSubject({commit, state}, selectedSubject){
           commit("SET_SUBJECT", selectedSubject);
+        },
+        async deleteSubject({commit, state, dispatch}, subject){
+          const db = getDatabase();
+          const currUser = state.user.uid;
+          const newSubArr = [];
           
+          let confirmDelete = confirm(`Are you sure you want to delete the topic ${subject} and all of it's cards? `);
+
+          if(confirmDelete){
+            await set(ref(db, `/cards/${currUser}/${subject}`), {
+              key: null
+            }).catch((error) => {
+              alert(error)
+            });
+          }
+
+          for(let value of Object.values(state.subjects)){
+            if(value !== subject){
+              newSubArr.push(value);
+            } 
+          };
+
+          dispatch("loadSubjects");
+          commit("SET_SUBJECTS", newSubArr);
         },
         async loadCards({commit, dispatch, state}){
           const currSubject = state.subject;
@@ -268,22 +291,22 @@ export default createStore({
           });
 
           await fetch(path, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    subject: details.subject,
-                    front: details.front,
-                    back: details.back,
-                    email: details.email,
-                    colors: details.colors,
-                    textColor: details.textColor,
-                    cardColor: details.cardColor
-                })
-            }).catch((error) => {
-                this.error = error.message
-            });
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                subject: details.subject,
+                front: details.front,
+                back: details.back,
+                email: details.email,
+                colors: details.colors,
+                textColor: details.textColor,
+                cardColor: details.cardColor
+            })
+          }).catch((error) => {
+              this.error = error.message
+          });
 
             await fetch(path)
             .then((res) => {

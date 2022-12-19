@@ -1,11 +1,20 @@
 <template>
-  <div v-if="store.state.user" class="account-info">
+  <div  v-if="store.state.user">
+    <div class="account-info">
     <p>Email: <span>{{this.email}}</span></p>
     <p v-if="this.displayName">Name: <span>{{this.displayName}}</span></p>
     <p>Created: <span>{{this.accountCreationDate}}</span></p>
     <p>Topics: <span>{{subjectsLength}}</span></p>
     <br/>
     <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
+  </div>
+  <div class="subject-editor">
+    <h1>Topics <img src="edit-icon.png" class="subject-edit-icon" @click.prevent="this.toggleEditMode()"/></h1>
+    <hr/>
+    <div v-for="(item, key) in subjects" class="subject-list">
+      <p>{{item}} <img src="cancel-icon.png" class="delete-subject-icon" style="width:25px;" v-if="this.editMode" @click.prevent="this.deleteSubject(item)"/></p>
+    </div>
+  </div>
   </div>
   <div v-else class="welcome-page">
     <h2 class="welcome-title">Memorwise</h2>
@@ -42,7 +51,9 @@
         accountCreationDate: "",
         cardOne: "start",
         firstWord: "Write",
-        lastWord: "new"
+        lastWord: "new",
+        subjects: this.$store.state.subjects,
+        editMode: false
       }
     },
     computed :{
@@ -50,9 +61,26 @@
         const store = useStore();
         const newArr = store.state.subjects;
         return newArr.length;
+      },
+      subjectArr(){
+        return this.store.state.stubjects
       }
     },
     methods: {
+      deleteSubject(e){
+        this.store.dispatch("deleteSubject", e);
+        let arr = [];
+        for(let value of Object.values(this.subjects)){
+          if(value !== e){
+            arr.push(value);
+          } 
+        };
+
+        this.subjects = arr;
+      },
+      toggleEditMode(){
+        this.editMode = !this.editMode;
+      },
       welcomeAnimation(){
         setTimeout(() => {
           this.firstWord = "Study";
@@ -66,6 +94,7 @@
       },
       getAccountInfo() {
         this.loadSubjects();
+        this.subjects = this.store.state.subjects;
         this.email = this.store.state.user.email;
         this.displayName = this.store.state.user.displayName;
         this.user = this.store.state.user;
@@ -73,7 +102,7 @@
         this.accountCreationDate = created.slice(0, -13)
       },
       deleteAccount(){
-        let confirmDelete = confirm("Are you sure you want to delete your account?")
+        let confirmDelete = confirm("Are you sure you want to delete your account?");
         
         if(confirmDelete){
           const db = getDatabase();
@@ -107,10 +136,10 @@
   .account-info {
     position: fixed;
     width: 500px;
-    height: fit-content;
+    height: 350px;
     margin-top: 25px;
     padding: 5px;
-    left: 32%;
+    left: 22%;
     font-family: 'Shadows Into Light';
     font-size: 20px;
     font-weight: bolder;
@@ -217,5 +246,52 @@
 
   .flipme {
     transform: rotateY(180deg);
+  }
+
+  /* Subject Editor */
+  .subject-editor {
+    position: fixed;
+    width: 300px;
+    height: 350px;
+    margin-top: 25px;
+    padding: 5%;
+    left: 65%;
+    font-family: 'Shadows Into Light';
+    font-size: 20px;
+    font-weight: bolder;
+    top: 25%;
+    border-radius: 5%;
+    background-color:#0bd692;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+    0 10px 10px rgba(0,0,0,0.22);
+    padding: 35px;
+    margin: 20px;
+    overflow-y: scroll;
+  }
+
+  .subject-list {
+    font-size: 35px;
+    margin-top: 15px;
+  }
+
+  .subject-edit-icon {
+    position: absolute;
+    height: 20px;
+    top: 0%;
+    left: 90%;
+  }
+
+  .subject-edit-icon:hover, .delete-subject-icon:hover {
+    cursor: pointer;
+  }
+
+  .subject-edit-icon:active, .delete-subject-icon:active {
+    transform: scale(.90);
+  }
+
+  hr {
+    background-color: black;
+    border: none;
+    height: 1px;
   }
 </style>
