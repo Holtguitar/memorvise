@@ -128,16 +128,17 @@ export default {
       }
     },
     editCard(e){
-      this.keyEdit = e.target.__vueParentComponent.props.id;
-      this.idEdit = e.target.__vueParentComponent.props.id;
-      this.subjectEdit = this.store.state.subject;
-      this.emailEdit = e.target.__vueParentComponent.props.email;
-      this.frontEdit = e.target.__vueParentComponent.props.front;
-      this.backEdit = e.target.__vueParentComponent.props.back;
-      this.cardColorEdit = this.cardColor;
-      this.textColorEdit = this.textColor;
-      this.colorsEdit = this.colors;
-      this.editMode = true;
+      console.log(e.target.__vueParentComponent.props)
+      // this.keyEdit = e.target.__vueParentComponent.props.id;
+      // this.idEdit = e.target.__vueParentComponent.props.id;
+      // this.subjectEdit = this.store.state.subject;
+      // this.emailEdit = e.target.__vueParentComponent.props.email;
+      // this.frontEdit = e.target.__vueParentComponent.props.front;
+      // this.backEdit = e.target.__vueParentComponent.props.back;
+      // this.cardColorEdit = this.cardColor;
+      // this.textColorEdit = this.textColor;
+      // this.colorsEdit = this.colors;
+      // this.editMode = true;
     },
     saveCard(e){
       this.editMode = false;
@@ -236,7 +237,7 @@ export default {
     height: 30px;
   }
 
-  .edit-card:hover, 
+  .edit-icon:hover, 
   .cancel-icon:hover, 
   .save-icon:hover, 
   .delete-icon:hover, 
