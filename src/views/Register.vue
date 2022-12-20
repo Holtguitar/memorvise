@@ -226,12 +226,13 @@
 	}
 
 	.container {
-		top: 15%;
+		position: absolute;
+		top: 10rem;
 		left: 0%;
 		margin-left: 0%;
-		background-color: red;
 		width: 100vw;
-		height: 30px;
+		height: 330px;
+		min-height: 0;
 	}
 
 	.login-button, .register-button {
@@ -245,14 +246,8 @@
 	}
 
 	.container form {
-		background-color: #FFFFFF;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		padding: 0 50px;
-		/* height: 70%; */
-		text-align: center;
+		padding: 0;
+		height: 100%;
 	}
 
 	.social-container img:hover {
@@ -260,7 +255,7 @@
 	}
 
 	.overlay-container {
-		/* height: 70%; */
+		height: 100%;
 	}
 
 	.google__sign-in {

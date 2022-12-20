@@ -17,8 +17,10 @@
   </div>
   </div>
   <div v-else class="welcome-page">
-    <h2 class="welcome-title">Memorwise</h2>
-    <div class="welcome-message">A Key Tool For Your Learning Journey</div>
+    <div class="welcome-header">
+      <h2 class="welcome-title">Memorwise</h2>
+      <div class="welcome-message">A Key Tool For Your Learning Journey</div>
+    </div>
     <div class="scene scene--card">
       <div
           class="welcome-card"
@@ -162,21 +164,22 @@
 
   .account-title {
     left: 30%;
-    text-decoration: underline;
-    font-family: 'Playball', cursive;
     margin-bottom: 25px;
   }
 
   .delete-account {
     left: 32%;
-    color: rgb(151, 0, 0);
     font-weight: 800;
   }
 
-  .welcome-title {
-    position: absolute;
-    padding: 5px;
+  /* Welcome Landing */
+  .welcome-header {
     top: 5rem;
+    height: 150px;
+    text-align: center;
+  }
+  .welcome-title {
+    padding: 5px;
     font-size: 60px;
     height: 100px;
     font-family: 'Playball', cursive;
@@ -186,8 +189,6 @@
 
   .welcome-message {
     padding: 5px;
-    top: 12rem;
-    left: -20%;
     font-size: 30px;
     height: 70px;
     font-family: 'Playball', cursive;
@@ -197,16 +198,15 @@
   /* Welcome Card View */
    /* Card Preview */
    .scene {
-    width: 400px;
+    position: absolute;
+    width: 450px;
     height: 260px;
     perspective: 600px;
     justify-content: center;
     align-items: center;
     background-color: rgb(190, 190, 190);
-    top: 15rem;
-    left: -3rem;
     font-family: 'Shadows Into Light', cursive;
-    
+    margin-top: 35%;
   }
   
   .welcome-card {
@@ -220,7 +220,6 @@
   }
   
   .welcome-card__face {
-    position: absolute;
     width: 100%;
     height: 100%;
     text-align: center;
@@ -229,10 +228,8 @@
     overflow-y: scroll;
     padding: 15px;
     font-size: 30px;
-  }
-  
-  .front-details {
-    margin-top: 25%
+    justify-content: center;
+    padding-top: 20%;
   }
   
   .welcome-card__face--back {
@@ -296,14 +293,14 @@
 
   @media (max-width: 900px) and (min-width: 380px) {
     .account-info {
-    width: 350px;
-    height: 200px;
-    padding: 5px;
-    left: 7%;
-    font-size: 20px;
-    top: 15%;
-    padding: 15px;
-    margin: 0px;
+      width: 350px;
+      height: 200px;
+      padding: 5px;
+      left: 7%;
+      font-size: 20px;
+      top: 15%;
+      padding: 15px;
+      margin: 0px;
   }
 
   .account-info p {
@@ -315,67 +312,49 @@
     left: 60%;
     font-weight: 800;
   }
+
   /* Landing Page */
+  .welcome-page {
+    position: fixed;
+    left: 0%;
+    top: 10%;
+    height: 90vh;
+    text-align: center;
+  }
+
+  .welcome-header {
+    height: 350px;
+    text-align: center;
+  }
+
   .welcome-title {
-    position: absolute;
-    padding: 5px;
-    top: 5rem;
-    font-size: 60px;
-    height: 100px;
-    font-family: 'Playball', cursive;
-    text-decoration: underline;
-    color: #107a57;
+    font-size: 30px;
+    text-align: center;
+    
   }
 
   .welcome-message {
-    padding: 5px;
-    top: 12rem;
-    left: -20%;
-    font-size: 30px;
-    height: 70px;
-    font-family: 'Playball', cursive;
-    color: #107a57;
+    font-size: 28px;
+    left: 0%;
   }
+
 
   /* Welcome Card View */
    /* Card Preview */
    .scene {
-    width: 400px;
-    height: 260px;
-    perspective: 600px;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(190, 190, 190);
-    top: 15rem;
-    left: -3rem;
-    font-family: 'Shadows Into Light', cursive;
-    
-  }
-  
-  .welcome-card {
-    width: 100%;
-    height: 100%;
-    transition: transform 1s;
-    transform-style: preserve-3d;
-    position: relative;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-
+    height: 200px;
+    width: 300px;
+    margin-top: 0%;
+    left: 11.5%;
   }
   
   .welcome-card__face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    font-weight: bold;
-    backface-visibility: hidden;
-    overflow-y: scroll;
-    padding: 15px;
-    font-size: 30px;
+    font-size: 25px;
+    padding-top: 22%;
   }
   
   .front-details {
-    margin-top: 25%
+    
   }
   
   .welcome-card__face--back {
