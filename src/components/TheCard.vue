@@ -115,30 +115,29 @@ export default {
       let deleteConfirm = confirm("Are you sure you want to delete this card?");
       if(deleteConfirm){
         const db = getDatabase();
-        const id = e.target.__vueParentComponent.props.id;
-        const subject = e.target.__vueParentComponent.props.subject;
+        const id = this.id;
+        const subject = this.subject;
         const userID = this.store.state.user.uid;
         const path = `cards/${userID}/${subject}/${id}`
-        const colors = e.target.__vueParentComponent.props.colors;
-        const textColor = e.target.__vueParentComponent.props.textColor
-        const cardColor = e.target.__vueParentComponent.props.cardColor
+        const colors = this.colors;
+        const textColor = this.textColor
+        const cardColor = this.cardColor
         const details = {db, path, userID, subject, id, colors, textColor, cardColor}
         this.store.dispatch("deleteCard", details);
 
       }
     },
     editCard(e){
-      console.log(e.target.__vueParentComponent.props)
-      // this.keyEdit = e.target.__vueParentComponent.props.id;
-      // this.idEdit = e.target.__vueParentComponent.props.id;
-      // this.subjectEdit = this.store.state.subject;
-      // this.emailEdit = e.target.__vueParentComponent.props.email;
-      // this.frontEdit = e.target.__vueParentComponent.props.front;
-      // this.backEdit = e.target.__vueParentComponent.props.back;
-      // this.cardColorEdit = this.cardColor;
-      // this.textColorEdit = this.textColor;
-      // this.colorsEdit = this.colors;
-      // this.editMode = true;
+      this.keyEdit = this.id;
+      this.idEdit = this.id;
+      this.subjectEdit = this.subject;
+      this.emailEdit = this.email;
+      this.frontEdit = this.front;
+      this.backEdit = this.back;
+      this.cardColorEdit = this.cardColor;
+      this.textColorEdit = this.textColor;
+      this.colorsEdit = this.colors;
+      this.editMode = true;
     },
     saveCard(e){
       this.editMode = false;

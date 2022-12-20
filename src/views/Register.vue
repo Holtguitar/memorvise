@@ -11,7 +11,7 @@
 			<input type="email" placeholder="Email" v-model="login_form.email"/>
 			<input type="password" placeholder="Password" v-model="login_form.password"/>
 			<a href="#">Forgot your password?</a>
-			<button class="button" @click.prevent="login">Sign In</button>
+			<button class="login-button" @click.prevent="login">Sign In</button>
 		</form>
 	</div>
 	<div class="overlay-container">
@@ -23,7 +23,7 @@
 				<input type="email" placeholder="Email" v-model="register_form.email"/>
 				<input type="password" placeholder="Password" v-model="register_form.password"/>
 				<!-- <input type="password" placeholder="Confirm Password" v-model="confirmPassword"/> -->
-				<button class="button" id="sign-up-button" @click="register">Sign Up</button>
+				<button class="register-button" id="sign-up-button" @click="register">Sign Up</button>
 			</div>
 		</div>
 	</div>
@@ -67,7 +67,7 @@
   margin-left: 5%;
 }
 
-.container .button {
+.login-button, .register-button {
 	border-radius: 20px;
 	border: 1px solid #0b1ec8;
 	background-color: #2f21eb;
@@ -78,14 +78,14 @@
 	letter-spacing: 1px;
 	text-transform: uppercase;
 	transition: transform 80ms ease-in;
-  margin-top: 15px;
+  	margin-top: 15px;
 }
 
-.button:active {
+.login-button:active, .register-button:active {
 	transform: scale(0.95);
 }
 
-.button:focus {
+.login-button:focus, .register-button:focus {
 	outline: none;
 }
 
@@ -94,7 +94,7 @@
 	border-color: #FFFFFF;
 }
 
-form {
+.container form {
 	background-color: #FFFFFF;
 	display: flex;
 	align-items: center;
@@ -105,7 +105,7 @@ form {
 	text-align: center;
 }
 
-input {
+.container input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
@@ -114,10 +114,10 @@ input {
 }
 
 .container {
-  left: 15%;
+  	left: 15%;
 	background-color: #fff;
 	border-radius: 10px;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+  	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
 		0 10px 10px rgba(0,0,0,0.22);
 	overflow: hidden;
 	width: 768px;

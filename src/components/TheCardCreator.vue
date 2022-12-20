@@ -6,26 +6,38 @@
             <button class="create-subject-button"  @click.prevent="createSubject()">Create</button>
         </form>
         <form class="card-form">
-            <span class="card-form-span">
+            <div class="card-form-span">
                 <h3 class="create-title">New Flash Card</h3>
                 <!-- <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p> -->
-                <select id="subject" v-model="this.subject" v-on:change="printSub()">
-                    <option v-for="(item, key) in subjects" :value="item" >{{item}}</option>
+                <select id="subject" v-model="this.subject">
+                    <option v-for="(item, key) in subjects" :value="item">{{item}}</option>
                 </select>
                 <p><input type="text" v-model="front" placeholder="Front" required/></p>
                 <p><input type="text" v-model="back" placeholder="Back" required/></p>
-            </span>
+                <button class="create-button" @click.prevent="createCard()">Create</button>
+            </div>
             <span class="color-form-span">
                 <div class="color-form">
                     <label for="cardColor">Card Color:</label>
-                    <input class="color-picker" id="cardColor" type="color" v-model="this.cardColor" v-on:change="changeColor"/>
+                    <input 
+                        class="color-picker-creator" 
+                        style="background-color: transparent; border-color: transparent; width: 25px; height: 25px;" 
+                        id="cardColor" 
+                        type="color" 
+                        v-model="this.cardColor" 
+                        v-on:change="changeColor"/>
                     <br/>
                     <br/>
                     <label for="textColor">Text Color:</label>
-                    <input class="color-picker" id="textColor" type="color" v-model="this.textColor" v-on:change="changeColor"/>
+                    <input 
+                        class="color-picker-creator" 
+                        style="background-color: transparent; border-color: transparent; width: 25px; height: 25px;" 
+                        id="textColor" 
+                        type="color" v-model="this.textColor" 
+                        v-on:change="changeColor"/>
+                    
                 </div>
             </span>
-            <button class="create-button" @click.prevent="createCard()">Create</button>
         </form>
         <div class="scene scene--card">
             <div
@@ -72,8 +84,7 @@
                 cardColor: "#FFFFFF",
                 textColor: "#000000",
                 colorClass: "background-color: #FFFFFF; color: #000000",
-                cardOne: "start",
-        
+                cardOne: "start"
             }
         },
         methods: {
@@ -174,10 +185,9 @@
         height: 70vh;
     }
     /* Card Creator Form */
-    .card-form, .subject-form, .card-formatter {
+    .card-form, .subject-form {
         display: flex;
         flex-direction: column;
-        /* height: 250px; */
         border-radius: 15px;
         background-color:#0bd692;
         box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
@@ -187,12 +197,11 @@
     }
 
     .subject-form {
-        height: 200px;
+        height: 175px;
         text-align: center;
     }
 
     .card-form {
-        /* display: grid; */
         grid-template-columns: auto auto;
         column-gap: 50px;
         width: 500px;
@@ -200,9 +209,19 @@
     }
 
     .card-form-span {
-        position: absolute;
-        /* left: -30%;
-        top: -10%; */
+        height: 250px;
+        width: 200px;
+        text-align: center;   
+    }
+    
+    .create-button {
+        border-radius: 5%;
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+        0 10px 10px rgba(0,0,0,0.22);
+        width: 10rem;
+        height: 30px;
+        border-color: transparent;
+        margin-top: 15%;
     }
 
     .color-form {
@@ -212,13 +231,13 @@
     }
 
     .color-form-span {
-        position: absolute;
+        position: fixed;
         background-color: rgb(81, 121, 253);
         color:rgb(2, 2, 101);
-        height: 100%;
-        width: 45%;
-        top: 0%;
-        right: 0%;
+        width: 150px;
+        height: 300px;
+        top: 22.5%;
+        right: 38%;
         border-radius: 200px 15px 15px 200px;
     }
 
@@ -235,18 +254,6 @@
     .mem-filter {
         display: flex;
         flex-direction: row;
-    }
-
-    .create-button {
-        position: absolute;
-        bottom: 10%;
-        left: 8%;
-        border-radius: 5%;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-        0 10px 10px rgba(0,0,0,0.22);
-        width: 10rem;
-        height: 30px;
-        border-color: transparent;
     }
 
     .create-subject-button {
@@ -271,14 +278,12 @@
         0 15px 15px rgba(0,0,0,0.22);
     }
 
-    .color-picker {
-        background-color: transparent;
-        border-color: transparent;
-        width: 35px;
-        /* margin-left: 15px; */
+    .color-picker-creator {
+        /* background-color: transparent;
+        border-color: transparent; */
     }
 
-    .color-picker:hover {
+    .color-picker-creator:hover {
         cursor: pointer;
     }
 
