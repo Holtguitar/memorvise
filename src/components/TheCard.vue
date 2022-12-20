@@ -106,7 +106,7 @@ export default {
   },
   methods: {
     changeTextColor(){
-      this.colorsEdit = `background-color: ${this.cardColorEdit}; color: ${this.textColorEdit}`
+      // this.colorsEdit = `background-color: ${this.cardColorEdit}; color: ${this.textColorEdit}`
     },    
     changeCardColor(){
       this.colorsEdit = `background-color: ${this.cardColorEdit}; color: ${this.textColorEdit}`

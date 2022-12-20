@@ -293,4 +293,134 @@
     border: none;
     height: 1px;
   }
+
+  @media (max-width: 900px) and (min-width: 380px) {
+    .account-info {
+    width: 350px;
+    height: 200px;
+    padding: 5px;
+    left: 7%;
+    font-size: 20px;
+    top: 15%;
+    padding: 15px;
+    margin: 0px;
+  }
+
+  .account-info p {
+    font-size: 20px;
+  }
+
+  .delete-account {
+    top: -19%;
+    left: 60%;
+    font-weight: 800;
+  }
+  /* Landing Page */
+  .welcome-title {
+    position: absolute;
+    padding: 5px;
+    top: 5rem;
+    font-size: 60px;
+    height: 100px;
+    font-family: 'Playball', cursive;
+    text-decoration: underline;
+    color: #107a57;
+  }
+
+  .welcome-message {
+    padding: 5px;
+    top: 12rem;
+    left: -20%;
+    font-size: 30px;
+    height: 70px;
+    font-family: 'Playball', cursive;
+    color: #107a57;
+  }
+
+  /* Welcome Card View */
+   /* Card Preview */
+   .scene {
+    width: 400px;
+    height: 260px;
+    perspective: 600px;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(190, 190, 190);
+    top: 15rem;
+    left: -3rem;
+    font-family: 'Shadows Into Light', cursive;
+    
+  }
+  
+  .welcome-card {
+    width: 100%;
+    height: 100%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    position: relative;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+
+  }
+  
+  .welcome-card__face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+    backface-visibility: hidden;
+    overflow-y: scroll;
+    padding: 15px;
+    font-size: 30px;
+  }
+  
+  .front-details {
+    margin-top: 25%
+  }
+  
+  .welcome-card__face--back {
+    transform: rotateY(180deg);
+  }
+
+  .back-details {
+    margin-top: 25%;
+  }
+
+  .flipme {
+    transform: rotateY(180deg);
+  }
+
+  /* Subject Editor */
+  .subject-editor {
+    width: 350px;
+    height: 200px;
+    padding: 5px;
+    left: 7%;
+    font-size: 20px;
+    top: 45%;
+    padding: 15px;
+    margin: 0px;
+    overflow-y: scroll;
+    padding-top: 5%;
+  }
+
+  .subject-list {
+    font-size: 35px;
+    margin-top: 15px;
+  }
+
+  .subject-edit-icon {
+    position: absolute;
+    height: 20px;
+    top: 0%;
+    left: 90%;
+  }
+
+
+  hr {
+    background-color: black;
+    border: none;
+    height: 1px;
+  }
+  }
 </style>

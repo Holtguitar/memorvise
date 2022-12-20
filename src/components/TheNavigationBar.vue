@@ -2,11 +2,11 @@
   <nav>
     <nav class="nav-bar">
       <router-link id="logo" to="/" v-if="this.store.state.user">Memorwise</router-link>
-      <router-link class="nav-item" id="home" to="/" v-if="this.store.state.user">Account Info</router-link>
+      <router-link class="nav-item" id="home" to="/" v-if="this.store.state.user">Account</router-link>
       <router-link class="nav-item" id="cards" to="/cards" v-if="this.store.state.user">Cards</router-link>
       <router-link class="nav-item" id="card-creator" to="/card-creator" v-if="this.store.state.user">Create</router-link>
-      <router-link  id="sign-in" to="/sign-in" v-if="!this.store.state.user">Sign In</router-link>
-      <button @click="handleSignOut"  id="sign-out" v-if="this.store.state.user">Sign Out</button>
+      <router-link class="nav-item" id="sign-in" to="/sign-in" v-if="!this.store.state.user">Sign In</router-link>
+      <button class="nav-item" id="sign-out" v-if="this.store.state.user" @click="handleSignOut" >Sign Out</button>
     </nav>
   </nav>
 </template>
@@ -68,25 +68,13 @@
     text-decoration: underline;
   }
 
-  /* #logo-else {
-    position: absolute;
-    padding: 5px;
-    top: 20%;
-    left: 5%;
-    font-size: 30px;
-    height: 60px;
-    font-family: 'Playball', cursive;
-    text-decoration: underline;
-    color: rgb(16, 122, 87)
-  } */
-
   #sign-out, #sign-in {
     position: absolute;
     margin-right: 30px;
     padding: 5px;
     top: 20%;
     left: 80%;
-    font-size: 30px;
+    /* font-size: 30px; */
     height: 60px;
     border: none;
     background-color: transparent;
@@ -111,7 +99,6 @@
 
   #sign-in {
     position: absolute;
-    /* margin-left: 80%; */
   }
 
   #sign-out:hover, #sign-in:hover {
@@ -122,6 +109,35 @@
 
   #sign-out {
     background-color: transparent;
+  }
+
+  @media (max-width: 900px) and (min-width: 380px) {
+    .nav-bar {
+      text-align: center;
+      justify-content: flex-start;
+      margin-bottom: 0px;
+    }
+
+    #logo {
+      display: none;
+    }
+
+    .nav-item {
+      font-size: 20px;
+      height: 60px;
+      width: 80px;
+      /* background-color: red; */
+      margin: 0;
+      left: 10%;
+    }
+
+    #sign-out {
+      left: 72%
+    }
+  }
+
+  @media (max-width: 300px) {
+
   }
 
 </style>

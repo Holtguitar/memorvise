@@ -8,15 +8,14 @@
         <form class="card-form">
             <div class="card-form-span">
                 <h3 class="create-title">New Flash Card</h3>
-                <!-- <p><input type="text" maxlength="30" v-model="subject" placeholder="Subject" required></p> -->
-                <select id="subject" v-model="this.subject">
+                <select class="subject-selector-creator" id="subject" v-model="this.subject">
                     <option v-for="(item, key) in subjects" :value="item">{{item}}</option>
                 </select>
                 <p><input type="text" v-model="front" placeholder="Front" required/></p>
                 <p><input type="text" v-model="back" placeholder="Back" required/></p>
-                <button class="create-button" @click.prevent="createCard()">Create</button>
+                <button class="create-button" @click.prevent="createCard()">Build</button>
             </div>
-            <span class="color-form-span">
+            <div class="color-form-span">
                 <div class="color-form">
                     <label for="cardColor">Card Color:</label>
                     <input 
@@ -33,11 +32,12 @@
                         class="color-picker-creator" 
                         style="background-color: transparent; border-color: transparent; width: 25px; height: 25px;" 
                         id="textColor" 
-                        type="color" v-model="this.textColor" 
+                        type="color" 
+                        v-model="this.textColor" 
                         v-on:change="changeColor"/>
                     
                 </div>
-            </span>
+            </div>
         </form>
         <div class="scene scene--card">
             <div
@@ -225,20 +225,26 @@
     }
 
     .color-form {
+        width: 150px;
+        height: 100px;
         width: 115px;
         top: 30%;
         left: 20%;
+        /* background-color: red; */
+        text-align: center;
+        justify-content: space-between;
+        padding-top: 3%;
     }
 
     .color-form-span {
-        position: fixed;
+        position: absolute;
         background-color: rgb(81, 121, 253);
         color:rgb(2, 2, 101);
+        border-radius: 200px 15px 15px 200px;
         width: 150px;
         height: 300px;
-        top: 22.5%;
-        right: 38%;
-        border-radius: 200px 15px 15px 200px;
+        right: 0%;
+        top: 0%;
     }
 
     .card-formatter {
@@ -362,6 +368,158 @@
   
   .flipme {
     transform: rotateY(180deg);
+  }
+
+  @media (max-width: 900px) and (min-width: 380px) {
+        .card-creator {
+            position: fixed;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            top: 10%;
+            left: 0%;
+            height: 90vh;
+            justify-content: center;
+            /* background-color: red; */
+        }
+
+        /* Card Creator Form */
+        .card-form, .subject-form {
+            padding: 15px;
+            margin: 0px;
+        }
+
+        .subject-form {
+            height: 150px;
+            width: 150px;
+            text-align: center;
+            font-size: 20px;
+            left: 10%;
+            top: 2%;
+        }
+
+        .subject-form input {
+            width: 125px;
+        }
+
+        .card-form {
+            grid-template-columns: auto auto;
+            column-gap: 50px;
+            width: fit-content;
+            height: fit-content;
+            left: 7%;
+            top: 5%;
+        }
+
+        .subject-selector-creator options {
+           
+        }
+
+        .card-form-span {
+            height: 150px;
+            width: 300px;
+            text-align: center;   
+        }
+        
+        .create-button {
+            width: 60px;
+            height: 30px;
+            margin-top: 15px;
+        }
+
+        .color-form {
+            top: 15%;
+            left: 15%;
+        }
+
+        .color-form-span {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            right: 0%;
+            top: -94%;
+            border-radius: 5%;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
+            0 10px 10px rgba(0,0,0,0.22);
+            background-color:#0bd692;
+            text-align: center;
+        }
+
+        .create-title {
+            top: -5%;
+            font-family: 'Shadows Into Light', cursive;
+            font-size: 20px;
+        }
+
+        .create-subject-button {
+            width: 60px;
+            height: 30px;
+            left: 30%;
+        }
+
+        /* Card Preview */
+        .scene {
+            width: 400px;
+            height: 260px;
+            perspective: 600px;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+        }
+        
+        .card {
+            width: 100%;
+            height: 100%;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        
+        .card__face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            backface-visibility: hidden;
+            overflow-y: scroll;
+            padding: 15px;
+        }
+        
+        .front-details {
+            margin-top: 25%
+        }
+
+        .back-details {
+            margin-top: 25%;
+        }
+
+        .edit-card {
+            float: right;
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            backface-visibility: hidden;
+        }
+
+        .edit-card__options{
+            display: none;
+        }
+
+        .rotate-image-icon {
+            width: 35px;
+            display: none;
+        }
+
+        .card-controller {
+            left: 45%;
+            top: 10%;
+            padding: 5px;
+        }
+    
   }
 
 </style>

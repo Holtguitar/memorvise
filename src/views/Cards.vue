@@ -113,7 +113,7 @@ export default {
   }
 
   .subject-selector {
-    position: fixed;
+    /* position: fixed; */
     text-align: center;
     display: flex;
     flex-direction: column;

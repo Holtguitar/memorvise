@@ -3,14 +3,12 @@
 	<div class="form-container sign-in-container">
 		<form action="#">
 			<h1 class="form-title">Sign in</h1>
-			<div class="social-container"
-        		@click.prevent="loginWithGoogle"
-      		>
-			<img src="\google.png" class="google__sign-in"/>
+			<div class="social-container" @click.prevent="loginWithGoogle">
+				<img src="\google.png" class="google__sign-in"/>
 			</div>
 			<input type="email" placeholder="Email" v-model="login_form.email"/>
 			<input type="password" placeholder="Password" v-model="login_form.password"/>
-			<a href="#">Forgot your password?</a>
+			<!-- <a href="#">Forgot your password?</a> -->
 			<button class="login-button" @click.prevent="login">Sign In</button>
 		</form>
 	</div>
@@ -138,34 +136,11 @@
 	z-index: 2;
 }
 
-.container.right-panel-active .sign-in-container {
-	transform: translateX(100%);
-}
-
 .sign-up-container {
 	left: 0;
 	width: 50%;
 	opacity: 0;
 	z-index: 1;
-}
-
-.container.right-panel-active .sign-up-container {
-	transform: translateX(100%);
-	opacity: 1;
-	z-index: 5;
-	animation: show 0.6s;
-}
-
-@keyframes show {
-	0%, 49.99% {
-		opacity: 0;
-		z-index: 1;
-	}
-	
-	50%, 100% {
-		opacity: 1;
-		z-index: 5;
-	}
 }
 
 .overlay-container {
@@ -177,10 +152,6 @@
 	overflow: hidden;
 	transition: transform 0.6s ease-in-out;
 	z-index: 100;
-}
-
-.container.right-panel-active .overlay-container{
-	transform: translateX(-100%);
 }
 
 .overlay {
@@ -199,10 +170,6 @@
 	transition: transform 0.6s ease-in-out;
 }
 
-.container.right-panel-active .overlay {
-  	transform: translateX(50%);
-}
-
 .overlay-panel {
 	position: absolute;
 	display: flex;
@@ -218,21 +185,9 @@
 	transition: transform 0.6s ease-in-out;
 }
 
-.overlay-left {
-	transform: translateX(-20%);
-}
-
-.container.right-panel-active .overlay-left {
-	transform: translateX(0);
-}
-
 .overlay-right {
 	right: 0;
 	transform: translateX(0);
-}
-
-.container.right-panel-active .overlay-right {
-	transform: translateX(20%);
 }
 
 .social-container {
@@ -262,6 +217,59 @@
 .button:hover {
   cursor: pointer;
   box-shadow: 0 14px 28px rgba(20, 20, 20, 0.25)
+}
+
+@media (max-width: 900px) {
+		
+	.form-title {
+		font-size: 20px;
+	}
+
+	.container {
+		top: 15%;
+		left: 0%;
+		margin-left: 0%;
+		background-color: red;
+		width: 100vw;
+		height: 30px;
+	}
+
+	.login-button, .register-button {
+		width: 100px;
+		height: 35px;
+		padding: 0%;
+	}
+
+	.container input {
+		width: 150px;
+	}
+
+	.container form {
+		background-color: #FFFFFF;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		padding: 0 50px;
+		/* height: 70%; */
+		text-align: center;
+	}
+
+	.social-container img:hover {
+		box-shadow: none;
+	}
+
+	.overlay-container {
+		/* height: 70%; */
+	}
+
+	.google__sign-in {
+		width: 150px;
+	}
+}
+
+@media (max-width: 300px) {
+ 
 }
 
 </style>
