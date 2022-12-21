@@ -348,8 +348,7 @@ export default {
   @media (max-width: 900px) and (min-width: 380px){
   .scene {
     width: 300px;
-    min-height: 195px;
-    max-height: 295px;
+    height: 195px;
     margin: 30px;
   }
   

@@ -72,7 +72,12 @@
     .doppio-link:hover {
       cursor:pointer;
     }
-  
+
+    @media (max-width: 900px) and (min-width: 380px){
+      .doppio-section {
+        left: 5%;
+      }
+    }  
 
   
   </style>

@@ -166,8 +166,8 @@ export default {
     }
 
     .subject-selector {
-      top: 20%;
-      left: 15%;
+      top: 15%;
+      left: 20%;
     }
   }
 

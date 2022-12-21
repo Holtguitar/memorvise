@@ -141,7 +141,7 @@
     margin-top: 25px;
     padding: 5px;
     left: 22%;
-    font-family: 'Shadows Into Light';
+    font-family: 'Shadows Into Light' !important;
     font-size: 20px;
     font-weight: bolder;
     top: 25%;
