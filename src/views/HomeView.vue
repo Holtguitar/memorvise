@@ -314,7 +314,7 @@
   @media (max-width: 900px) and (min-width: 380px) {
   .account-info {
     width: 270px;
-    height: fit-content;
+    height: 250px;
     padding: 5px;
     left: 15%;
     font-size: 15px;

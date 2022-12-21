@@ -157,6 +157,7 @@ export default {
       width: 100vw;
       left: 4%;
       margin-left: 0;
+      padding-bottom: 100px;
     }
 
     .card-scroll {
@@ -167,6 +168,7 @@ export default {
       width: 100vw;
       overflow-y: scroll;
       margin-bottom: 200px;
+      /* padding-bottom: 200px; */
     }
 
     .subject-selector {
