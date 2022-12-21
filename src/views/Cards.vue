@@ -113,7 +113,7 @@ export default {
   }
 
   .subject-selector {
-    /* position: fixed; */
+    position: fixed;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -145,14 +145,33 @@ export default {
     background-color: blue;
     color: green;
   }
-  @media (max-width: 850px) {
+
+  @media (max-width: 900px) and (min-width: 380px){
     .card-holder {
-    display: grid;
-    grid-template-columns: auto;
-    column-gap: 50px;
-  }
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      left: 0%;
+      margin-left: 0;
+    }
+
+    .card-scroll {
+      position: fixed;
+      top: 30%;
+      left: 0%;
+      height: 60vh;
+      width: 100vw;
+      overflow-y: scroll;
+      margin-bottom: 200px;
+    }
+
+    .subject-selector {
+      top: 20%;
+      left: 15%;
+    }
   }
 
+ 
 
 </style>
 

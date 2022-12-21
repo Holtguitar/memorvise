@@ -6,7 +6,10 @@
       <router-link class="nav-item" id="cards" to="/cards" v-if="this.store.state.user">Cards</router-link>
       <router-link class="nav-item" id="card-creator" to="/card-creator" v-if="this.store.state.user">Create</router-link>
       <router-link class="nav-item" id="sign-in" to="/sign-in" v-if="!this.store.state.user">Sign In</router-link>
-      <button class="nav-item" id="sign-out" v-if="this.store.state.user" @click="handleSignOut" >Sign Out</button>
+      <button class="nav-item" id="sign-out" v-if="this.store.state.user" @click="handleSignOut" >
+        <p class="sign-out-text">Sign Out</p>
+        <img class="sign-out-icon" src="/sign-out-icon.png"/>
+      </button>
     </nav>
   </nav>
 </template>
@@ -53,6 +56,10 @@
     font-family: 'Shadows Into Light', cursive;
   }
 
+  .sign-out-text {
+    font-weight: 800;
+  }
+
   .nav-item:hover {
     text-decoration: underline;
   }
@@ -74,7 +81,6 @@
     padding: 5px;
     top: 20%;
     left: 80%;
-    /* font-size: 30px; */
     height: 60px;
     border: none;
     background-color: transparent;
@@ -97,6 +103,12 @@
     cursor: pointer;
   }
 
+  .sign-out-icon {
+    display: none;
+  }
+
+  
+
   #sign-in {
     position: absolute;
   }
@@ -116,6 +128,7 @@
       text-align: center;
       justify-content: flex-start;
       margin-bottom: 0px;
+      height: 70px;
     }
 
     #logo {
@@ -131,8 +144,23 @@
       left: 10%;
     }
 
+    #sign-out, #sign-in {
+      left: 70%
+    }
+
+    .sign-out-text {
+      display: none;
+    }
+
+    .sign-out-icon {
+      display:block;
+      width: 35px;
+      left: 20%;
+    }
+
     #sign-out {
-      left: 72%
+      width: 60px;
+      left: 75%;
     }
   }
 

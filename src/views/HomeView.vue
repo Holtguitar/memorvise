@@ -154,7 +154,8 @@
   }
 
   .account-info p {
-    font-size: 30px;
+    font-size: 20px;
+    font-family: 'Shadows Into Light';
   }
 
   .account-info span {
@@ -168,8 +169,11 @@
   }
 
   .delete-account {
-    left: 32%;
+    position: absolute;
+    left: 40%;
     font-weight: 800;
+    top: 82%;
+    color: rgb(134, 1, 1)
   }
 
   /* Welcome Landing */
@@ -253,7 +257,7 @@
     padding: 5%;
     left: 65%;
     font-family: 'Shadows Into Light';
-    font-size: 20px;
+    font-size: 15px;
     font-weight: bolder;
     top: 25%;
     border-radius: 5%;
@@ -266,14 +270,14 @@
   }
 
   .subject-list {
-    font-size: 35px;
+    font-size: 25px;
     margin-top: 15px;
   }
 
   .subject-edit-icon {
     position: absolute;
     height: 20px;
-    top: 0%;
+    top: 20%;
     left: 90%;
   }
 
@@ -291,22 +295,23 @@
     height: 1px;
   }
 
+  .delete-subject-icon {
+    position: absolute;
+    top: 5%;
+    margin-left: 15px;
+  }
+
   @media (max-width: 900px) and (min-width: 380px) {
-    .account-info {
-      width: 350px;
-      height: 200px;
-      padding: 5px;
-      left: 7%;
-      font-size: 20px;
-      top: 15%;
-      padding: 15px;
-      margin: 0px;
-  }
-
-  .account-info p {
+  .account-info {
+    width: 350px;
+    height: 200px;
+    padding: 5px;
+    left: 7%;
     font-size: 20px;
+    top: 15%;
+    padding: 15px;
+    margin: 0px;
   }
-
   .delete-account {
     top: -19%;
     left: 60%;
@@ -353,10 +358,6 @@
     padding-top: 22%;
   }
   
-  .front-details {
-    
-  }
-  
   .welcome-card__face--back {
     transform: rotateY(180deg);
   }
@@ -376,7 +377,7 @@
     padding: 5px;
     left: 7%;
     font-size: 20px;
-    top: 45%;
+    top: 55%;
     padding: 15px;
     margin: 0px;
     overflow-y: scroll;
@@ -384,7 +385,7 @@
   }
 
   .subject-list {
-    font-size: 35px;
+    font-size: 20px;
     margin-top: 15px;
   }
 

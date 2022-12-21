@@ -345,5 +345,117 @@ export default {
     transform: rotateY(180deg);
   }
 
+  @media (max-width: 900px) and (min-width: 380px){
+  .scene {
+    width: 300px;
+    min-height: 195px;
+    max-height: 295px;
+    margin: 30px;
+  }
+  
+  .card {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  
+  .card__face {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    font-size: 15px;
+    padding: 15px;
+  }
+  
+  .front-details {
+    margin-top: 25%
+  }
+
+  .front-details-long {
+    margin-top: 0%;
+  }
+
+  .back-details {
+    margin-top: 25%;
+  }
+
+  .back-details-long {
+    margin-top: 0%;
+  }
+
+  .rotate-image-icon-edit {
+    width: 30px;
+    height: 15px;
+    margin-top: 5px;
+  }
+
+  .rotate-image-icon {
+    width: 30px;
+    height: 15px;
+    margin-top: 5px;
+  }
+
+  .edit-icon {
+    width: 15px;
+  }
+
+  .delete-icon {
+    width: 15px;
+  }
+
+  .cancel-icon {
+    width: 15px;
+    left: 60%;
+    margin-top: 2px;
+  }
+
+  .save-icon {
+    width: 20px;
+  }
+
+  .scene .text-color-picker, .card-color-picker, .cards-image, .text-image {
+    height: 15px;
+  }
+
+  .text-image, .text-color-picker {
+    left: 35%;
+    margin-top: 5px;
+  }
+
+  .cards-image, .card-color-picker {
+    left: 47%;
+    margin-top: 7px;
+  }
+
+  .card-controller {
+    position: absolute;
+    left: 18%;
+    top: 100%;
+    margin-top: 15px;
+    width: 200px;
+  }
+
+  .card-edit-menu {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    width: 200px;
+    right: 0vw;
+    top: 10%;
+  }
+
+  .text-color-picker {
+    position: fixed;
+    opacity: 0;
+  }
+
+  .card-color-picker {
+    position: fixed;
+    opacity: 0;
+  }
+
+  }
+
   
 </style>

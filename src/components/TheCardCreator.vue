@@ -284,11 +284,6 @@
         0 15px 15px rgba(0,0,0,0.22);
     }
 
-    .color-picker-creator {
-        /* background-color: transparent;
-        border-color: transparent; */
-    }
-
     .color-picker-creator:hover {
         cursor: pointer;
     }
@@ -380,7 +375,6 @@
             left: 0%;
             height: 90vh;
             justify-content: center;
-            /* background-color: red; */
         }
 
         /* Card Creator Form */
@@ -409,10 +403,6 @@
             height: fit-content;
             left: 7%;
             top: 5%;
-        }
-
-        .subject-selector-creator options {
-           
         }
 
         .card-form-span {
@@ -458,7 +448,7 @@
         }
 
         /* Card Preview */
-        .scene {
+        .card-creator .scene {
             width: 400px;
             height: 260px;
             perspective: 600px;
@@ -467,7 +457,7 @@
             margin: 20px;
         }
         
-        .card {
+        .card-creator .card {
             width: 100%;
             height: 100%;
             transition: transform 1s;
@@ -477,7 +467,7 @@
             display: none;
         }
         
-        .card__face {
+        .card-creator .card__face {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -489,15 +479,15 @@
             padding: 15px;
         }
         
-        .front-details {
+        .card-creator .front-details {
             margin-top: 25%
         }
 
-        .back-details {
+        .card-creator .back-details {
             margin-top: 25%;
         }
 
-        .edit-card {
+        .card-creator .edit-card {
             float: right;
             border: none;
             background-color: transparent;
@@ -505,16 +495,16 @@
             backface-visibility: hidden;
         }
 
-        .edit-card__options{
+        .card-creator .edit-card__options{
             display: none;
         }
 
-        .rotate-image-icon {
+        .card-creator .rotate-image-icon {
             width: 35px;
             display: none;
         }
 
-        .card-controller {
+        .card-creator .card-controller {
             left: 45%;
             top: 10%;
             padding: 5px;
