@@ -78,7 +78,9 @@
       .footer-bar {
         height: 45px;
       }
-    }  
 
-  
+      .doppio-section {
+        left: 5%;
+      }
+    }  
   </style>

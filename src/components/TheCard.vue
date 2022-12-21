@@ -375,11 +375,11 @@ export default {
   }
 
   .back-details {
-    margin-top: 25%;
+    margin-top: 30%;
   }
 
   .back-details-long {
-    margin-top: 0%;
+    margin-top: 1%;
   }
 
   .rotate-image-icon-edit {
