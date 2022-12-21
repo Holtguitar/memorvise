@@ -147,6 +147,7 @@ export default {
 
   #subject {
     width: 150px;
+    left: 15%;
   }
 
   @media (max-width: 900px) and (min-width: 380px){
@@ -154,7 +155,7 @@ export default {
       display: flex;
       flex-direction: column;
       width: 100vw;
-      left: 0%;
+      left: 4%;
       margin-left: 0;
     }
 

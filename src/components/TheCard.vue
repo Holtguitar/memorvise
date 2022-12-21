@@ -234,6 +234,7 @@ export default {
   .rotate-image-icon-edit {
     width: 45px;
     height: 30px;
+    margin-top: 5px;
   }
 
   .edit-icon:hover, 
@@ -255,15 +256,18 @@ export default {
   .rotate-image-icon {
     width: 45px;
     height: 30px;
+    margin-top: 5px;
   }
 
   .edit-icon {
     width: 25px;
-    color: red
+    color: red;
+    margin-top: 5px;
   }
 
   .delete-icon {
     width: 25px;
+    margin-top: 5px;
   }
 
   .cancel-icon {
@@ -281,12 +285,15 @@ export default {
   }
 
   .text-image, .text-color-picker {
+    position: fixed;
     left: 30%;
+    margin-top: 5px;
   }
 
   .cards-image, .card-color-picker {
+    position: fixed;
     left: 47%;
-    top: 107%;
+    margin-top: 5px;
   }
 
   .card-controller {
