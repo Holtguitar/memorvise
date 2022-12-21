@@ -74,8 +74,9 @@
     }
 
     @media (max-width: 900px) and (min-width: 380px){
-      .doppio-section {
-        left: 5%;
+
+      .footer-bar {
+        height: 45px;
       }
     }  
 

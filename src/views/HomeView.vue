@@ -141,7 +141,7 @@
     margin-top: 25px;
     padding: 5px;
     left: 22%;
-    font-family: 'Shadows Into Light' !important;
+    font-family: 'Shadows Into Light';
     font-size: 20px;
     font-weight: bolder;
     top: 25%;
@@ -313,6 +313,7 @@
     margin: 0px;
   }
   .delete-account {
+    position: relative;
     top: -19%;
     left: 60%;
     font-weight: 800;
@@ -376,7 +377,7 @@
     height: 200px;
     padding: 5px;
     left: 7%;
-    font-size: 20px;
+    font-size: 15px;
     top: 55%;
     padding: 15px;
     margin: 0px;

@@ -348,7 +348,7 @@ export default {
   @media (max-width: 900px) and (min-width: 380px){
   .scene {
     width: 300px;
-    height: 195px;
+    height: 150px;
     margin: 30px;
   }
   
@@ -367,7 +367,7 @@ export default {
   }
   
   .front-details {
-    margin-top: 25%
+    margin-top: 30%
   }
 
   .front-details-long {
