@@ -262,6 +262,10 @@
         flex-direction: row;
     }
 
+    #subject {
+        width: 150px;
+    }
+
     .create-subject-button {
         position: absolute;
         bottom: 10%;

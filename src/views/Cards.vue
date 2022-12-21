@@ -134,6 +134,7 @@ export default {
     font-weight: 700;
     font-size: 40px;
     top: -50%;
+    max-width: 100px !important;
   }
 
   .subject {    
@@ -142,8 +143,10 @@ export default {
     font-weight: 700;
     font-size: 40px;
     padding: 10px;
-    background-color: blue;
-    color: green;
+  }
+
+  #subject {
+    width: 150px;
   }
 
   @media (max-width: 900px) and (min-width: 380px){
@@ -157,7 +160,7 @@ export default {
 
     .card-scroll {
       position: fixed;
-      top: 30%;
+      top: 25%;
       left: 0%;
       height: 60vh;
       width: 100vw;
@@ -166,8 +169,20 @@ export default {
     }
 
     .subject-selector {
-      top: 15%;
+      top: 12%;
       left: 20%;
+      height: 85px;
+      padding: 5px;
+    }
+
+    .select-title {
+      font-size: 15px;
+      top: 35%;
+    }
+
+    #subject {
+      top: 85%;
+      left: 40%;
     }
   }
 

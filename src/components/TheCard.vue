@@ -177,7 +177,7 @@ export default {
   
   .scene {
     width: 400px;
-    min-height: 260px;
+    height: 260px;
     margin: 40px 0;
     perspective: 600px;
   }
@@ -348,7 +348,7 @@ export default {
   @media (max-width: 900px) and (min-width: 380px){
   .scene {
     width: 300px;
-    height: 125px;
+    height: 195px;
     margin: 30px;
   }
   
@@ -367,7 +367,7 @@ export default {
   }
   
   .front-details {
-    margin-top: 30%
+    margin-top: 25%
   }
 
   .front-details-long {
@@ -375,7 +375,7 @@ export default {
   }
 
   .back-details {
-    margin-top: 30%;
+    margin-top: 25%;
   }
 
   .back-details-long {

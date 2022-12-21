@@ -145,7 +145,8 @@
     }
 
     #sign-out, #sign-in {
-      left: 70%
+      left: 70%;
+      height: 50px;
     }
 
     .sign-out-text {

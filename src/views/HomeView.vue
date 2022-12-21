@@ -1,10 +1,10 @@
 <template>
   <div  v-if="store.state.user">
     <div class="account-info">
-    <p>Email: <span>{{this.email}}</span></p>
-    <p v-if="this.displayName">Name: <span>{{this.displayName}}</span></p>
-    <p>Created: <span>{{this.accountCreationDate}}</span></p>
-    <p>Topics: <span>{{subjectsLength}}</span></p>
+    <span>Email: <p>{{this.email}}</p></span>
+    <span v-if="this.displayName">Name: <p>{{this.displayName}}</p></span>
+    <span>Created: <p>{{this.accountCreationDate}}</p></span>
+    <span>Topics: <p>{{subjectsLength}}</p></span>
     <br/>
     <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
   </div>
@@ -69,21 +69,20 @@
     },
     methods: {
       deleteSubject(e){
-        
-        let confirmDelete = confirm(`Are you sure you want to delete the topic ${subject} and all of it's cards? `);
+        let confirmDelete = confirm(`Are you sure you want to delete the topic ${e} and all of it's cards? `);
 
-       if(confirmDelete){
+        if(confirmDelete){
         this.store.dispatch("deleteSubject", e);
         let arr = [];
 
-        for(let value of Object.values(this.subjects)){
-          if(value !== e){
-            arr.push(value);
-          } 
-        };
+          for(let value of Object.values(this.subjects)){
+            if(value !== e){
+              arr.push(value);
+            } 
+          };
 
-        this.subjects = arr;
-       }
+          this.subjects = arr;
+        }
 
         
       },
@@ -164,6 +163,9 @@
   .account-info p {
     font-size: 20px;
     font-family: 'Shadows Into Light';
+    color: black;
+    text-indent: 25px;
+
   }
 
   .account-info span {
@@ -311,19 +313,22 @@
 
   @media (max-width: 900px) and (min-width: 380px) {
   .account-info {
-    width: 350px;
-    height: 200px;
+    width: 270px;
+    height: fit-content;
     padding: 5px;
-    left: 7%;
-    font-size: 20px;
+    left: 15%;
+    font-size: 15px;
     top: 15%;
     padding: 15px;
     margin: 0px;
+    font-family: 'Shadows Into Light' !important;
+    overflow-y: scroll;
+    overflow-x: scroll;
   }
 
   .account-info p {
-    font-size: 20px;
-    font-family: 'Shadows Into Light';
+    font-size: 15px;
+    font-family: 'Shadows Into Light' !important;
   }
   .delete-account {
     position: relative;
@@ -386,15 +391,16 @@
 
   /* Subject Editor */
   .subject-editor {
-    width: 350px;
+    width: 270px;
     height: 200px;
     padding: 5px;
-    left: 7%;
+    left: 15%;
     font-size: 15px;
     top: 55%;
-    padding: 15px;
+    padding: 17px;
     margin: 0px;
     overflow-y: scroll;
+    overflow-x: scroll;
     padding-top: 5%;
   }
 
