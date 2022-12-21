@@ -327,7 +327,7 @@
   }
   .delete-account {
     position: relative;
-    top: -12%;
+    top: 0%;
     left: 60%;
     font-weight: 800;
   }

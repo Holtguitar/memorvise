@@ -80,7 +80,11 @@
       }
 
       .doppio-section {
-        left: 5%;
+        left: 7%;
+      }
+
+      .doppio-link {
+        left: 1%;
       }
     }  
   </style>
