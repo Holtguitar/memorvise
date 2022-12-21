@@ -69,8 +69,13 @@
     },
     methods: {
       deleteSubject(e){
+        
+        let confirmDelete = confirm(`Are you sure you want to delete the topic ${subject} and all of it's cards? `);
+
+       if(confirmDelete){
         this.store.dispatch("deleteSubject", e);
         let arr = [];
+
         for(let value of Object.values(this.subjects)){
           if(value !== e){
             arr.push(value);
@@ -78,6 +83,9 @@
         };
 
         this.subjects = arr;
+       }
+
+        
       },
       toggleEditMode(){
         this.editMode = !this.editMode;
@@ -312,9 +320,14 @@
     padding: 15px;
     margin: 0px;
   }
+
+  .account-info p {
+    font-size: 20px;
+    font-family: 'Shadows Into Light';
+  }
   .delete-account {
     position: relative;
-    top: -19%;
+    top: -15%;
     left: 60%;
     font-weight: 800;
   }

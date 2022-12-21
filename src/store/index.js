@@ -193,15 +193,14 @@ export default createStore({
           const currUser = state.user.uid;
           const newSubArr = [];
           
-          let confirmDelete = confirm(`Are you sure you want to delete the topic ${subject} and all of it's cards? `);
-
-          if(confirmDelete){
-            await set(ref(db, `/cards/${currUser}/${subject}`), {
-              key: null
-            }).catch((error) => {
-              alert(error)
-            });
-          }
+          
+        
+          await set(ref(db, `/cards/${currUser}/${subject}`), {
+            key: null
+          }).catch((error) => {
+            alert(error)
+          });
+          
 
           for(let value of Object.values(state.subjects)){
             if(value !== subject){
