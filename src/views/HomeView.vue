@@ -318,7 +318,7 @@
     width: 270px;
     height: 250px;
     padding: 5px;
-    left: 15%;
+    left: 25%;
     font-size: 15px;
     top: 0%;
     padding: 15px;
