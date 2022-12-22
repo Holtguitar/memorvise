@@ -168,12 +168,11 @@ export default {
       width: 100vw;
       overflow-y: scroll;
       margin-bottom: 200px;
-      /* padding-bottom: 200px; */
     }
 
     .subject-selector {
       top: 12%;
-      left: 20%;
+      left: 18%;
       height: 85px;
       padding: 5px;
     }

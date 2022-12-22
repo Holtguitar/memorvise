@@ -392,7 +392,7 @@
             width: 150px;
             text-align: center;
             font-size: 20px;
-            left: 10%;
+            left: 9%;
             top: 2%;
         }
 
@@ -423,7 +423,7 @@
 
         .color-form {
             top: 15%;
-            left: 15%;
+            left: 14%;
         }
 
         .color-form-span {
@@ -432,7 +432,7 @@
             height: 150px;
             right: 0%;
             top: -94%;
-            border-radius: 5%;
+            border-radius: 15px;
             box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
             0 10px 10px rgba(0,0,0,0.22);
             background-color:#0bd692;

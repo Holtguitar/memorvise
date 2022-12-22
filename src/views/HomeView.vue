@@ -1,14 +1,15 @@
 <template>
   <div  v-if="store.state.user">
     <div class="account-info">
-    <span><u>Account Info</u></span>
+    <span><u>Account Info</u> <img src="\edit-icon.png" class="account-edit-icon" @click.prevent="this.toggleEditAccountMode()"/></span>
+    <br/>
     <br/>
     <span>Email: <p>{{this.email}}</p></span>
     <span v-if="this.displayName">Name: <p>{{this.displayName}}</p></span>
     <span>Created: <p>{{this.accountCreationDate}}</p></span>
     <span>Topics: <p>{{subjectsLength}}</p></span>
     <br/>
-    <router-link class="delete-account" to="/sign-in" @click="this.deleteAccount()">Delete Account</router-link>
+    <div v-if="editAccountMode" class="delete-account" @click="this.deleteAccount()">Delete Account</div>
   </div>
   <div class="subject-editor">
     <h1>Topics <img src="\edit-icon.png" class="subject-edit-icon" @click.prevent="this.toggleEditMode()"/></h1>
@@ -56,7 +57,8 @@
         firstWord: "Write",
         lastWord: "new",
         subjects: this.$store.state.subjects,
-        editMode: false
+        editMode: false,
+        editAccountMode: false
       }
     },
     computed :{
@@ -74,22 +76,23 @@
         let confirmDelete = confirm(`Are you sure you want to delete the topic ${e} and all of it's cards? `);
 
         if(confirmDelete){
-        this.store.dispatch("deleteSubject", e);
-        let arr = [];
+          this.store.dispatch("deleteSubject", e);
+          let arr = [];
 
-          for(let value of Object.values(this.subjects)){
-            if(value !== e){
-              arr.push(value);
-            } 
-          };
+            for(let value of Object.values(this.subjects)){
+              if(value !== e){
+                arr.push(value);
+              } 
+            };
 
-          this.subjects = arr;
-        }
-
-        
+            this.subjects = arr;
+          }
       },
       toggleEditMode(){
         this.editMode = !this.editMode;
+      },
+      toggleEditAccountMode(){
+        this.editAccountMode = !this.editAccountMode;
       },
       welcomeAnimation(){
         setTimeout(() => {
@@ -120,7 +123,6 @@
           const path = `cards/${userID}`
           const details = {db, path, userID}
           this.store.dispatch("deleteUser", details);
-          
         }
         
       }, 
@@ -160,6 +162,7 @@
     0 10px 10px rgba(0,0,0,0.22);
     padding: 35px;
     margin: 20px;
+    overflow-y: scroll;
   }
 
   .account-info p {
@@ -182,10 +185,15 @@
 
   .delete-account {
     position: absolute;
-    left: 40%;
+    left: 50%;
     font-weight: 800;
-    top: 82%;
+    top: 10%;
     color: rgb(134, 1, 1)
+  }
+
+  .delete-account:hover {
+    cursor: pointer;
+    text-decoration: underline;
   }
 
   /* Welcome Landing */
@@ -293,11 +301,19 @@
     left: 90%;
   }
 
-  .subject-edit-icon:hover, .delete-subject-icon:hover {
+  .account-edit-icon {
+    position: absolute;
+    height: 20px;
+    justify-content: flex-end;
+    margin-left: 25px;
+    top: 5%;
+  }
+
+  .subject-edit-icon:hover, .account-edit-icon, .delete-subject-icon:hover {
     cursor: pointer;
   }
 
-  .subject-edit-icon:active, .delete-subject-icon:active {
+  .subject-edit-icon:active, .account-edit-icon, .delete-subject-icon:active {
     transform: scale(.90);
   }
 

@@ -79,6 +79,11 @@
   	margin-top: 15px;
 }
 
+.login-button:hover, .register-button:hover {
+	cursor: pointer;
+}
+
+
 .login-button:active, .register-button:active {
 	transform: scale(0.95);
 }

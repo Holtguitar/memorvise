@@ -151,16 +151,17 @@ export default createStore({
             }
           });
         },
-        async deleteUser({dispatch, state}, details){
+        async deleteUser({dispatch, state, router}, details){
           await set(ref(details.db, details.user, details.path), {
             id: null,
           }).then(() => {   
             state.user.delete();
-            dispatch("logout");
-            window.location.href="/sign-in"
           }).catch((error) => {
             alert(error);
           });
+
+
+          dispatch("logout");
         },
 ////////////////////////SUBJECT AND CARD MANAGEMENT///////////////////////////////////        
         async loadSubjects({commit}){
@@ -198,7 +199,7 @@ export default createStore({
           await set(ref(db, `/cards/${currUser}/${subject}`), {
             key: null
           }).catch((error) => {
-            alert(error)
+            alert(error);
           });
           
 
