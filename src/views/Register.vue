@@ -226,7 +226,7 @@
 	}
 
 	.container {
-		position: absolute;
+		position: fixed;
 		top: 10rem;
 		left: 0%;
 		margin-left: 0%;

@@ -1,6 +1,8 @@
 <template>
   <div  v-if="store.state.user">
     <div class="account-info">
+    <span><u>Account Info</u></span>
+    <br/>
     <span>Email: <p>{{this.email}}</p></span>
     <span v-if="this.displayName">Name: <p>{{this.displayName}}</p></span>
     <span>Created: <p>{{this.accountCreationDate}}</p></span>
@@ -318,7 +320,7 @@
     padding: 5px;
     left: 15%;
     font-size: 15px;
-    top: 15%;
+    top: 0%;
     padding: 15px;
     margin: 0px;
     font-family: 'Shadows Into Light' !important;
@@ -342,24 +344,25 @@
     position: fixed;
     left: 0%;
     top: 10%;
-    height: 90vh;
+    height: 60vh;
     text-align: center;
   }
 
   .welcome-header {
     height: 350px;
     text-align: center;
+    top: 0%;
   }
 
   .welcome-title {
     font-size: 30px;
     text-align: center;
-    
   }
 
   .welcome-message {
     font-size: 28px;
     left: 0%;
+    top: 5%;
   }
 
 
@@ -370,6 +373,7 @@
     width: 300px;
     margin-top: 0%;
     left: 11.5%;
+    top: 60%;
   }
   
   .welcome-card__face {
