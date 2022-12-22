@@ -318,9 +318,9 @@
     width: 270px;
     height: 250px;
     padding: 5px;
-    left: 25%;
+    left: 15%;
     font-size: 15px;
-    top: 0%;
+    top: 15%;
     padding: 15px;
     margin: 0px;
     font-family: 'Shadows Into Light' !important;
