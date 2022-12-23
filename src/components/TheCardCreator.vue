@@ -504,6 +504,11 @@
             top: 5%;
         }
 
+        .question-modal {
+            left: 15%;
+            top: 35%;
+        }
+
         .question-mark-icon {
             left: 15%;
         }
