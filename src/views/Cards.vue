@@ -167,8 +167,8 @@ export default {
       left: 0%;
       height: 60vh;
       width: 100vw;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
+      /* overflow-y: scroll; */
+      /* -webkit-overflow-scrolling: touch; */
       margin-bottom: 200px;
     }
 
