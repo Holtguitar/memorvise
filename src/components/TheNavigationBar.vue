@@ -1,7 +1,7 @@
 <template>
   <nav>
     <nav class="nav-bar">
-      <router-link id="logo" to="/" v-if="this.store.state.user">Memorwise</router-link>
+      <router-link id="logo" to="/">Recollect</router-link>
       <router-link class="nav-item" id="home" to="/" v-if="this.store.state.user">Account</router-link>
       <router-link class="nav-item" id="cards" to="/cards" v-if="this.store.state.user">Cards</router-link>
       <router-link class="nav-item" id="card-creator" to="/card-creator" v-if="this.store.state.user">Create</router-link>
@@ -53,11 +53,12 @@
     top: 30%;
     font-size: 30px;
     height: 60px;
-    font-family: 'Shadows Into Light', cursive;
+    font-family: 'Merienda One', cursive;
+    font-weight: 400;
   }
 
   .sign-out-text {
-    font-weight: 800;
+    font-weight: 400;
   }
 
   .nav-item:hover {
@@ -71,8 +72,7 @@
     left: 5%;
     font-size: 30px;
     height: 60px;
-    font-family: 'Playball', cursive;
-    text-decoration: underline;
+    font-family: 'Rubik Vinyl', cursive;
   }
 
   #sign-out, #sign-in {
@@ -86,8 +86,8 @@
     background-color: transparent;
     text-decoration: none;
     color: rgb(16, 122, 87);
-    font-weight: 600;
-    font-family: 'Shadows Into Light', cursive;
+    font-weight: 400;
+    font-family: 'Merienda One', cursive;
     --c: rgb(16, 122, 87); /* the border color */
     --b: 3px;    /* the border thickness*/
     --g: 5px;     /* the gap on hover */
@@ -139,7 +139,6 @@
       font-size: 20px;
       height: 60px;
       width: 80px;
-      /* background-color: red; */
       margin: 0;
       left: 10%;
     }
@@ -147,6 +146,7 @@
     #sign-out, #sign-in {
       left: 70%;
       height: 50px;
+      font-size: 18px
     }
 
     .sign-out-text {

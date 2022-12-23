@@ -42,9 +42,9 @@
     }
   
     .doppio-section {
-      font-size: 20px;
+      font-size: 13px;
       height: 60px;
-      font-family: 'Shadows Into Light', cursive;
+      font-family: 'Short Stack', cursive;
       width: 400px;
       height: 100%;
       left: 40%;

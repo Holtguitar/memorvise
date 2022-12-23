@@ -21,7 +21,7 @@
   </div>
   <div v-else class="welcome-page">
     <div class="welcome-header">
-      <h2 class="welcome-title">Memorwise</h2>
+      <h2 class="welcome-title">Recollect</h2>
       <div class="welcome-message">A Key Tool For Your Learning Journey</div>
     </div>
     <div class="scene scene--card">
@@ -152,7 +152,7 @@
     margin-top: 25px;
     padding: 5px;
     left: 22%;
-    font-family: 'Shadows Into Light';
+    font-family: 'Marhey', cursive;
     font-size: 20px;
     font-weight: bolder;
     top: 25%;
@@ -167,15 +167,15 @@
 
   .account-info p {
     font-size: 20px;
-    font-family: 'Shadows Into Light';
-    color: black;
+    font-family: 'Marhey', cursive;
+    color: rgb(91, 91, 91);
     text-indent: 25px;
 
   }
 
   .account-info span {
     color: rgb(38, 20, 140);
-    font-family:fantasy;
+    font-family: 'Marhey', cursive;
   }
 
   .account-title {
@@ -206,8 +206,7 @@
     padding: 5px;
     font-size: 60px;
     height: 100px;
-    font-family: 'Playball', cursive;
-    text-decoration: underline;
+    font-family: 'Rubik Vinyl', cursive;
     color: #107a57;
   }
 
@@ -215,7 +214,7 @@
     padding: 5px;
     font-size: 30px;
     height: 70px;
-    font-family: 'Playball', cursive;
+    font-family: 'Short Stack', cursive;
     color: #107a57;
   }
 
@@ -229,8 +228,9 @@
     justify-content: center;
     align-items: center;
     background-color: rgb(190, 190, 190);
-    font-family: 'Shadows Into Light', cursive;
+    font-family: 'Merienda One', cursive;
     margin-top: 35%;
+    left: 15%;
   }
   
   .welcome-card {
@@ -240,6 +240,7 @@
     transform-style: preserve-3d;
     position: relative;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    
 
   }
   
@@ -276,7 +277,7 @@
     margin-top: 25px;
     padding: 5%;
     left: 65%;
-    font-family: 'Shadows Into Light';
+    font-family: 'Marhey', cursive;
     font-size: 15px;
     font-weight: bolder;
     top: 25%;
@@ -357,11 +358,12 @@
 
   /* Landing Page */
   .welcome-page {
-    position: fixed;
-    left: 0%;
-    top: 10%;
-    height: 60vh;
+    /* position: fixed; */
+    /* left: 0%; */
+    /* top: 10%; */
+    /* height: 60vh; */
     text-align: center;
+    background-color: red;
   }
 
   .welcome-header {

@@ -1,5 +1,14 @@
 @import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Gochi+Hand&family=Marhey:wght@300&family=Merienda+One&family=Rubik+Vinyl&family=Short+Stack&family=Stardos+Stencil&display=swap'); 
 
+/* Font List */
+/* font-family: 'Chewy', cursive;
+font-family: 'Gochi Hand', cursive;
+font-family: 'Marhey', cursive;
+font-family: 'Merienda One', cursive;
+font-family: 'Rubik Vinyl', cursive;
+font-family: 'Short Stack', cursive;
+font-family: 'Stardos Stencil', cursive; */
 #app {
   max-width: 1280px;
   margin: 0 auto;

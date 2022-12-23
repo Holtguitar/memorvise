@@ -253,8 +253,8 @@
 
     .create-title {
         top: -5%;
-        font-family: 'Shadows Into Light', cursive;
-        font-size: 30px;
+        font-family: 'Stardos Stencil', cursive;
+        font-size: 25px;
     }
 
     .mem-filter {
@@ -441,7 +441,6 @@
 
         .create-title {
             top: -5%;
-            font-family: 'Shadows Into Light', cursive;
             font-size: 20px;
         }
 
