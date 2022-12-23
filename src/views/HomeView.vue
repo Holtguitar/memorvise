@@ -1,7 +1,9 @@
 <template>
   <div  v-if="store.state.user">
     <div class="account-info">
-    <span><u>Account Info</u> <img src="\edit-icon.png" class="account-edit-icon" @click.prevent="this.toggleEditAccountMode()"/></span>
+    <span>
+      <u>Account Info</u> 
+    </span>
     <br/>
     <br/>
     <span>Email: <p>{{this.email}}</p></span>
@@ -9,7 +11,17 @@
     <span>Created: <p>{{this.accountCreationDate}}</p></span>
     <span>Topics: <p>{{subjectsLength}}</p></span>
     <br/>
-    <div v-if="editAccountMode" class="delete-account" @click="this.deleteAccount()">Delete Account</div>
+    <div class="delete-box"> 
+      <img src="\edit-icon.png" 
+      class="account-edit-icon" 
+      @click.prevent="this.toggleEditAccountMode()"/>
+      <div 
+        v-if="editAccountMode" 
+        class="delete-account" 
+        @click="this.deleteAccount()">
+        Delete Account
+      </div>
+    </div>
   </div>
   <div class="subject-editor">
     <h1>Topics <img src="\edit-icon.png" class="subject-edit-icon" @click.prevent="this.toggleEditMode()"/></h1>
@@ -29,7 +41,7 @@
           class="welcome-card"
           v-bind:class="{ flipme: cardOne == 'flipped' }">
           <div class="welcome-card__face welcome-card__face--front">
-              <div class="front-details"><span class="first-word">{{firstWord}}</span> something <span class="last-word">{{lastWord}}</span></div>
+              <div class="front-details"><span class="first-word">{{animationWord}}</span></div>
           </div>
           <div class="welcome-card__face welcome-card__face--back">
           <div class="back-details">Learn something </div>
@@ -54,11 +66,10 @@
         email: "",
         accountCreationDate: "",
         cardOne: "start",
-        firstWord: "Write",
-        lastWord: "new",
         subjects: this.$store.state.subjects,
         editMode: false,
-        editAccountMode: false
+        editAccountMode: false,
+        animationWord: ""
       }
     },
     computed :{
@@ -96,14 +107,20 @@
       },
       welcomeAnimation(){
         setTimeout(() => {
-          this.firstWord = "Study";
-          this.lastWord = "often"
+          this.animationWord = "Write";
 
           setTimeout(() => {
-            this.firstWord = "Memorize";
-            this.lastWord = "well"
-          }, 2000)
-        }, 2000);
+            this.animationWord = "Study";
+
+            setTimeout(() => {
+              this.animationWord = "Memorize";
+
+              setTimeout(() => {
+                this.animationWord = "Learn";
+              }, 1000)
+            }, 1000)
+          }, 1000)
+        }, 1000);
       },
       getAccountInfo() {
         this.loadSubjects();
@@ -183,12 +200,28 @@
     margin-bottom: 25px;
   }
 
+  .delete-box {
+    height: 50px;
+    justify-content:space-between ;
+    width: 300px;
+    
+  }
+
+   .account-edit-icon {
+    height: 20px;
+    justify-content: flex-end;
+    top: 25%;
+  }
+
   .delete-account {
     position: absolute;
-    left: 50%;
     font-weight: 800;
-    top: 10%;
-    color: rgb(134, 1, 1)
+    color: rgb(134, 1, 1);
+    width: fit-content;
+    height: fit-content;
+    left: 50%;
+    top: 20%;
+    
   }
 
   .delete-account:hover {
@@ -302,14 +335,6 @@
     left: 90%;
   }
 
-  .account-edit-icon {
-    position: absolute;
-    height: 20px;
-    justify-content: flex-end;
-    margin-left: 25px;
-    top: 5%;
-  }
-
   .subject-edit-icon:hover, .account-edit-icon, .delete-subject-icon:hover {
     cursor: pointer;
   }
@@ -351,9 +376,9 @@
   }
   .delete-account {
     position: relative;
-    top: 0%;
-    left: 60%;
-    font-weight: 800;
+    font-weight: 600;
+    left: 25%;
+    top: 5%;
   }
 
   /* Landing Page */
@@ -395,7 +420,7 @@
   
   .welcome-card__face {
     font-size: 15px;
-    padding-top: 22%;
+    padding-top: 25%;
   }
   
   .welcome-card__face--back {
@@ -433,7 +458,7 @@
   .subject-edit-icon {
     position: absolute;
     height: 20px;
-    top: 0%;
+    /* top: 90%; */
     left: 90%;
   }
 
