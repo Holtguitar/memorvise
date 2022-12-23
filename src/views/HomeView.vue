@@ -367,7 +367,7 @@
     margin: 0px;
     font-family: 'Shadows Into Light' !important;
     overflow-y: scroll;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
   }
 
   .account-info p {

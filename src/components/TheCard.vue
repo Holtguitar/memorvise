@@ -205,23 +205,28 @@ export default {
   }
   
   .front-details {
-    margin-top: 25%
+    margin-top: 25%;
+    overflow-y: scroll;
   }
 
   .front-details-long {
     margin-top: 0%;
+    overflow-y: scroll;
   }
   
   .card__face--back {
     transform: translateZ(-1px) rotateY(180deg);
+    overflow-y: scroll;
   }
 
   .back-details {
     margin-top: 25%;
+    overflow-y: scroll;
   }
 
   .back-details-long {
     margin-top: 0%;
+    overflow-y: scroll;
   }
 
   .edit-card {
