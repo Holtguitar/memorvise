@@ -107,31 +107,68 @@
                 let filter;
                 let newBack = [];
                 const specialChar = /[`!@#$%^&*()_+\-=\[\]{};:\\|,.<>”"\/?~0123456789 ]/;
-                
 
                 filter = this.front.split(' ');
 
                 filter.forEach((e) => {
                     let a;
                     let i;
-                    if(specialChar.test(e[0]) && e.length > 1){
-                        a = e[0] + e[1];
-                        i = 2;
-                    } else {
+
+                    if(e.length === 1){
                         a = e[0];
-                        i = 1;
-                    }
-                    
-                    for(i = i; i < e.length; i++){
-                        if(specialChar.test(e[i])){
-                            a = a + e[i];
+                    } else if(e.length > 1 && specialChar.test(e[0])){
+                        a = e[0] + e[1];
+
+                        for(i = 2; i < e.length; i++){
+                            if(specialChar.test(e[i])){
+                                a = a + e[i];
+                            }
+                        }
+                    } else if(e.length > 1){
+                        a = e[0];
+
+                        for(i = 1; i < e.length; i++){
+                            if(specialChar.test(e[i])){
+                                a = a + e[i];
+                            }
                         }
                     }
 
                     newBack.push(a);
+
                 });
+
                 this.back = newBack.join(" ");
                 return newBack.join(" ");
+
+                
+                
+
+                // filter = this.front.split(' ');
+
+                // filter.forEach((e) => {
+                //     let a;
+                //     let i;
+                //     if(specialChar.test(e[0]) && e.length > 1){
+                //         a = e[0] + e[1];
+                //         i = 2;
+                //     } else {
+                //         a = e[0];
+                //         i = 1;
+                //     }
+                    
+                //     for(i = i; i < e.length; i++){
+                //         if(specialChar.test(e[i])){
+                //             a = a + e[i];
+                //         }
+                //     }
+
+                //     newBack.push(a);
+                // });
+                // this.back = newBack.join(" ");
+                // return newBack.join(" ");
+
+                
             }
         },
         methods: {
@@ -538,8 +575,7 @@
             width: 150px;
             height: 150px;
             Left: 53%;
-            top: 12%;
-
+            top: 13%;
             border-radius: 15px;
             box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
             0 10px 10px rgba(0,0,0,0.22);
