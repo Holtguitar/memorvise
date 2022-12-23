@@ -106,7 +106,7 @@
             filteredBack(){
                 let filter;
                 let newBack = [];
-                const specialChar = /[`!@#$%^&*()_+\-=\[\]{};:\\|,.<>”"\/?~0123456789 ]/;
+                const specialChar = /[“`!@#$%^&*()_+\-=\[\]{};:\\|,.<>”"\/?~0123456789 ]/;
 
                 filter = this.front.split(' ');
 
