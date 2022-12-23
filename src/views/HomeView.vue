@@ -358,12 +358,11 @@
 
   /* Landing Page */
   .welcome-page {
-    /* position: fixed; */
-    /* left: 0%; */
-    /* top: 10%; */
-    /* height: 60vh; */
+    position: fixed;
+    left: 0%;
+    top: 10%;
+    height: 60vh;
     text-align: center;
-    background-color: red;
   }
 
   .welcome-header {
@@ -373,12 +372,12 @@
   }
 
   .welcome-title {
-    font-size: 30px;
+    font-size: 20px;
     text-align: center;
   }
 
   .welcome-message {
-    font-size: 28px;
+    font-size: 15px;
     left: 0%;
     top: 5%;
   }
