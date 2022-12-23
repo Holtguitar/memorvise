@@ -109,6 +109,7 @@ export default {
     padding-bottom: 250px;
     width: 150vh;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
     margin-bottom: 200px;
   }
 
@@ -167,6 +168,7 @@ export default {
       height: 60vh;
       width: 100vw;
       overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
       margin-bottom: 200px;
     }
 
