@@ -389,7 +389,7 @@
     height: 200px;
     width: 300px;
     margin-top: 0%;
-    left: 13%;
+    left: 1%;
     top: 60%;
   }
   

@@ -13,6 +13,7 @@
                 </select>
                 <p><input type="text" v-model="front" placeholder="Front" required/></p>
                 <p><input type="text" v-model="back" placeholder="Back" required/></p>
+                <p><label for="mem-filter">Recollect Filtering Tool</label><input type="checkbox" id="mem-filter" @click="toggleMemFilter()"/></p>
                 <button class="create-button" @click.prevent="createCard()">Build</button>
             </div>
             <div class="color-form-span">
@@ -84,10 +85,45 @@
                 cardColor: "#FFFFFF",
                 textColor: "#000000",
                 colorClass: "background-color: #FFFFFF; color: #000000",
-                cardOne: "start"
+                cardOne: "start",
+                memFilter: false,
+                filteredFront: ""
             }
         },
         methods: {
+        toggleMemFilter(){
+            this.memFilter = !this.memFilter;
+            let filter;
+            let newFront = [];
+            const specialChar = /[`!@#$%^&*()_+\-=\[\]{};:\\|,.<>”"\/?~0123456789 ]/;
+            
+
+            filter = this.front.split(' ');
+
+            filter.forEach((e) => {
+                let a;
+                let i;
+                if(specialChar.test(e[0]) && e.length > 1){
+                    a = e[0] + e[1];
+                    i = 2;
+                } else {
+                    a = e[0];
+                    i = 1;
+                }
+                
+                for(i = i; i < e.length; i++){
+                    if(specialChar.test(e[i])){
+                        a = a + e[i];
+                    }
+                }
+
+                newFront.push(a)
+            });
+
+            this.back = newFront.join(" ")
+            
+
+        },
         createSubject(){
 
             fetch(`https://memorvise-default-rtdb.firebaseio.com/cards/${this.user.currentUser.uid}/${this.newSubject}.json`, {
@@ -230,7 +266,6 @@
         width: 115px;
         top: 30%;
         left: 20%;
-        /* background-color: red; */
         text-align: center;
         justify-content: space-between;
         padding-top: 3%;

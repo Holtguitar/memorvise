@@ -155,7 +155,7 @@ export default {
       display: flex;
       flex-direction: column;
       width: 100vw;
-      left: 4%;
+      left: 3%;
       margin-left: 0;
       padding-bottom: 100px;
     }

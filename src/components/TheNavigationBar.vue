@@ -129,6 +129,7 @@
       justify-content: flex-start;
       margin-bottom: 0px;
       height: 70px;
+      padding-left: 5%;
     }
 
     #logo {
@@ -136,11 +137,10 @@
     }
 
     .nav-item {
-      font-size: 20px;
-      height: 60px;
-      width: 80px;
-      margin: 0;
-      left: 10%;
+      margin-right: 20px;
+      padding: 8px;
+      top: 25%;
+      font-size: 18px;
     }
 
     #sign-out, #sign-in {
