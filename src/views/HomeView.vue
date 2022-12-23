@@ -368,11 +368,11 @@
   .welcome-header {
     height: 350px;
     text-align: center;
-    top: 0%;
+    top: 10%;
   }
 
   .welcome-title {
-    font-size: 20px;
+    font-size: 23px;
     text-align: center;
   }
 
@@ -389,12 +389,12 @@
     height: 200px;
     width: 300px;
     margin-top: 0%;
-    left: 11.5%;
+    left: 13%;
     top: 60%;
   }
   
   .welcome-card__face {
-    font-size: 25px;
+    font-size: 15px;
     padding-top: 22%;
   }
   
