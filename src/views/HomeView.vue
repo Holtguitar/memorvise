@@ -254,7 +254,7 @@
     padding: 15px;
     font-size: 30px;
     justify-content: center;
-    padding-top: 20%;
+    padding-top: 25%;
   }
   
   .welcome-card__face--back {
@@ -359,7 +359,7 @@
   /* Landing Page */
   .welcome-page {
     position: fixed;
-    left: 0%;
+    left: 10%;
     top: 10%;
     height: 60vh;
     text-align: center;
