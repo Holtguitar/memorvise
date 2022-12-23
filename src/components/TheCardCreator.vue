@@ -12,8 +12,12 @@
                     <option v-for="(item, key) in subjects" :value="item">{{item}}</option>
                 </select>
                 <p><input type="text" v-model="front" placeholder="Front" required/></p>
-                <p><input type="text" v-model="back" placeholder="Back" required/></p>
-                <p><label for="mem-filter">Recollect Filtering Tool</label><input type="checkbox" id="mem-filter" @click="toggleMemFilter()"/></p>
+                <p><input type="text" v-model="back" placeholder="Back" required :disabled="memFilter"/></p>
+                <p class="mem-container">
+                    <label class="mem-label" for="mem-filter">Recollect Filtering Tool</label>
+                    <img src="/question-mark.png" class="question-mark-icon" @click.prevent="toggleShowModal()"/>
+                    <input type="checkbox" id="mem-filter" @click="toggleMemFilter()"/>
+                </p>
                 <button class="create-button" @click.prevent="createCard()">Build</button>
             </div>
             <div class="color-form-span">
@@ -49,7 +53,8 @@
                     <div class="front-details">{{front}}</div>
                 </div>
                 <div class="card__face card__face--back">
-                <div class="back-details">{{back}}</div>
+                <div class="back-details" v-if="!this.memFilter">{{back}}</div>
+                <div class="back-details" v-else>{{filteredBack}}</div>
                 </div>
             </div>
             <span class="card-controller">
@@ -59,6 +64,13 @@
                 @click="cardOne == 'start' ? (cardOne = 'flipped' ) : (cardOne = 'start' )"
                 />
             </span>
+        </div>
+        <div class="question-modal" v-if="this.showModal">
+            <p class="x-symbol" @click.prevent="toggleShowModal()">&times;</p>
+            <br/>
+            <div class="question-modal-text">
+                This function will take all of the text from the front and place them on the back, keeping only the first letter of each word and the punctuation/symbols.
+            </div>
         </div>
     </div>
     
@@ -87,42 +99,48 @@
                 colorClass: "background-color: #FFFFFF; color: #000000",
                 cardOne: "start",
                 memFilter: false,
-                filteredFront: ""
+                showModal: false
+            }
+        },
+        computed: {
+            filteredBack(){
+                let filter;
+                let newBack = [];
+                const specialChar = /[`!@#$%^&*()_+\-=\[\]{};:\\|,.<>”"\/?~0123456789 ]/;
+                
+
+                filter = this.front.split(' ');
+
+                filter.forEach((e) => {
+                    let a;
+                    let i;
+                    if(specialChar.test(e[0]) && e.length > 1){
+                        a = e[0] + e[1];
+                        i = 2;
+                    } else {
+                        a = e[0];
+                        i = 1;
+                    }
+                    
+                    for(i = i; i < e.length; i++){
+                        if(specialChar.test(e[i])){
+                            a = a + e[i];
+                        }
+                    }
+
+                    newBack.push(a);
+                });
+                this.back = newBack.join(" ");
+                return newBack.join(" ");
             }
         },
         methods: {
         toggleMemFilter(){
             this.memFilter = !this.memFilter;
-            let filter;
-            let newFront = [];
-            const specialChar = /[`!@#$%^&*()_+\-=\[\]{};:\\|,.<>”"\/?~0123456789 ]/;
             
-
-            filter = this.front.split(' ');
-
-            filter.forEach((e) => {
-                let a;
-                let i;
-                if(specialChar.test(e[0]) && e.length > 1){
-                    a = e[0] + e[1];
-                    i = 2;
-                } else {
-                    a = e[0];
-                    i = 1;
-                }
-                
-                for(i = i; i < e.length; i++){
-                    if(specialChar.test(e[i])){
-                        a = a + e[i];
-                    }
-                }
-
-                newFront.push(a)
-            });
-
-            this.back = newFront.join(" ")
-            
-
+            if(!this.memFilter){
+                this.back = ""
+            }
         },
         createSubject(){
 
@@ -201,6 +219,9 @@
     loadSubjects(){
       this.store.dispatch("loadSubjects");
     },
+    toggleShowModal(){
+        this.showModal = !this.showModal;
+    }
     },
     mounted(){
         this.changeColor;
@@ -230,6 +251,10 @@
         0 10px 10px rgba(0,0,0,0.22);
         padding: 35px;
         margin: 20px;
+    }
+
+    .mem-container {
+        margin-top: 15px;
     }
 
     .subject-form {
@@ -299,6 +324,10 @@
 
     #subject {
         width: 150px;
+    }
+
+    .mem-label {
+        margin-right: 15px;
     }
 
     .create-subject-button {
@@ -378,6 +407,37 @@
     backface-visibility: hidden;
   }
 
+  .question-modal {
+    position: fixed;
+    width: 280px;
+    height: 140px;
+    padding: 10px 15px 15px 15px;
+    border: solid rgb(190, 190, 190) 1px;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+    background-color: rgb(255, 242, 225);
+    top: 60%;
+    left: 35%;
+  }
+
+  .question-mark-icon {
+    height: 20px;
+  }
+
+  .question-mark-icon:hover {
+    cursor: pointer;
+  }
+
+  .x-symbol {
+    float: right;
+    margin-bottom: 5px;
+  }
+
+  .x-symbol:hover {
+    cursor: pointer;
+  }
+
   .edit-card:hover{
     cursor: pointer;
   }
@@ -439,15 +499,22 @@
             grid-template-columns: auto auto;
             column-gap: 50px;
             width: fit-content;
-            height: fit-content;
+            height: 250px;
             left: 7%;
             top: 5%;
         }
 
+        .question-mark-icon {
+            left: 15%;
+        }
+
+        .mem-label {
+            margin-right: -5px;
+        }
         .card-form-span {
             height: 150px;
             width: 300px;
-            text-align: center;   
+            text-align: center;
         }
         
         .create-button {
@@ -462,11 +529,12 @@
         }
 
         .color-form-span {
-            position: absolute;
+            position: fixed;
             width: 150px;
             height: 150px;
-            right: 0%;
-            top: -94%;
+            Left: 53%;
+            top: 12%;
+
             border-radius: 15px;
             box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
             0 10px 10px rgba(0,0,0,0.22);
