@@ -235,7 +235,6 @@ export default {
   .card__face--back {
     position: fixed;
     top: 0%;
-    background-color: green;
     transform: translateZ(-1px) rotateY(180deg);
  
   }
