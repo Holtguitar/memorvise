@@ -200,39 +200,55 @@ export default {
     font-weight: bold;
     font-size: 20px;
     backface-visibility: hidden;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
     padding: 15px;
-  }
-
-  .card__face::-webkit-scrollbar {
-    display: none;
   }
   
   .front-details {
     margin-top: 25%;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .front-details-webkit-scrollbar {
+    display: none;
   }
 
   .front-details-long {
     margin-top: 0%;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .front-details-long-webkit-scrollbar {
+    display: none;
   }
   
   .card__face--back {
     transform: translateZ(-1px) rotateY(180deg);
-    /* overflow-y: scroll; */
   }
 
   .back-details {
     margin-top: 25%;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .back-details-webkit-scrollbar {
+    display: none;
   }
 
   .back-details-long {
     margin-top: 0%;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .back-details-long-webkit-scrollbar {
+    display: none;
   }
 
   .edit-card {
