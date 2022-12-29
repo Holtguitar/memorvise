@@ -413,7 +413,7 @@
   }
 
 
-  .flipme {
+  .welcome-page .flipme {
     transform: rotateY(180deg);
   }
 

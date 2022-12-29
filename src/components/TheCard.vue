@@ -191,6 +191,7 @@ export default {
   }
   
   .card__face {
+    position: fixed;
     width: 100%;
     height: 100%;
     text-align: center;
