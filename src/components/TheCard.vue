@@ -198,6 +198,10 @@ export default {
     font-size: 20px;
     backface-visibility: hidden;
     padding: 15px;
+    overflow-y: scroll !important;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
   }
 
   .card-face::-webkit-scrollbar {
@@ -206,7 +210,7 @@ export default {
   
   .front-details {
     margin-top: 25%;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
     scrollbar-width: none;     
@@ -217,8 +221,9 @@ export default {
   }
 
   .front-details-long {
+    position: relative;
     margin-top: 0%;   
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
     scrollbar-width: none;   
@@ -235,7 +240,7 @@ export default {
 
   .back-details {
     margin-top: 25%;  
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
     scrollbar-width: none;   
@@ -247,7 +252,7 @@ export default {
 
   .back-details-long {
     margin-top: 0%;
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
     scrollbar-width: none; 

@@ -1,5 +1,5 @@
 <template>
-  <div  v-if="store.state.user">
+  <div class="contain" v-if="store.state.user">
     <div class="account-info">
     <span>
       <u>Account Info</u> 

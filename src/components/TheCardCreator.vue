@@ -617,7 +617,8 @@
             transform-style: preserve-3d;
             position: relative;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            display: none;
+            /* display: none; */
+            
         }
         
         .card-creator .card__face {
@@ -629,6 +630,7 @@
             font-size: 20px;
             backface-visibility: hidden;
             padding: 15px;
+            overflow-y: scroll;
         }
         
         .card-creator .front-details {
