@@ -96,6 +96,8 @@ export default {
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 50px;
+    overscroll-behavior: auto;
+    
   }
 
   .card-scroll {
@@ -163,7 +165,7 @@ export default {
 
   @media (max-width: 900px) and (min-width: 380px){
     .card-holder {
-      position: absolute;
+      /* position: absolute; */
       display: flex;
       flex-direction: column;
       grid-template-columns: auto auto;
@@ -172,30 +174,18 @@ export default {
       width: 100vw;
       left: 0%;
       padding-bottom: 100px;
-      overflow-x: hidden; 
     }
 
     .card-scroll {
-         
-      /* height: 60vh; */
-      /* width: 95vw; */
-      /* margin-bottom: 200px; */
-      /* overflow-x: hidden; */
-      position: fixed;
+      /* position: fixed; */
       top: 25%;
       left: 0%;
       height: 60vh;
       padding-bottom: 250px;
       width: 150vh;
       margin-bottom: 200px;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-      -ms-overflow-style: none; 
-      scrollbar-width: none; 
     }
  
-
-
     .subject-selector {
       top: 12%;
       left: 18%;
