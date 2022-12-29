@@ -10,11 +10,11 @@
         :style="this.cardStyle"
       >
         <div class="card__face card__face--front">
-            <div v-if="(this.front.length < 120)" class="front-details">{{front}}</div>
+            <div v-if="(this.front.length < 100)" class="front-details">{{front}}</div>
             <div v-else class="front-details-long">{{front}}</div>
         </div>
         <div class="card__face card__face--back">
-          <div v-if="(this.back.length < 160)" class="back-details">{{back}}</div>
+          <div v-if="(this.back.length < 100)" class="back-details">{{back}}</div>
           <div v-else class="back-details-long">{{back}}</div>
         </div>
       </div>
