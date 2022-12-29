@@ -397,6 +397,12 @@ export default {
     height: 195px;
     margin: 30px 0;
   }
+
+  .front-details, .front-details-long, .back-details, .back-details-long {
+    position: absolute;
+    top: 0%;
+    overflow-y: hidden !important; 
+  }
   
 
   .rotate-image-icon-edit {
