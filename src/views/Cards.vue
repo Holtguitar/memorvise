@@ -120,7 +120,6 @@ export default {
     column-gap: 50px;
     left: 20%;
     width: 60vw;
-    background-color: red;
   }
 
   .card-scroll::-webkit-scrollbar {
