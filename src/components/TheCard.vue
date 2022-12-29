@@ -183,7 +183,7 @@ export default {
   }
   
   .card {
-    position: fixed;
+    /* position: fixed; */
     width: 100%;
     height: 100%;
     transition: transform 1s;
