@@ -210,10 +210,10 @@ export default {
   
   .front-details {
     margin-top: 25%;
-    overflow-y: scroll !important;
+    /* overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
-    scrollbar-width: none;     
+    scrollbar-width: none;      */
   }
 
   .front-details::-webkit-scrollbar {
@@ -222,10 +222,10 @@ export default {
 
   .front-details-long {
     margin-top: 0%;   
-    overflow-y: scroll !important;
+    /* overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
-    scrollbar-width: none;   
+    scrollbar-width: none;    */
   }
 
   .front-details-long::-webkit-scrollbar {
@@ -241,10 +241,10 @@ export default {
 
   .back-details {
     margin-top: 25%;  
-    overflow-y: scroll !important;
+    /* overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
-    scrollbar-width: none;   
+    scrollbar-width: none;    */
   }
 
   .back-details::-webkit-scrollbar {
@@ -253,10 +253,10 @@ export default {
 
   .back-details-long {
     margin-top: 0%;
-    overflow-y: scroll !important;
+    /* overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
-    scrollbar-width: none; 
+    scrollbar-width: none;  */
   }
 
   .back-details-long::-webkit-scrollbar {
@@ -398,11 +398,11 @@ export default {
     margin: 30px 0;
   }
 
-  .front-details, .front-details-long, .back-details, .back-details-long {
+  /* .front-details, .front-details-long, .back-details, .back-details-long {
     position: absolute;
     top: 0%;
     overflow-y: hidden !important; 
-  }
+  } */
   
 
   .rotate-image-icon-edit {

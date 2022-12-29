@@ -250,7 +250,7 @@
 
   /* Welcome Card View */
    /* Card Preview */
-   .scene {
+   .welcome-card .scene {
     position: absolute;
     width: 450px;
     height: 260px;
@@ -285,10 +285,6 @@
     font-size: 30px;
     justify-content: center;
     padding-top: 25%;
-  }
-
-  .flipme {
-    transform: rotateY(180deg);
   }
 
   /* Subject Editor */
@@ -399,7 +395,7 @@
 
   /* Welcome Card View */
    /* Card Preview */
-   .scene {
+   .welcome-card .scene {
     height: 200px;
     width: 300px;
     margin-top: 0%;
@@ -410,11 +406,6 @@
   .welcome-card__face {
     font-size: 15px;
     padding-top: 25%;
-  }
-
-
-  .flipme {
-    transform: rotateY(180deg);
   }
 
   /* Subject Editor */
