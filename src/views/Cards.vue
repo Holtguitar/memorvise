@@ -99,14 +99,6 @@ export default {
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 50px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
-  }
-
-  .card-holder::-webkit-scrollbar {
-    display: none;
   }
 
   .card-scroll {
@@ -117,10 +109,10 @@ export default {
     padding-bottom: 250px;
     width: 150vh;
     margin-bottom: 200px;
-    /* overflow-y: scroll;
+    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
-    scrollbar-width: none;  */
+    scrollbar-width: none; 
   }
 
   .card-scroll::-webkit-scrollbar {

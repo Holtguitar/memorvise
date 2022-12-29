@@ -367,7 +367,7 @@
     margin: 0px;
     font-family: 'Shadows Into Light' !important;
     overflow-y: scroll;
-    /* overflow-x: scroll; */
+    overflow-x: hidden;
   }
 
   .account-info p {
@@ -446,7 +446,7 @@
     padding: 17px;
     margin: 0px;
     overflow-y: scroll;
-    overflow-x: scroll;
+    overflow-x: hidden;
     padding-top: 5%;
   }
 

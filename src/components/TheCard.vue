@@ -201,6 +201,13 @@ export default {
     font-size: 20px;
     backface-visibility: hidden;
     padding: 15px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .card-face::-webkit-scrollbar {
+    display: none;
   }
   
   .front-details {

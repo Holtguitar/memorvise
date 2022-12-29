@@ -431,7 +431,7 @@
   }
   
   .front-details {
-    margin-top: 25%
+    /* margin-top: 25% */
   }
   
   .card__face--back {
@@ -439,7 +439,7 @@
   }
 
   .back-details {
-    margin-top: 25%;
+    /* margin-top: 25%; */
   }
 
   .edit-card {
