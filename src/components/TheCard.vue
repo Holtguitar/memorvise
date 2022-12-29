@@ -205,7 +205,11 @@ export default {
   }
   
   .front-details {
-    /* margin-top: 25%;     */
+    margin-top: 25%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;     
   }
 
   .front-details::-webkit-scrollbar {
@@ -213,7 +217,11 @@ export default {
   }
 
   .front-details-long {
-    /* margin-top: 0%;      */
+    margin-top: 0%;   
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;   
   }
 
   .front-details-long::-webkit-scrollbar {
@@ -226,7 +234,11 @@ export default {
   }
 
   .back-details {
-    /* margin-top: 25%;     */
+    margin-top: 25%;  
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;   
   }
 
   .back-details::-webkit-scrollbar {
@@ -234,7 +246,11 @@ export default {
   }
 
   .back-details-long {
-    /* margin-top: 0%; */
+    margin-top: 0%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
   }
 
   .back-details-long::-webkit-scrollbar {
