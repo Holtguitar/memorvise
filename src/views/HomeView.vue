@@ -43,9 +43,6 @@
           <div class="welcome-card__face welcome-card__face--front">
               <div class="front-details"><span class="first-word">{{animationWord}}</span></div>
           </div>
-          <div class="welcome-card__face welcome-card__face--back">
-          <div class="back-details">Learn something </div>
-          </div>
       </div>
     </div>
   </div>
@@ -289,14 +286,6 @@
     justify-content: center;
     padding-top: 25%;
   }
-  
-  .welcome-card__face--back {
-    transform: rotateY(180deg);
-  }
-
-  .back-details {
-    margin-top: 25%;
-  }
 
   .flipme {
     transform: rotateY(180deg);
@@ -422,14 +411,7 @@
     font-size: 15px;
     padding-top: 25%;
   }
-  
-  .welcome-card__face--back {
-    transform: rotateY(180deg);
-  }
 
-  .back-details {
-    margin-top: 25%;
-  }
 
   .flipme {
     transform: rotateY(180deg);

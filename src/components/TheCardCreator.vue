@@ -140,35 +140,6 @@
 
                 this.back = newBack.join(" ");
                 return newBack.join(" ");
-
-                
-                
-
-                // filter = this.front.split(' ');
-
-                // filter.forEach((e) => {
-                //     let a;
-                //     let i;
-                //     if(specialChar.test(e[0]) && e.length > 1){
-                //         a = e[0] + e[1];
-                //         i = 2;
-                //     } else {
-                //         a = e[0];
-                //         i = 1;
-                //     }
-                    
-                //     for(i = i; i < e.length; i++){
-                //         if(specialChar.test(e[i])){
-                //             a = a + e[i];
-                //         }
-                //     }
-
-                //     newBack.push(a);
-                // });
-                // this.back = newBack.join(" ");
-                // return newBack.join(" ");
-
-                
             }
         },
         methods: {
@@ -271,6 +242,7 @@
 
 <style>
     .card-creator {
+        position: fixed;
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -278,6 +250,7 @@
         top: 15%;
         height: 70vh;
     }
+
     /* Card Creator Form */
     .card-form, .subject-form {
         display: flex;
@@ -394,7 +367,7 @@
     }
 
     /* Card Preview */
-  .scene {
+  .card-creator .scene {
     width: 400px;
     height: 260px;
     perspective: 600px;
@@ -403,7 +376,7 @@
     margin: 20px;
   }
   
-  .card {
+  .card-creator .card {
     width: 100%;
     height: 100%;
     transition: transform 1s;
@@ -412,7 +385,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
   
-  .card__face {
+  .card-creator .card__face {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -426,23 +399,23 @@
     padding: 15px;
   }
 
-  .card-face::-webkit-scrollbar {
+  .card-creator .card-face::-webkit-scrollbar {
     display: none;
   }
   
-  .front-details {
+  .card-creator .front-details {
     /* margin-top: 25% */
   }
   
-  .card__face--back {
+  .card-creator .card__face--back {
     transform: rotateY(180deg);
   }
 
-  .back-details {
+  .card-creator .back-details {
     /* margin-top: 25%; */
   }
 
-  .edit-card {
+  .card-creator .edit-card {
     float: right;
     border: none;
     background-color: transparent;
@@ -464,46 +437,46 @@
     left: 35%;
   }
 
-  .question-mark-icon {
+  .card-creator .question-mark-icon {
     height: 20px;
   }
 
-  .question-mark-icon:hover {
+  .card-creator .question-mark-icon:hover {
     cursor: pointer;
   }
 
-  .x-symbol {
+  .card-creator .x-symbol {
     float: right;
     margin-bottom: 5px;
   }
 
-  .x-symbol:hover {
+  .card-creator .x-symbol:hover {
     cursor: pointer;
   }
 
-  .edit-card:hover{
+  .card-creator .edit-card:hover{
     cursor: pointer;
   }
 
-  .edit-card__options{
+  .card-creator .edit-card__options{
     display: none;
   }
 
-  .rotate-image-icon {
+  .card-creator .rotate-image-icon {
     width: 35px;
   }
 
-  .rotate-image-icon:hover {
+  .card-creator .rotate-image-icon:hover {
     cursor: pointer;
   }
 
-  .card-controller {
+  .card-creator .card-controller {
     left: 45%;
     top: 10%;
     padding: 5px;
   }
   
-  .flipme {
+  .card-creator .flipme {
     transform: rotateY(180deg);
   }
 
@@ -552,20 +525,20 @@
             top: 35%;
         }
 
-        .question-mark-icon {
+        .card-creator .question-mark-icon {
             left: 15%;
         }
 
-        .mem-label {
+        .card-creator .mem-label {
             margin-right: -5px;
         }
-        .card-form-span {
+        .card-creator .card-form-span {
             height: 150px;
             width: 300px;
             text-align: center;
         }
         
-        .create-button {
+        .card-creator .create-button {
             width: 60px;
             height: 30px;
             margin-top: 15px;
@@ -617,7 +590,7 @@
             transform-style: preserve-3d;
             position: relative;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            /* display: none; */
+            display: none;
             
         }
         
@@ -638,7 +611,7 @@
         }
 
         .card-creator .back-details {
-            margin-top: 25%;
+            /* margin-top: 25%; */
         }
 
         .card-creator .edit-card {

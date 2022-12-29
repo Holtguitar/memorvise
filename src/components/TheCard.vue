@@ -221,7 +221,6 @@ export default {
   }
 
   .front-details-long {
-    position: relative;
     margin-top: 0%;   
     overflow-y: scroll !important;
     -webkit-overflow-scrolling: touch;
@@ -234,6 +233,9 @@ export default {
   }
   
   .card__face--back {
+    position: fixed;
+    top: 0%;
+    background-color: green;
     transform: translateZ(-1px) rotateY(180deg);
  
   }
