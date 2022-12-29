@@ -112,8 +112,8 @@ export default {
     padding-bottom: 250px;
     width: 150vh;
     margin-bottom: 200px;
-    /* overflow-y: scroll; */
-    /* -webkit-overflow-scrolling: touch; */
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   .subject-selector {
