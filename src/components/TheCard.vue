@@ -214,20 +214,20 @@ export default {
     margin-top: 25%;    
   }
 
-  /* .front-details-webkit-scrollbar {
+  .front-details-webkit-scrollbar {
     display: none;
-  } */
+  }
 
   .front-details-long {
     margin-top: 0%;    
-    /* overflow-y: scroll;
+    overflow-y: scroll;
     -ms-overflow-style: none; 
-    scrollbar-width: none;  */
+    scrollbar-width: none; 
   }
 
-  /* .front-details-long-webkit-scrollbar {
+  .front-details-long-webkit-scrollbar {
     display: none;
-  } */
+  }
   
   .card__face--back {
     transform: translateZ(-1px) rotateY(180deg);
@@ -235,25 +235,25 @@ export default {
 
   .back-details {
     margin-top: 25%;    
-    /* overflow-y: scroll;
+    overflow-y: scroll;
     -ms-overflow-style: none; 
-    scrollbar-width: none;  */
+    scrollbar-width: none; 
   }
 
-  /* .back-details-webkit-scrollbar {
+  .back-details-webkit-scrollbar {
     display: none;
-  } */
+  }
 
   .back-details-long {
     margin-top: 0%;
-    /* overflow-y: scroll;
+    overflow-y: scroll;
     -ms-overflow-style: none; 
-    scrollbar-width: none;  */
+    scrollbar-width: none; 
   }
 
-  /* .back-details-long-webkit-scrollbar {
+  .back-details-long-webkit-scrollbar {
     display: none;
-  } */
+  }
 
   .edit-card {
     float: right;
@@ -335,11 +335,9 @@ export default {
     left: 5%;
     top: 3%;
     width: 350px;
-    /* background-color: red; */
   }
 
   .card-controller button {
-    /* margin-top: 15px; */
     border-radius: 10px;
     box-shadow: 0 1px 1px rgba(0,0,0,0.25), 
     0 1px 1px rgba(0,0,0,0.22);
@@ -407,7 +405,7 @@ export default {
   }
   
   .front-details {
-    margin-top: 25%
+    margin-top: 25%;
   }
 
   .front-details-long {

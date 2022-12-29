@@ -13,7 +13,7 @@
     <hr style="border: solid 1px grey;">
   </div>
   <div class="card-scroll">
-    <!-- <div class="card-holder"> -->
+    <div class="card-holder">
       <the-card
         v-if="flip" 
         v-for="result in this.$store.state.cards"
@@ -26,7 +26,7 @@
           :back="result.back"
           :colors="result.colors"
       ></the-card>
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 
@@ -101,22 +101,22 @@ export default {
   .card-scroll {
     position: fixed;
     top: 27%;
-    /* left: 21%; */
+    left: 21%;
     height: 60vh;
-    /* padding-bottom: 250px; */
-    /* width: 150vh; */
-    /* margin-bottom: 200px; */
+    padding-bottom: 250px;
+    width: 150vh;
+    margin-bottom: 200px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
     scrollbar-width: none; 
 /* Test */
-    /* position: absolute; */
+    /* position: absolute;
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 50px;
     left: 20%;
-    width: 60vw;
+    width: 60vw; */
   }
 
   .card-scroll::-webkit-scrollbar {
