@@ -163,25 +163,38 @@ export default {
 
   @media (max-width: 900px) and (min-width: 380px){
     .card-holder {
+      position: absolute;
       display: flex;
       flex-direction: column;
+      grid-template-columns: auto auto;
+      column-gap: 50px;
+      padding-left: 3%; 
       width: 100vw;
-      left: 3%;
-      margin-left: 0;
+      left: 0%;
       padding-bottom: 100px;
-      /* background-color: red; */
-      overflow-x: hidden;
+      overflow-x: hidden; 
     }
 
     .card-scroll {
+         
+      /* height: 60vh; */
+      /* width: 95vw; */
+      /* margin-bottom: 200px; */
+      /* overflow-x: hidden; */
       position: fixed;
       top: 25%;
       left: 0%;
       height: 60vh;
-      width: 95vw;
+      padding-bottom: 250px;
+      width: 150vh;
       margin-bottom: 200px;
-      overflow-x: hidden;
+      overflow-y: scroll;
+      -webkit-overflow-scrolling: touch;
+      -ms-overflow-style: none; 
+      scrollbar-width: none; 
     }
+ 
+
 
     .subject-selector {
       top: 12%;

@@ -192,7 +192,8 @@ export default {
   }
   
   .card__face {
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     width: 100%;
     height: 100%;
     text-align: center;
@@ -347,7 +348,8 @@ export default {
   }
 
   .card-edit-menu {
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     display: flex;
     flex-direction: column;
     height: 250px;
@@ -384,27 +386,110 @@ export default {
   }
 
   @media (max-width: 900px) and (min-width: 380px){
-  .scene {
-    width: 300px;
+    .scene {
+      width: 300px;
+      height: 195px;
+      margin: 30px 0;
+      perspective: 600px;
+
+         /* width: 300px;
     height: 195px;
-    margin: 30px;
+    margin: 30px; */
+    }
+  
+    .card {
+      width: 100%;
+      height: 100%;
+      transition: transform 1s;
+      transform-style: preserve-3d;
+      position: relative;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    }
+    
+    .card__face {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-weight: bold;
+      font-size: 20px;
+      backface-visibility: hidden;
+      padding: 15px;
+      overflow-y: scroll;
+      -ms-overflow-style: none; 
+      scrollbar-width: none; 
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .card-face::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .front-details {
+      margin-top: 25%;    
+    }
+
+    .front-details-webkit-scrollbar {
+      display: none;
+    }
+
+    .front-details-long {
+      margin-top: 0%;    
+      overflow-y: scroll;
+      -ms-overflow-style: none; 
+      scrollbar-width: none; 
+    }
+
+    .front-details-long-webkit-scrollbar {
+      display: none;
+    }
+    
+    .card__face--back {
+      transform: translateZ(-1px) rotateY(180deg);
+    }
+
+    .back-details {
+      margin-top: 25%;    
+      overflow-y: scroll;
+      -ms-overflow-style: none; 
+      scrollbar-width: none; 
+    }
+
+    .back-details-webkit-scrollbar {
+      display: none;
+    }
+
+    .back-details-long {
+      margin-top: 0%;
+      overflow-y: scroll;
+      -ms-overflow-style: none; 
+      scrollbar-width: none; 
+    }
+
+    .back-details-long-webkit-scrollbar {
+      display: none;
+    }
+  .scene {
+    /* width: 300px;
+    height: 195px;
+    margin: 30px; */
   }
   
   .card {
-    width: 100%;
-    height: 100%;
-    position: absolute;
+    /* width: 100%; */
+    /* height: 100%; */
+    /* position: absolute; */
   }
   
   .card__face {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    font-size: 15px;
-    padding: 15px;
+    /* position: fixed; */
+    /* width: 100%; */
+    /* height: 100%; */
+    /* font-size: 15px; */
+    /* padding: 15px; */
   }
   
-  .front-details {
+  /* .front-details {
     margin-top: 25%;
   }
 
@@ -418,7 +503,7 @@ export default {
 
   .back-details-long {
     margin-top: 1%;
-  }
+  } */
 
   .rotate-image-icon-edit {
     width: 30px;
@@ -465,7 +550,8 @@ export default {
   }
 
   .card-controller {
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     left: 18%;
     top: 100%;
     margin-top: 15px;
@@ -473,7 +559,8 @@ export default {
   }
 
   .card-edit-menu {
-    position: absolute;
+    /* position: absolute; */
+    position: fixed;
     display: flex;
     flex-direction: column;
     height: 250px;
@@ -492,7 +579,7 @@ export default {
     opacity: 0;
   }
 
-  }
+}
 
   
 </style>
