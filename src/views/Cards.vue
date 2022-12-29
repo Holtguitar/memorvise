@@ -95,12 +95,12 @@ export default {
   }
 
   .card-holder {
-    /* position: fix; */
+    /* position: fixed; */
     position: absolute;
     display: grid;
     grid-template-columns: auto auto;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    /* overflow-y: scroll; */
+    /* -webkit-overflow-scrolling: touch; */
     column-gap: 50px;
   }
 
@@ -112,8 +112,8 @@ export default {
     padding-bottom: 250px;
     width: 150vh;
     margin-bottom: 200px;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
+    /* overflow-y: scroll; */
+    /* -webkit-overflow-scrolling: touch; */
   }
 
   .subject-selector {

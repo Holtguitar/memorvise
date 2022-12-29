@@ -200,33 +200,33 @@ export default {
     font-weight: bold;
     font-size: 20px;
     backface-visibility: hidden;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     padding: 15px;
   }
   
   .front-details {
     margin-top: 25%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 
   .front-details-long {
     margin-top: 0%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
   
   .card__face--back {
     transform: translateZ(-1px) rotateY(180deg);
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 
   .back-details {
     margin-top: 25%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 
   .back-details-long {
     margin-top: 0%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
   }
 
   .edit-card {
