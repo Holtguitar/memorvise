@@ -10,7 +10,7 @@
         :style="this.cardStyle"
       >
         <div class="card__face card__face--front">
-            <div v-if="(this.front.length < 160)" class="front-details">{{front}}</div>
+            <div v-if="(this.front.length < 120)" class="front-details">{{front}}</div>
             <div v-else class="front-details-long">{{front}}</div>
         </div>
         <div class="card__face card__face--back">
@@ -200,8 +200,14 @@ export default {
     font-weight: bold;
     font-size: 20px;
     backface-visibility: hidden;
-    /* overflow-y: scroll; */
+    overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     padding: 15px;
+  }
+
+  .card__face::-webkit-scrollbar {
+    display: none;
   }
   
   .front-details {
@@ -239,7 +245,7 @@ export default {
 
   .rotate-image-icon-edit {
     width: 45px;
-    height: 30px;
+    height: 20px;
     margin-top: 5px;
   }
 
@@ -261,7 +267,7 @@ export default {
 
   .rotate-image-icon {
     width: 45px;
-    height: 30px;
+    height: 20px;
     margin-top: 5px;
   }
 
@@ -306,9 +312,10 @@ export default {
     display:flex;
     flex-direction: row;
     justify-content: space-between;
-    left: 7%;
+    left: 5%;
     top: 3%;
     width: 350px;
+    /* background-color: red; */
   }
 
   .card-controller button {

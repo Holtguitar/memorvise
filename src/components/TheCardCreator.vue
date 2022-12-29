@@ -421,7 +421,13 @@
     font-size: 20px;
     backface-visibility: hidden;
     overflow-y: scroll;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     padding: 15px;
+  }
+
+  .card-face::-webkit-scrollbar {
+    display: none;
   }
   
   .front-details {
@@ -622,7 +628,6 @@
             font-weight: bold;
             font-size: 20px;
             backface-visibility: hidden;
-            overflow-y: scroll;
             padding: 15px;
         }
         

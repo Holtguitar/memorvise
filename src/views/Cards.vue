@@ -114,6 +114,12 @@ export default {
     margin-bottom: 200px;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+
+  .card-scroll::-webkit-scrollbar {
+    display: none;
   }
 
   .subject-selector {
@@ -162,6 +168,8 @@ export default {
       left: 3%;
       margin-left: 0;
       padding-bottom: 100px;
+      /* background-color: red; */
+      overflow-x: hidden;
     }
 
     .card-scroll {
@@ -169,8 +177,9 @@ export default {
       top: 25%;
       left: 0%;
       height: 60vh;
-      width: 100vw;
+      width: 95vw;
       margin-bottom: 200px;
+      overflow-x: hidden;
     }
 
     .subject-selector {
