@@ -47,9 +47,6 @@ export default {
       front: true,
     }
   },
-  watch: {
-    // getSubject: () => {console.log(this.subject)}
-  },
   computed: {
     getSubject(){
       return this.$store.state.subject;

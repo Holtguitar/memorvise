@@ -212,6 +212,7 @@ export default {
   }
   
   .front-details {
+    position: fixed;
     margin-top: 25%;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -223,6 +224,7 @@ export default {
   }
 
   .front-details-long {
+    position: fixed;
     margin-top: 0%;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -238,6 +240,7 @@ export default {
   }
 
   .back-details {
+    position: fixed;
     margin-top: 25%;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
@@ -249,6 +252,7 @@ export default {
   }
 
   .back-details-long {
+    position: fixed;
     margin-top: 0%;
     overflow-y: scroll;
     -ms-overflow-style: none;  /* IE and Edge */
