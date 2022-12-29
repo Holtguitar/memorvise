@@ -183,7 +183,6 @@ export default {
   }
   
   .card {
-    /* position: fixed; */
     width: 100%;
     height: 100%;
     transition: transform 1s;
@@ -193,8 +192,7 @@ export default {
   }
   
   .card__face {
-    /* position: absolute; */
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     text-align: center;
@@ -203,8 +201,9 @@ export default {
     backface-visibility: hidden;
     padding: 15px;
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    -webkit-overflow-scrolling: touch;
   }
 
   .card-face::-webkit-scrollbar {
@@ -212,56 +211,49 @@ export default {
   }
   
   .front-details {
-    position: fixed;
-    margin-top: 25%;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    margin-top: 25%;    
   }
 
-  .front-details-webkit-scrollbar {
+  /* .front-details-webkit-scrollbar {
     display: none;
-  }
+  } */
 
   .front-details-long {
-    position: fixed;
-    margin-top: 0%;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    margin-top: 0%;    
+    /* overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  */
   }
 
-  .front-details-long-webkit-scrollbar {
+  /* .front-details-long-webkit-scrollbar {
     display: none;
-  }
+  } */
   
   .card__face--back {
     transform: translateZ(-1px) rotateY(180deg);
   }
 
   .back-details {
-    position: fixed;
-    margin-top: 25%;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    margin-top: 25%;    
+    /* overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  */
   }
 
-  .back-details-webkit-scrollbar {
+  /* .back-details-webkit-scrollbar {
     display: none;
-  }
+  } */
 
   .back-details-long {
-    position: fixed;
     margin-top: 0%;
-    overflow-y: scroll;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    /* overflow-y: scroll;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;  */
   }
 
-  .back-details-long-webkit-scrollbar {
+  /* .back-details-long-webkit-scrollbar {
     display: none;
-  }
+  } */
 
   .edit-card {
     float: right;
