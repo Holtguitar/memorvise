@@ -13,7 +13,7 @@
     <hr style="border: solid 1px grey;">
   </div>
   <div class="card-scroll">
-    <div class="card-holder">
+    <!-- <div class="card-holder"> -->
       <the-card
         v-if="flip" 
         v-for="result in this.$store.state.cards"
@@ -26,7 +26,7 @@
           :back="result.back"
           :colors="result.colors"
       ></the-card>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -91,34 +91,34 @@ export default {
     margin-top: -10% !important;
   }
 
-  .card-holder {
+  /* .card-holder {
     position: absolute;
     display: grid;
     grid-template-columns: auto auto;
     column-gap: 50px;
     overscroll-behavior: auto;
-    
-  }
+    background-color: rgb(0, 255, 98);
+  } */
 
   .card-scroll {
+    position: absolute;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 50px;
+    row-gap: 20px;
+    overscroll-behavior: auto;
+    /* ^^^TEST - Removal of card-holder element to determin cause of mobile scroll bug for individual cards^^^ */
     position: fixed;
-    top: 27%;
-    left: 21%;
-    height: 60vh;
-    padding-bottom: 250px;
-    width: 150vh;
-    margin-bottom: 200px;
+    left: 0%;
+    top: 26%;
+    height: 65%;
+    width: 100%;
+    padding-bottom: 100px;
+    padding-left: 2%;
     overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
     -ms-overflow-style: none; 
-    scrollbar-width: none; 
-/* Test */
-    /* position: absolute;
-    display: grid;
-    grid-template-columns: auto auto;
-    column-gap: 50px;
-    left: 20%;
-    width: 60vw; */
+    scrollbar-width: none;
   }
 
   .card-scroll::-webkit-scrollbar {
@@ -164,8 +164,8 @@ export default {
   }
 
   @media (max-width: 900px) and (min-width: 380px){
-    .card-holder {
-      /* position: absolute; */
+    /* .card-holder {
+      position: absolute;
       display: flex;
       flex-direction: column;
       grid-template-columns: auto auto;
@@ -174,16 +174,13 @@ export default {
       width: 100vw;
       left: 0%;
       padding-bottom: 100px;
-    }
+    } */
 
     .card-scroll {
-      /* position: fixed; */
-      top: 25%;
-      left: 0%;
-      height: 60vh;
-      padding-bottom: 250px;
-      width: 150vh;
-      margin-bottom: 200px;
+      grid-template-columns: auto;
+      top: 23%;
+      height: 75vh;
+      padding-left: 11%;
     }
  
     .subject-selector {

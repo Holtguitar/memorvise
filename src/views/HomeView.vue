@@ -32,10 +32,8 @@
   </div>
   </div>
   <div v-else class="welcome-page">
-    <div class="welcome-header">
-      <h2 class="welcome-title">Recollect</h2>
-      <div class="welcome-message">A Key Tool For Your Learning Journey</div>
-    </div>
+    <h2 class="welcome-title">Recollect</h2>
+    <div class="welcome-message">A Key Tool For Your Learning Journey</div>
     <div class="scene scene--card">
       <div
           class="welcome-card"
@@ -201,7 +199,6 @@
     height: 50px;
     justify-content:space-between ;
     width: 300px;
-    
   }
 
    .account-edit-icon {
@@ -218,7 +215,6 @@
     height: fit-content;
     left: 50%;
     top: 20%;
-    
   }
 
   .delete-account:hover {
@@ -227,11 +223,12 @@
   }
 
   /* Welcome Landing */
-  .welcome-header {
-    top: 5rem;
-    height: 150px;
+  .welcome-page {
+    height: 80vh !important;
+    margin-top: 5%;
     text-align: center;
   }
+
   .welcome-title {
     padding: 5px;
     font-size: 60px;
@@ -241,9 +238,7 @@
   }
 
   .welcome-message {
-    padding: 5px;
     font-size: 30px;
-    height: 70px;
     font-family: 'Short Stack', cursive;
     color: #107a57;
   }
@@ -259,8 +254,8 @@
     align-items: center;
     background-color: rgb(190, 190, 190);
     font-family: 'Merienda One', cursive;
-    margin-top: 15%;
-    left: 30%;
+    top: 40%;
+    left: 32%;
   }
   
   .welcome-card {
@@ -375,12 +370,6 @@
     top: 10%;
     height: 60vh;
     text-align: center;
-  }
-
-  .welcome-header {
-    height: 350px;
-    text-align: center;
-    top: 10%;
   }
 
   .welcome-title {

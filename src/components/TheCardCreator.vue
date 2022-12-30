@@ -404,7 +404,7 @@
   }
   
   .card-creator .front-details {
-    /* margin-top: 25% */
+    margin-top: 25%
   }
   
   .card-creator .card__face--back {
@@ -412,7 +412,7 @@
   }
 
   .card-creator .back-details {
-    /* margin-top: 25%; */
+    margin-top: 25%;
   }
 
   .card-creator .edit-card {

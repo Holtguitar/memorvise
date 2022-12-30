@@ -25,7 +25,8 @@ a,
 }
 
 body {
-  background-color: #fcfcfc
+  background-color: #fcfcfc;
+  overscroll-behavior-y: none ;
 }
 
 

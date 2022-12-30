@@ -1,7 +1,8 @@
 <template>
   <nav>
     <nav class="nav-bar">
-      <router-link id="logo" to="/">Recollect</router-link>
+      <!-- <router-link id="logo" to="/" v-if="!this.store.state.user">Recollect</router-link> -->
+      <router-link id="mobile-logo" to="/">Recollect</router-link>
       <router-link class="nav-item" id="home" to="/" v-if="this.store.state.user">Account</router-link>
       <router-link class="nav-item" id="cards" to="/cards" v-if="this.store.state.user">Cards</router-link>
       <router-link class="nav-item" id="card-creator" to="/card-creator" v-if="this.store.state.user">Create</router-link>
@@ -75,6 +76,17 @@
     font-family: 'Rubik Vinyl', cursive;
   }
 
+  #mobile-logo {
+    position: absolute;
+    padding: 5px;
+    top: 30%;
+    left: 5%;
+    font-size: 30px;
+    height: 60px;
+    font-family: 'Rubik Vinyl', cursive;
+    /* display: none; */
+  }
+
   #sign-out, #sign-in {
     position: absolute;
     margin-right: 30px;
@@ -107,8 +119,6 @@
     display: none;
   }
 
-  
-
   #sign-in {
     position: absolute;
   }
@@ -130,6 +140,12 @@
       margin-bottom: 0px;
       height: 70px;
       padding-left: 5%;
+    }
+
+    #mobile-logo {
+      /* height: 50px; */
+      /* font-size: 20px; */
+      display: none;
     }
 
     #logo {
