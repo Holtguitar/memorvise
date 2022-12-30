@@ -259,8 +259,8 @@
     align-items: center;
     background-color: rgb(190, 190, 190);
     font-family: 'Merienda One', cursive;
-    margin-top: 35%;
-    left: 15%;
+    margin-top: 15%;
+    left: 30%;
   }
   
   .welcome-card {
@@ -268,10 +268,8 @@
     height: 100%;
     transition: transform 1s;
     transform-style: preserve-3d;
-    position: relative;
+    position: fixed;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    
-
   }
   
   .welcome-card__face {
