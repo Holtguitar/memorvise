@@ -22,6 +22,7 @@ export default createStore({
         friendsList: [],
         subjects: [],
         cards: [],
+        currentCard: [],
         reloadCards: false
     },
     mutations: {
@@ -57,6 +58,10 @@ export default createStore({
         },
         CLEAR_CARDS(state){
           state.cards = [];
+        },
+        SET_CURRENT_CARD(state, index){
+          state.currentCard = [];
+          state.currentCard.push(state.cards[index + 1])
         }
     },
     actions: {
@@ -242,6 +247,9 @@ export default createStore({
             this.error = error;
             alert(error);
           });
+        },
+        async loadIndexedCard({commit, state}, index) {
+          commit("SET_CURRENT_CARD", index);
         },
         async deleteCard({commit, dispatch, state}, details) {
 
