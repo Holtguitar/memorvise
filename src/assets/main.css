@@ -1,0 +1,43 @@
+@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Gochi+Hand&family=Marhey:wght@300&family=Merienda+One&family=Rubik+Vinyl&family=Short+Stack&family=Stardos+Stencil&display=swap'); 
+
+/* Font List */
+/* font-family: 'Chewy', cursive;
+font-family: 'Gochi Hand', cursive;
+font-family: 'Marhey', cursive;
+font-family: 'Merienda One', cursive;
+font-family: 'Rubik Vinyl', cursive;
+font-family: 'Short Stack', cursive;
+font-family: 'Stardos Stencil', cursive; */
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-weight: normal;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: #107a57;
+  font-weight: 600;
+  transition: 0.4s;
+}
+
+body {
+  background-color: #fcfcfc;
+  overscroll-behavior-y: none ;
+}
+
+
+@media (hover: hover) {
+  a:hover {
+    /* background-color: hsla(160, 87%, 46%, 0.245); */
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    /* display: flex; */
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "memorvise",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "firebase": "^9.15.0",
+    "git": "^0.1.5",
+    "npm-git-install": "^0.3.0",
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.5",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.2",
+    "node-sass": "^8.0.0",
+    "sass-loader": "^13.2.0",
+    "vite": "^3.1.8"
+  }
+}
