@@ -276,10 +276,6 @@ export default {
   backface-visibility: hidden;
   padding: 15px;
   overflow-y: scroll;
-  /* -webkit-overflow-scrolling: touch; */
-  /* -ms-overflow-style: none; */
-  /* scrollbar-width: none; */
-  /* background-color: green; */
 }
 
 .card-face::-webkit-scrollbar {
@@ -464,10 +460,13 @@ export default {
 
 @media (max-width: 900px) and (min-width: 380px) {
   /* --------CARD STYLE------------ */
-  .scene {
+  .card {
     width: 300px;
     height: 195px;
-    margin: 30px 0;
+    left: 11%;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
 
   /* ---------CARD CONTROLLER STYLE-------------- */
@@ -490,10 +489,10 @@ export default {
 
   .card-controller {
     position: fixed;
-    left: 18%;
     top: 100%;
     margin-top: 15px;
     width: 200px;
+    left: 25%;
   }
 
   /* Edit Mode */

@@ -62,7 +62,7 @@
       class="right-arrow"
       src="/arrow-right.png"
       @click="this.increase()"
-      v-if="this.cardIndex <= this.maxCardIndex"
+      v-if="this.cardIndex !== this.maxCardIndex"
     />
   </div>
 </template>
@@ -83,8 +83,8 @@ export default {
       subject: this.getSubject,
       front: true,
       slideMode: false,
-      cardIndex: 1,
-      maxCardIndex: this.$store.state.cards.length,
+      cardIndex: 0,
+      maxCardIndex: null,
     }
   },
   computed: {
@@ -100,10 +100,9 @@ export default {
   },
   methods: {
     increase() {
-      if (this.cardIndex < this.$store.state.cards.length - 1) {
+      if (this.cardIndex <= this.$store.state.cards.length - 1) {
         this.cardIndex++
         this.loadIndexedCard()
-        console.log(this.cardIndex, ' ', this.maxCardIndex)
       }
     },
     decrease() {
@@ -119,6 +118,7 @@ export default {
       this.store.dispatch('loadSubjects')
     },
     loadCards() {
+      this.toggleSlideMode()
       this.store.commit('CLEAR_CARDS')
       this.store.dispatch('loadSubjects')
       this.store.commit('SET_SUBJECT', this.subject)
@@ -129,6 +129,7 @@ export default {
     },
     toggleSlideMode() {
       this.cardIndex = 0
+      this.maxCardIndex = this.$store.state.cards.length - 2
       this.slideMode = !this.slideMode
       this.loadIndexedCard()
     },
@@ -232,7 +233,7 @@ export default {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  /* background-color: green; */
+  background-color: green;
 }
 
 .card-holder {
@@ -340,10 +341,43 @@ input:checked + .slider:before {
 
 @media (max-width: 900px) and (min-width: 380px) {
   .card-scroll {
+    position: fixed;
     grid-template-columns: auto;
     top: 23%;
     height: 75vh;
-    padding-left: 11%;
+    padding-left: 0%;
+    left: 0%;
+  }
+
+  .card-scroll-single {
+    position: fixed;
+    top: 23%;
+    height: 40%;
+    width: 120%;
+    left: 0%;
+    justify-content: space-between !important;
+    /* height: 40vh; */
+    /* width: 100; */
+    /* padding-left: 0%; */
+    /* left: 0%; */
+    background-color: red;
+    margin-left: -20%;
+  }
+
+  .left-arrow,
+  .right-arrow {
+    position: absolute;
+    width: 35px;
+    top: 5%;
+    background-color: yellow;
+  }
+
+  .left-arrow {
+    left: 20%;
+  }
+
+  .right-arrow {
+    left: 100%;
   }
 
   .subject-selector {
@@ -371,13 +405,10 @@ input:checked + .slider:before {
     left: 62%;
     width: 80px;
     text-align: center;
-    /* background-color: red; */
   }
   .switch {
     margin-top: 15px;
     display: inline-block;
-    /* width: 40px; */
-    /* height: 26px; */
   }
 
   .slide-mode {

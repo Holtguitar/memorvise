@@ -81,6 +81,7 @@
 import { getDatabase, set, ref } from '../firebase'
 import { RouterLink } from 'vue-router'
 import { Store, useStore } from 'vuex'
+import store from '../store'
 
 export default {
   data() {
@@ -91,7 +92,7 @@ export default {
       email: '',
       accountCreationDate: '',
       cardOne: 'start',
-      subjects: this.$store.state.subjects,
+      subjects: store.state.subjects,
       editMode: false,
       editAccountMode: false,
       animationWord: '',
@@ -154,12 +155,12 @@ export default {
       }, 1000)
     },
     getAccountInfo() {
-      this.loadSubjects()
       this.email = this.store.state.user.email
       this.displayName = this.store.state.user.displayName
       this.user = this.store.state.user
       const created = this.user.metadata.creationTime
       this.accountCreationDate = created.slice(0, -13)
+      this.loadSubjects()
     },
     deleteAccount() {
       let confirmDelete = confirm(
